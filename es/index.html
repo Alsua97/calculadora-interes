@@ -1,0 +1,2362 @@
+<!--
+  ════════════════════════════════════════════════════════
+  OurToolkit — Calculadora de Interés Compuesto
+  https://ourtoolkit.blogspot.com
+
+  © 2025 OurToolkit Blog. Todos los derechos reservados.
+  All rights reserved.
+
+  Código propietario. Prohibida su reproducción,
+  distribución o uso comercial sin autorización expresa.
+  Proprietary code. Unauthorized reproduction or
+  commercial use is strictly prohibited.
+  ════════════════════════════════════════════════════════
+-->
+<!DOCTYPE html>
+<html lang="es" data-theme="system">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Calculadora de Interés Compuesto gratuita y profesional. Calcula el crecimiento de tus inversiones con aportaciones periódicas, visualiza gráficos y descarga tu tabla de amortización.">
+    <meta name="keywords"
+        content="calculadora interés compuesto, inversión, ahorro, interés compuesto, rendimiento financiero, cálculo inversión">
+    <meta name="author" content="OurToolkit">
+    <meta property="og:title" content="Calculadora de Interés Compuesto | OurToolkit">
+    <meta property="og:description"
+        content="Calcula el crecimiento de tus inversiones con nuestra calculadora de interés compuesto profesional y gratuita.">
+    <meta property="og:type" content="website">
+    <title>Calculadora de Interés Compuesto | OurToolkit</title>
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="es" href="https://ourtoolkit.github.io/calculadora-interes/es/" />
+    <link rel="alternate" hreflang="en" href="https://ourtoolkit.github.io/calculadora-interes/en/" />
+    <!-- PWA -->
+    <link rel="manifest" href="/calculadora-interes/manifest.json" />
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Calculadora IC" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================================
+   CSS VARIABLES — DARK & LIGHT THEMES
+   ============================================================ */
+        :root {
+            --bg: #08080f;
+            --surface: #111120;
+            --surface-h: #181830;
+            --border: #1e1e38;
+            --border-h: #2e2e54;
+            --text: #ecedf8;
+            --text-sec: #8888a0;
+            --text-hint: #3e3e60;
+            --accent: #6366f1;
+            --accent-h: #818cf8;
+            --accent-bg: rgba(99, 102, 241, .12);
+            --green: #10b981;
+            --green-bg: rgba(16, 185, 129, .1);
+            --amber: #f59e0b;
+            --amber-bg: rgba(245, 158, 11, .1);
+            --radius-card: 14px;
+            --radius-btn: 8px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, .45);
+            --shadow-h: 0 8px 40px rgba(99, 102, 241, .2);
+            --ease: cubic-bezier(.22, 1, .36, 1);
+            --font-title: 'Syne', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --header-h: 64px;
+        }
+
+        [data-theme="light"] {
+            --bg: #f4f4fb;
+            --surface: #ffffff;
+            --surface-h: #f0f0fa;
+            --border: #e0e0ee;
+            --border-h: #c8c8e8;
+            --text: #0c0c1a;
+            --text-sec: #52527a;
+            --text-hint: #aaaacc;
+            --accent: #4f52e0;
+            --accent-h: #6366f1;
+            --accent-bg: rgba(79, 82, 224, .1);
+            --green: #059669;
+            --green-bg: rgba(5, 150, 105, .08);
+            --amber: #d97706;
+            --amber-bg: rgba(217, 119, 6, .08);
+            --shadow: 0 4px 24px rgba(0, 0, 0, .1);
+            --shadow-h: 0 8px 40px rgba(99, 102, 241, .15);
+        }
+
+        /* ============================================================
+                  RESET & BASE
+           ============================================================ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.6;
+            transition: background .3s var(--ease), color .3s var(--ease);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        a {
+            color: var(--accent-h);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        a:hover {
+            color: var(--text);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ============================================================
+              TYPOGRAPHY
+   ============================================================ */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-title);
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--text-sec);
+            line-height: 1.75;
+        }
+
+        /* ============================================================
+              LAYOUT
+   ============================================================ */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 14px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 6px;
+            }
+        }
+
+        /* ============================================================
+             HEADER
+   ============================================================ */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: var(--header-h);
+            background: rgba(8, 8, 15, .85);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+            transition: background .3s;
+        }
+
+        [data-theme="light"] .site-header {
+            background: rgba(244, 244, 251, .88);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-family: var(--font-title);
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text);
+            white-space: nowrap;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent), #a78bfa);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .9rem;
+        }
+
+        .logo-dot {
+            color: var(--accent-h);
+        }
+
+        .header-title {
+            flex: 1;
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--text-sec);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .header-title span {
+            color: var(--text);
+        }
+
+        .theme-btn {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-btn);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: background .2s, border-color .2s, transform .2s var(--ease);
+        }
+
+        .theme-btn:hover {
+            background: var(--surface-h);
+            border-color: var(--border-h);
+            transform: scale(1.08);
+        }
+
+        /* ============================================================
+                 AD ZONES
+   ============================================================ */
+        .ad-zone {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .ad-zone .ad-label {
+            font-size: .68rem;
+            color: var(--text-hint);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin-bottom: 6px;
+        }
+
+        .ad-placeholder {
+            width: 100%;
+            max-width: 728px;
+            height: 90px;
+            background: var(--surface);
+            border: 1px dashed var(--border);
+            border-radius: var(--radius-btn);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-hint);
+            font-size: .78rem;
+        }
+
+        .ad-desktop {
+            display: flex;
+        }
+
+        .ad-mobile {
+            display: none;
+        }
+
+        .ad-mobile .ad-placeholder {
+            max-width: 320px;
+            height: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .ad-desktop {
+                display: none;
+            }
+
+            .ad-mobile {
+                display: flex;
+            }
+        }
+
+        /* ============================================================
+               HERO / TOOL HEADER
+   ============================================================ */
+        .tool-hero {
+            padding: 48px 0 32px;
+            text-align: center;
+        }
+
+        .tool-hero h1 {
+            background: linear-gradient(135deg, var(--text) 30%, var(--accent-h));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .tool-hero p {
+            max-width: 560px;
+            margin: 0 auto;
+            font-size: .95rem;
+        }
+
+        /* ============================================================
+                CARD
+   ============================================================ */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            padding: 28px;
+            transition: border-color .25s, box-shadow .25s;
+        }
+
+        .card:hover {
+            border-color: var(--border-h);
+        }
+
+        /* ============================================================
+                CALCULATOR GRID
+   ============================================================ */
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================================
+                FORM ELEMENTS
+   ============================================================ */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .8rem;
+            font-weight: 600;
+            color: var(--text-sec);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: 7px;
+        }
+
+        label .tip {
+            font-size: .7rem;
+            color: var(--text-hint);
+            text-transform: none;
+            letter-spacing: 0;
+            font-weight: 400;
+        }
+
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-prefix,
+        .input-suffix {
+            position: absolute;
+            font-size: .82rem;
+            font-weight: 600;
+            pointer-events: none;
+            line-height: 1;
+            color: var(--text-sec);
+        }
+
+        .input-prefix {
+            left: 12px;
+        }
+
+        .input-suffix {
+            right: 12px;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            height: 48px;
+            background: var(--bg);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-btn);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: .95rem;
+            font-weight: 500;
+            padding: 0 14px;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input[type="number"].has-prefix {
+            padding-left: 30px;
+        }
+
+        input[type="number"].has-suffix {
+            padding-right: 46px;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-bg);
+        }
+
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+        select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238888a0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 38px;
+        }
+
+        [data-theme="light"] input[type="number"],
+        [data-theme="light"] select {
+            background: #fafaff;
+        }
+
+        /* Range slider */
+        .slider-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .slider-wrap input[type="number"] {
+            width: 90px;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--border);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-bg);
+            transition: transform .2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border: none;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        /* ============================================================
+   BUTTONS
+   ============================================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            height: 48px;
+            padding: 0 24px;
+            border-radius: var(--radius-btn);
+            font-family: var(--font-body);
+            font-size: .92rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all .25s var(--ease);
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 2px 16px rgba(99, 102, 241, .3);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-h);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(99, 102, 241, .4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            background: var(--surface-h);
+            border-color: var(--border-h);
+        }
+
+        .btn-sm {
+            height: 36px;
+            padding: 0 14px;
+            font-size: .8rem;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 480px) {
+            .btn-row {
+                flex-direction: column;
+            }
+
+            .btn-row .btn {
+                width: 100%;
+            }
+        }
+
+        /* ============================================================
+                    RESULTS PANEL
+   ============================================================ */
+        .results-hidden {
+            display: none;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+
+        .kpi {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            padding: 18px 16px;
+            text-align: center;
+            transition: border-color .25s, transform .3s var(--ease);
+        }
+
+        .kpi:hover {
+            border-color: var(--border-h);
+            transform: translateY(-2px);
+        }
+
+        .kpi-icon {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+        }
+
+        .kpi-value {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.2rem, 2.8vw, 1.65rem);
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.1;
+            margin-bottom: 4px;
+            font-variant-numeric: lining-nums tabular-nums;
+            font-feature-settings: "lnum" 1, "tnum" 1;
+            letter-spacing: -0.01em;
+        }
+
+        .kpi-label {
+            font-size: .72rem;
+            color: var(--text-hint);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            font-weight: 600;
+        }
+
+        .kpi-green .kpi-value {
+            color: var(--green);
+        }
+
+        .kpi-accent .kpi-value {
+            color: var(--accent-h);
+        }
+
+        .kpi-amber .kpi-value {
+            color: var(--amber);
+        }
+
+        /* ============================================================
+            PROGRESS BAR (capital vs interés)
+   ============================================================ */
+        .breakdown-bar {
+            margin-bottom: 24px;
+        }
+
+        .breakdown-bar h3 {
+            margin-bottom: 12px;
+            font-size: .9rem;
+            color: var(--text-sec);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+        }
+
+        .bar-track {
+            height: 10px;
+            background: var(--border);
+            border-radius: 99px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .bar-seg {
+            height: 100%;
+            transition: width .6s var(--ease);
+        }
+
+        .bar-capital {
+            background: var(--accent);
+        }
+
+        .bar-contrib {
+            background: #a78bfa;
+        }
+
+        .bar-interest {
+            background: var(--green);
+        }
+
+        .bar-legend {
+            display: flex;
+            gap: 18px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .78rem;
+            color: var(--text-sec);
+            font-weight: 500;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+                 CHART
+   ============================================================ */
+        .chart-wrap {
+            position: relative;
+            width: 100%;
+            height: 310px;
+            margin-bottom: 0;
+        }
+
+        canvas#growthChart {
+            width: 100% !important;
+        }
+
+        /* ============================================================
+                    TABLE
+   ============================================================ */
+        .table-section {
+            margin-top: 24px;
+        }
+
+        .table-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: var(--radius-card);
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            min-width: 560px;
+            border-collapse: collapse;
+            font-size: .82rem;
+        }
+
+        thead tr {
+            background: var(--surface-h);
+        }
+
+        thead th {
+            padding: 12px 16px;
+            text-align: right;
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--text-hint);
+            white-space: nowrap;
+        }
+
+        thead th:first-child {
+            text-align: left;
+        }
+
+        tbody tr {
+            border-top: 1px solid var(--border);
+            transition: background .15s;
+        }
+
+        tbody tr:hover {
+            background: var(--surface-h);
+        }
+
+        tbody td {
+            padding: 11px 16px;
+            text-align: right;
+            color: var(--text-sec);
+            font-weight: 500;
+        }
+
+        tbody td:first-child {
+            text-align: left;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .td-positive {
+            color: var(--green) !important;
+        }
+
+        .td-accent {
+            color: var(--accent-h) !important;
+        }
+
+        /* ============================================================
+                SECTION — INFO & FAQ
+   ============================================================ */
+        .info-section {
+            margin: 40px 0;
+        }
+
+        .info-section h2 {
+            margin-bottom: 18px;
+        }
+
+        .info-section p {
+            margin-bottom: 14px;
+        }
+
+        .info-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .formula-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: var(--radius-btn);
+            padding: 16px 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: .92rem;
+            color: var(--accent-h);
+            word-break: break-all;
+        }
+
+        .formula-box span {
+            color: var(--text-sec);
+            font-family: var(--font-body);
+            font-size: .8rem;
+            display: block;
+            margin-top: 8px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            padding: 20px;
+        }
+
+        .info-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .info-card p {
+            font-size: .88rem;
+        }
+
+        .info-card .info-icon {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        /* FAQ */
+        .faq-section {
+            margin: 40px 0;
+        }
+
+        .faq-section h2 {
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color .2s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--border-h);
+        }
+
+        .faq-q {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 18px 20px;
+            background: var(--surface);
+            border: none;
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: .92rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+            transition: background .2s;
+        }
+
+        .faq-q:hover {
+            background: var(--surface-h);
+        }
+
+        .faq-chevron {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform .3s var(--ease), background .2s;
+            font-size: .7rem;
+            color: var(--accent-h);
+        }
+
+        .faq-item.open .faq-chevron {
+            transform: rotate(180deg);
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s var(--ease), padding .3s;
+            background: var(--bg);
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 300px;
+        }
+
+        .faq-a-inner {
+            padding: 0 20px 18px;
+            font-size: .88rem;
+            color: var(--text-sec);
+            line-height: 1.75;
+        }
+
+        /* ============================================================
+                FOOTER
+   ============================================================ */
+        .site-footer {
+            margin-top: 60px;
+            border-top: 1px solid var(--border);
+            padding: 28px 0;
+            text-align: center;
+        }
+
+        .site-footer p {
+            font-size: .82rem;
+            color: var(--text-hint);
+        }
+
+        .site-footer a {
+            color: var(--accent-h);
+        }
+
+        .site-footer a:hover {
+            color: var(--text);
+        }
+
+        /* ============================================================
+                    UTILITY
+   ============================================================ */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--accent-h);
+            background: var(--accent-bg);
+            padding: 4px 10px;
+            border-radius: 99px;
+            margin-bottom: 14px;
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 32px 0;
+        }
+
+        .text-green {
+            color: var(--green);
+        }
+
+        .text-amber {
+            color: var(--amber);
+        }
+
+        .text-accent {
+            color: var(--accent-h);
+        }
+
+        .mt-0 {
+            margin-top: 0;
+        }
+
+        .mb-4 {
+            margin-bottom: 4px;
+        }
+
+        /* ============================================================
+            LOADING SPINNER (optional polish)
+   ============================================================ */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin .7s linear infinite;
+            display: none;
+        }
+
+        /* ============================================================
+                  PRINT
+   ============================================================ */
+        @media print {
+
+            .site-header,
+            .ad-zone,
+            .btn-row,
+            .theme-btn {
+                display: none !important;
+            }
+
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .card {
+                border: 1px solid #ccc;
+            }
+        }
+
+        /* ============================================================
+                SETTINGS PANEL
+   ============================================================ */
+        .cfg-panel {
+            position: fixed;
+            top: 72px;
+            right: 16px;
+            width: 186px;
+            background: var(--surface);
+            border: 1px solid var(--border-h);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-h);
+            z-index: 500;
+            padding: 10px;
+            display: none;
+            animation: panelIn .18s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .cfg-panel.open {
+            display: block;
+        }
+
+        @keyframes panelIn {
+            from {
+                opacity: 0;
+                transform: translateY(-8px) scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .cfg-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 499;
+            display: none;
+        }
+
+        .cfg-overlay.open {
+            display: block;
+        }
+
+        .cfg-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 3px 0;
+        }
+
+        .cfg-row-label {
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--text-hint);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .cfg-select {
+            flex: 1;
+            height: 28px;
+            background: var(--bg);
+            border: 1px solid var(--border-h);
+            border-radius: 6px;
+            color: var(--text-sec);
+            font-size: .75rem;
+            font-weight: 500;
+            font-family: var(--font-body);
+            padding: 0 6px;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238888a0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 7px center;
+            padding-right: 22px;
+            transition: border-color .15s;
+        }
+
+        .cfg-select:focus {
+            border-color: var(--accent);
+        }
+
+        [data-theme="light"] .cfg-select {
+            background-color: #f5f5fa;
+            color: #333355;
+        }
+
+        .cfg-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 7px 0;
+        }
+
+        .cfg-tools-link {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 10px;
+            border-radius: 7px;
+            background: var(--accent-bg);
+            border: 1px solid rgba(99, 102, 241, .2);
+            color: var(--accent-h);
+            font-size: .82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all .15s;
+            width: 100%;
+        }
+
+        .cfg-tools-link:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* ============================================================
+            TABULAR NUMBERS — crisp financial data
+   ============================================================ */
+        .kpi-value {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+            letter-spacing: -.02em;
+        }
+
+        tbody td {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+        }
+
+        /* ============================================================
+              INPUT SUFFIX — wider variant for "años"
+   ============================================================ */
+        input[type="number"].has-suffix-wide {
+            padding-right: 52px;
+        }
+
+        /* KPI icon styling for SVGs */
+        .kpi-icon svg {
+            stroke: currentColor;
+        }
+
+        .kpi-green .kpi-icon svg {
+            stroke: var(--green);
+        }
+
+        .kpi-accent .kpi-icon svg {
+            stroke: var(--accent-h);
+        }
+
+        .kpi-amber .kpi-icon svg {
+            stroke: var(--amber);
+        }
+
+        .info-icon svg {
+            stroke: var(--accent-h);
+            opacity: .8;
+        }
+
+        /* AD zones: hidden until loaded */
+        .ad-top,
+        .ad-mid,
+        .ad-footer {
+            min-height: 0;
+            padding: 0;
+            transition: all .3s;
+        }
+
+        .ad-top.loaded,
+        .ad-footer.loaded {
+            min-height: 70px;
+            padding: 10px 0;
+        }
+
+        .ad-mid.loaded {
+            min-height: 90px;
+            padding: 12px 0;
+        }
+
+        .ad-top:not(.loaded) .ad-label,
+        .ad-mid:not(.loaded) .ad-label,
+        .ad-footer:not(.loaded) .ad-label {
+            display: none;
+        }
+
+        .ad-top:not(.loaded) .ad-placeholder,
+        .ad-mid:not(.loaded) .ad-placeholder,
+        .ad-footer:not(.loaded) .ad-placeholder {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+                     HEADER
+     ============================================================ -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="https://ourtoolkit.blogspot.com" class="logo" title="OurToolkit — Herramientas gratuitas">
+                <span class="logo-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff"
+                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                    </svg></span>
+                Our<span class="logo-dot">Toolkit</span>
+            </a>
+            <span class="header-title">/ <span>Calculadora de Interés Compuesto</span></span>
+            <button class="theme-btn" id="cfgBtn" title="Configuración" aria-label="Configuración"><svg width="15"
+                    height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg></button>
+        </div>
+    </header>
+
+    <!-- ============================================================
+             AD TOP — Banner superior
+     ============================================================ -->
+    <div class="ad-top ad-zone" id="adTop">
+        <span class="ad-label">Publicidad</span>
+        <!-- AdsTerra banner 728×90 desktop -->
+        <div class="ad-desktop">
+            <div class="ad-placeholder">[ AdsTerra Banner 728×90 ]</div>
+        </div>
+        <!-- AdsTerra banner 320×50 móvil -->
+        <div class="ad-mobile">
+            <div class="ad-placeholder">[ AdsTerra Banner 320×50 ]</div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+                 MAIN CONTENT
+     ============================================================ -->
+    <main>
+        <div class="container">
+
+            <!-- Hero -->
+            <section class="tool-hero">
+                <div class="section-label">Finanzas personales</div>
+                <h1>Calculadora de Interés Compuesto</h1>
+                <p>Descubre el verdadero poder de tu dinero trabajando para ti. Calcula el crecimiento de tus
+                    inversiones con aportaciones periódicas y visualiza tu riqueza futura.</p>
+            </section>
+
+            <!-- ── INPUTS ──────────────────────────────────────────── -->
+            <div class="calc-grid">
+
+                <!-- Panel izquierdo: parámetros -->
+                <div class="card">
+                    <h2 class="mb-4" style="margin-bottom:22px;">Parámetros</h2>
+
+                    <div class="form-group">
+                        <label>Capital inicial <span class="tip">(inversión de partida)</span></label>
+                        <div class="input-wrap">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="principal" class="has-prefix" min="0" step="100" value="10000"
+                                aria-label="Capital inicial">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Aportación periódica <span class="tip">(opcional)</span></label>
+                        <div class="input-wrap">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="contribution" class="has-prefix" min="0" step="10" value="200"
+                                aria-label="Aportación periódica">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Frecuencia de aportación</label>
+                        <select id="contribFreq" aria-label="Frecuencia de aportación">
+                            <option value="12">Mensual</option>
+                            <option value="4">Trimestral</option>
+                            <option value="2">Semestral</option>
+                            <option value="1">Anual</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tasa de interés anual</label>
+                        <div class="slider-wrap">
+                            <input type="range" id="rateSlider" min="0.1" max="30" step="0.1" value="7"
+                                aria-label="Deslizador tasa de interés">
+                            <div class="input-wrap" style="width:90px;flex-shrink:0;">
+                                <input type="number" id="rate" class="has-suffix" min="0.01" max="100" step="0.1"
+                                    value="7" style="text-align:right;" aria-label="Tasa de interés anual">
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Capitalización</label>
+                        <select id="compFreq" aria-label="Frecuencia de capitalización">
+                            <option value="12">Mensual (12×/año)</option>
+                            <option value="4">Trimestral (4×/año)</option>
+                            <option value="2">Semestral (2×/año)</option>
+                            <option value="1">Anual (1×/año)</option>
+                            <option value="365">Diaria (365×/año)</option>
+                            <option value="0">Continua (e^rt)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Período de inversión</label>
+                        <div class="slider-wrap">
+                            <input type="range" id="yearsSlider" min="1" max="50" step="1" value="20"
+                                aria-label="Deslizador años">
+                            <div class="input-wrap" style="width:90px;flex-shrink:0;">
+                                <input type="number" id="years" class="has-suffix has-suffix-wide" min="1" max="100"
+                                    step="1" value="20" style="text-align:right;" aria-label="Años de inversión">
+                                <span class="input-suffix">años</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Inflación anual estimada <span class="tip">(para valor real)</span></label>
+                        <div class="input-wrap">
+                            <input type="number" id="inflation" class="has-suffix" min="0" max="30" step="0.1" value="3"
+                                style="text-align:right;" aria-label="Inflación anual">
+                            <span class="input-suffix">%</span>
+                        </div>
+                    </div>
+
+                    <div class="btn-row" style="margin-top:20px;">
+                        <button class="btn btn-primary" id="calcBtn" onclick="calcular()"><svg width="15" height="15"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="2" width="16" height="20" rx="2" />
+                                <line x1="8" y1="6" x2="16" y2="6" />
+                                <line x1="16" y1="10" x2="8" y2="10" />
+                                <line x1="11" y1="14" x2="8" y2="14" />
+                                <line x1="11" y1="18" x2="8" y2="18" />
+                                <line x1="14" y1="14" x2="16" y2="18" />
+                                <line x1="16" y1="14" x2="14" y2="18" />
+                            </svg> Calcular</button>
+                        <button class="btn btn-outline" onclick="resetForm()"><svg width="15" height="15"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="1 4 1 10 7 10" />
+                                <path d="M3.51 15a9 9 0 1 0 .49-4.5" />
+                            </svg> Limpiar</button>
+                    </div>
+                </div>
+
+                <!-- Panel derecho: gráfico -->
+                <div class="card" id="chartCard">
+                    <h2 style="margin-bottom:18px;display:flex;align-items:center;gap:8px;"><svg width="18" height="18"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                            <polyline points="16 7 22 7 22 13" />
+                        </svg> Crecimiento proyectado</h2>
+                    <div class="chart-wrap">
+                        <canvas id="growthChart" aria-label="Gráfico de crecimiento de inversión"></canvas>
+                    </div>
+                    <div class="breakdown-bar" id="breakdownBar" style="margin-top:18px;">
+                        <h3>Composición del capital final</h3>
+                        <div class="bar-track">
+                            <div class="bar-seg bar-capital" id="barCapital"></div>
+                            <div class="bar-seg bar-contrib" id="barContrib"></div>
+                            <div class="bar-seg bar-interest" id="barInterest"></div>
+                        </div>
+                        <div class="bar-legend">
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background:var(--accent)"></div>Capital inicial
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background:#a78bfa"></div>Aportaciones
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-dot" style="background:var(--green)"></div>Intereses
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /calc-grid -->
+
+            <!-- ── KPIs ───────────────────────────────────────────── -->
+            <div id="resultsSection" class="results-hidden">
+
+                <div class="kpi-grid">
+                    <div class="kpi kpi-accent">
+                        <div class="kpi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="4" width="22" height="16" rx="2" />
+                                <line x1="1" y1="10" x2="23" y2="10" />
+                            </svg></div>
+                        <div class="kpi-value" id="kpiTotal">—</div>
+                        <div class="kpi-label">Capital Final</div>
+                    </div>
+                    <div class="kpi kpi-green">
+                        <div class="kpi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="20" x2="12" y2="10" />
+                                <line x1="18" y1="20" x2="18" y2="4" />
+                                <line x1="6" y1="20" x2="6" y2="16" />
+                            </svg></div>
+                        <div class="kpi-value" id="kpiInterest">—</div>
+                        <div class="kpi-label">Intereses Ganados</div>
+                    </div>
+                    <div class="kpi">
+                        <div class="kpi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="8" cy="8" r="6" />
+                                <path d="M18.09 10.37A6 6 0 1 1 10.34 18" />
+                                <path d="M7 6h1v4" />
+                                <line x1="16.71" y1="13.88" x2="13.83" y2="17.29" />
+                            </svg></div>
+                        <div class="kpi-value" id="kpiInvested">—</div>
+                        <div class="kpi-label">Total Invertido</div>
+                    </div>
+                    <div class="kpi kpi-amber">
+                        <div class="kpi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg></div>
+                        <div class="kpi-value" id="kpiReal">—</div>
+                        <div class="kpi-label">Valor Real (inflación)</div>
+                    </div>
+                </div>
+
+                <!-- ── AD MID — Después del resultado principal ── -->
+                <div class="ad-mid ad-zone" id="adMid">
+                    <span class="ad-label">Publicidad</span>
+                    <div class="ad-desktop">
+                        <div class="ad-placeholder">[ AdsTerra Native Banner 728×90 ]</div>
+                    </div>
+                    <div class="ad-mobile">
+                        <div class="ad-placeholder">[ AdsTerra Native 320×50 ]</div>
+                    </div>
+                </div>
+
+                <!-- Tabla de amortización -->
+                <div class="table-section card">
+                    <div class="table-header">
+                        <h3 style="display:flex;align-items:center;gap:7px;"><svg width="15" height="15"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <line x1="3" y1="9" x2="21" y2="9" />
+                                <line x1="3" y1="15" x2="21" y2="15" />
+                                <line x1="9" y1="9" x2="9" y2="21" />
+                            </svg> Tabla de evolución anual</h3>
+                        <button class="btn btn-outline btn-sm" onclick="exportCSV()"><svg width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg> Exportar CSV</button>
+                    </div>
+                    <div class="table-scroll">
+                        <table id="amortTable" aria-label="Tabla de evolución anual de la inversión">
+                            <thead>
+                                <tr>
+                                    <th>Año</th>
+                                    <th>Capital inicial</th>
+                                    <th>Aportado</th>
+                                    <th>Intereses</th>
+                                    <th>Acum. intereses</th>
+                                    <th>Capital final</th>
+                                    <th>Valor real</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div><!-- /resultsSection -->
+
+            <div class="divider"></div>
+
+            <!-- ============================================================
+                      INFO SEO SECTION (300+ words)
+    ============================================================== -->
+            <section class="info-section" aria-labelledby="info-heading">
+                <div class="section-label">Aprende más</div>
+                <h2 id="info-heading">¿Qué es el Interés Compuesto y por qué es tan poderoso?</h2>
+
+                <p>El <strong style="color:var(--text)">interés compuesto</strong> es, sin duda, uno de los conceptos
+                    más transformadores de las finanzas personales. A diferencia del interés simple —donde los intereses
+                    se calculan siempre sobre el capital original—, el interés compuesto genera intereses sobre los
+                    intereses ya acumulados. Esta característica crea un efecto bola de nieve que, con el tiempo, puede
+                    multiplicar de forma espectacular cualquier inversión.</p>
+
+                <p>Albert Einstein —aunque la cita es probablemente apócrifa— supuestamente llamó al interés compuesto
+                    "la octava maravilla del mundo". Real o no, la frase captura perfectamente su efecto: quien lo
+                    entiende, lo cobra; quien no, lo paga.</p>
+
+                <div class="formula-box">
+                    A = P × (1 + r/n)^(n×t) + C × [((1 + r/n)^(n×t) − 1) / (r/n)]
+                    <span>A = capital final · P = capital inicial · r = tasa anual · n = períodos/año · t = años · C =
+                        aportación periódica</span>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg></div>
+                        <h3>El tiempo es tu mayor aliado</h3>
+                        <p>Invertir $10,000 durante 30 años al 7% anual produce más del doble que invertir la misma
+                            cantidad durante 20 años. Empezar pronto, aunque sea con poco, marca una diferencia enorme a
+                            largo plazo.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="17 1 21 5 17 9" />
+                                <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                                <polyline points="7 23 3 19 7 15" />
+                                <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                            </svg></div>
+                        <h3>Frecuencia de capitalización</h3>
+                        <p>Cuanto más frecuente es la capitalización (diaria vs anual), mayor es el rendimiento
+                            efectivo. La capitalización mensual o diaria, habitual en fondos indexados y ETFs, maximiza
+                            el efecto compuesto.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
+                            </svg></div>
+                        <h3>Aportaciones periódicas</h3>
+                        <p>Añadir una cantidad mensual constante, por pequeña que sea, puede duplicar o triplicar el
+                            capital final. Este método se conoce como Dollar Cost Averaging (DCA) y reduce además el
+                            riesgo de comprar siempre en máximos.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg></div>
+                        <h3>Inflación y valor real</h3>
+                        <p>El valor nominal de tu inversión crecerá, pero la inflación erosiona el poder adquisitivo.
+                            Por eso nuestra calculadora muestra el <strong style="color:var(--text)">valor real</strong>
+                            ajustado por inflación: el dato que verdaderamente importa para planificar tu retiro.</p>
+                    </div>
+                </div>
+
+                <p>Cuando hablamos de vehículos reales de inversión, los fondos indexados (como los que replican el S&P
+                    500) han ofrecido históricamente retornos del <span class="text-green">7–10% anual</span> en
+                    términos nominales, aproximadamente un <span class="text-accent">4–7% real</span> después de
+                    inflación. Las cuentas de ahorro de alto rendimiento o los bonos del gobierno suelen ofrecer
+                    retornos menores, pero con menor riesgo.</p>
+
+                <p>La fórmula de capitalización continua —cuando <em>n</em> tiende a infinito— es A = P × e^(r×t), donde
+                    <em>e</em> es la constante de Euler (≈2.718). Aunque en la práctica ninguna institución capitaliza
+                    de forma verdaderamente continua, su comprensión es fundamental en matemáticas financieras
+                    avanzadas.
+                </p>
+
+                <p>Recuerda siempre diversificar tus inversiones, considerar tu horizonte temporal y tolerancia al
+                    riesgo, y consultar a un asesor financiero certificado antes de tomar decisiones importantes. Esta
+                    calculadora es una herramienta educativa: los resultados reales dependen de muchos factores que
+                    ninguna simulación puede capturar al 100%.</p>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- ============================================================
+                      FAQ SECTION
+         ============================================================ -->
+            <section class="faq-section" aria-labelledby="faq-heading">
+                <div class="section-label">Preguntas frecuentes</div>
+                <h2 id="faq-heading">Preguntas Frecuentes</h2>
+
+                <div class="faq-item" id="faq1">
+                    <button class="faq-q" onclick="toggleFaq('faq1')" aria-expanded="false">
+                        ¿Cuál es la diferencia entre interés simple e interés compuesto?
+                        <span class="faq-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg></span>
+                    </button>
+                    <div class="faq-a" role="region">
+                        <div class="faq-a-inner">
+                            El <strong>interés simple</strong> se calcula siempre sobre el capital original: si
+                            inviertes $1,000 al 10% anual, ganas $100 cada año sin excepción. El <strong>interés
+                                compuesto</strong>, en cambio, suma los intereses generados al capital, de modo que en
+                            el año 2 calculas el 10% sobre $1,100 (no sobre $1,000), en el año 3 sobre $1,210, y así
+                            sucesivamente. La diferencia parece pequeña al principio, pero a lo largo de décadas puede
+                            representar miles o millones de dólares adicionales.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" id="faq2">
+                    <button class="faq-q" onclick="toggleFaq('faq2')" aria-expanded="false">
+                        ¿Qué tasa de interés es realista para mis inversiones?
+                        <span class="faq-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg></span>
+                    </button>
+                    <div class="faq-a" role="region">
+                        <div class="faq-a-inner">
+                            Depende completamente del instrumento elegido. Las cuentas de ahorro tradicionales ofrecen
+                            0.5–3% anual. Los bonos del gobierno de EE.UU. ofrecen actualmente 4–5%. Los fondos
+                            indexados al S&P 500 han promediado un <strong>~10% nominal (7% real)</strong> en los
+                            últimos 100 años, aunque con alta volatilidad año a año. Las criptomonedas pueden ofrecer
+                            retornos mucho mayores, pero también pérdidas totales. Para planificación a largo plazo,
+                            usar entre 5% y 8% es un supuesto razonable y conservador.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" id="faq3">
+                    <button class="faq-q" onclick="toggleFaq('faq3')" aria-expanded="false">
+                        ¿Con qué frecuencia debo capitalizar para maximizar mi rendimiento?
+                        <span class="faq-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg></span>
+                    </button>
+                    <div class="faq-a" role="region">
+                        <div class="faq-a-inner">
+                            Matemáticamente, cuanto más frecuente sea la capitalización, mayor el rendimiento: la
+                            capitalización diaria supera a la mensual, que supera a la anual. Sin embargo, la diferencia
+                            práctica entre capitalización mensual y diaria es mínima (apenas unas décimas de punto
+                            porcentual). La mayoría de los fondos de inversión y ETFs capitalizan diariamente de forma
+                            automática al reinvertir dividendos. Lo que <em>sí</em> importa más es la <strong>tasa de
+                                interés real</strong> y el <strong>tiempo de inversión</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" id="faq4">
+                    <button class="faq-q" onclick="toggleFaq('faq4')" aria-expanded="false">
+                        ¿Cómo afecta la inflación a mi inversión?
+                        <span class="faq-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg></span>
+                    </button>
+                    <div class="faq-a" role="region">
+                        <div class="faq-a-inner">
+                            La inflación reduce el poder adquisitivo de tu dinero con el tiempo. Si tienes $100,000
+                            nominales en 20 años pero la inflación fue del 3% anual, esos $100,000 equivalen en poder de
+                            compra a solo ~$55,368 de hoy. Por eso es crucial que tu tasa de retorno supere la
+                            inflación. La calculadora muestra el <strong>valor real</strong> de tu capital final: ese es
+                            el número que debes usar para planificar gastos futuros como la jubilación.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item" id="faq5">
+                    <button class="faq-q" onclick="toggleFaq('faq5')" aria-expanded="false">
+                        ¿Puedo usar esta calculadora para planificar mi jubilación?
+                        <span class="faq-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg></span>
+                    </button>
+                    <div class="faq-a" role="region">
+                        <div class="faq-a-inner">
+                            Sí, es una excelente herramienta de planificación inicial. Introduce tu capital actual como
+                            <em>inversión inicial</em>, tu ahorro mensual como <em>aportación periódica</em>, y el
+                            número de años hasta tu jubilación como <em>período</em>. Usa una tasa conservadora (5–7%) y
+                            activa el ajuste por inflación para ver el valor real. El resultado te dará una estimación
+                            del capital disponible. Ten en cuenta que los retornos reales varían año a año, y los
+                            impuestos reducirán las ganancias dependiendo de tu país y tipo de cuenta (IRA, 401k, etc.).
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div><!-- /container -->
+    </main>
+
+    <!-- ============================================================
+            AD FOOTER — Banner al final de página
+     ============================================================ -->
+    <div class="ad-footer ad-zone" id="adFooter">
+        <span class="ad-label">Publicidad</span>
+        <div class="ad-desktop">
+            <div class="ad-placeholder">[ AdsTerra Footer Banner 728×90 ]</div>
+        </div>
+        <div class="ad-mobile">
+            <div class="ad-placeholder">[ AdsTerra Footer 320×50 ]</div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+                 FOOTER
+     ============================================================ -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <p>© 2025 <a href="https://ourtoolkit.blogspot.com" target="_blank" rel="noopener">OurToolkit Blog</a> —
+                Herramientas gratuitas para todos.</p>
+            <p style="margin-top:6px;font-size:.75rem;">Esta calculadora es solo para fines educativos. No constituye
+                asesoramiento financiero.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+                JAVASCRIPT
+     ============================================================ -->
+    <script>
+        (function () {
+            'use strict';
+
+            /* ── Tiny canvas chart (no external deps) ─────────────────── */
+            var chartData = null;
+
+            function drawChart(labels, totalArr, investedArr) {
+                var canvas = document.getElementById('growthChart');
+                var dpr = window.devicePixelRatio || 1;
+                var rect = canvas.parentElement.getBoundingClientRect();
+                var W = rect.width || 400;
+                var H = 290;
+                canvas.width = W * dpr;
+                canvas.height = H * dpr;
+                canvas.style.width = W + 'px';
+                canvas.style.height = H + 'px';
+                var ctx = canvas.getContext('2d');
+                ctx.scale(dpr, dpr);
+
+                var theme = document.documentElement.getAttribute('data-theme');
+                var isDark = theme !== 'light';
+                var gridColor = isDark ? 'rgba(90,90,130,.55)' : 'rgba(150,150,200,.5)';
+                var labelColor = isDark ? '#b0b0c8' : '#444466';
+                var bgColor = isDark ? '#111120' : '#ffffff';
+
+                ctx.fillStyle = bgColor;
+                ctx.fillRect(0, 0, W, H);
+
+                var pad = { top: 28, right: 18, bottom: 62, left: 60 };
+                var cw = W - pad.left - pad.right;
+                var ch = H - pad.top - pad.bottom;
+
+                var maxVal = Math.max.apply(null, totalArr) * 1.10;
+                var range = maxVal || 1;
+
+                function xPos(i) { return pad.left + (i / (labels.length - 1)) * cw; }
+                function yPos(v) { return pad.top + ch - (v / range) * ch; }
+
+                /* Grid lines + Y labels */
+                var gridLines = 4;
+                for (var g = 0; g <= gridLines; g++) {
+                    var gy = pad.top + (g / gridLines) * ch;
+                    ctx.beginPath();
+                    ctx.moveTo(pad.left, gy);
+                    ctx.lineTo(pad.left + cw, gy);
+                    ctx.strokeStyle = gridColor;
+                    ctx.lineWidth = (g === gridLines) ? 1.5 : 1;
+                    ctx.stroke();
+                    var gv = maxVal * (1 - g / gridLines);
+                    ctx.fillStyle = labelColor;
+                    ctx.font = 'bold 12px Plus Jakarta Sans, sans-serif';
+                    ctx.textAlign = 'right';
+                    ctx.fillText(formatKShort(gv), pad.left - 10, gy + 4);
+                }
+
+                /* Invested filled area */
+                ctx.beginPath();
+                ctx.moveTo(xPos(0), yPos(investedArr[0]));
+                for (var i = 1; i < investedArr.length; i++) ctx.lineTo(xPos(i), yPos(investedArr[i]));
+                ctx.lineTo(xPos(investedArr.length - 1), yPos(0));
+                ctx.lineTo(xPos(0), yPos(0));
+                ctx.closePath();
+                ctx.fillStyle = isDark ? 'rgba(167,139,250,.20)' : 'rgba(167,139,250,.25)';
+                ctx.fill();
+
+                /* Total filled area */
+                ctx.beginPath();
+                ctx.moveTo(xPos(0), yPos(totalArr[0]));
+                for (var j = 1; j < totalArr.length; j++) ctx.lineTo(xPos(j), yPos(totalArr[j]));
+                ctx.lineTo(xPos(totalArr.length - 1), yPos(0));
+                ctx.lineTo(xPos(0), yPos(0));
+                ctx.closePath();
+                var grad = ctx.createLinearGradient(0, pad.top, 0, pad.top + ch);
+                grad.addColorStop(0, 'rgba(99,102,241,.42)');
+                grad.addColorStop(1, 'rgba(99,102,241,.04)');
+                ctx.fillStyle = grad;
+                ctx.fill();
+
+                /* Invested line — dashed, visible */
+                ctx.beginPath();
+                ctx.moveTo(xPos(0), yPos(investedArr[0]));
+                for (var m = 1; m < investedArr.length; m++) ctx.lineTo(xPos(m), yPos(investedArr[m]));
+                ctx.strokeStyle = isDark ? '#a78bfa' : '#7c3aed';
+                ctx.lineWidth = 2.5;
+                ctx.lineJoin = 'round';
+                ctx.setLineDash([7, 5]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                /* Total line — thick, solid */
+                ctx.beginPath();
+                ctx.moveTo(xPos(0), yPos(totalArr[0]));
+                for (var k = 1; k < totalArr.length; k++) ctx.lineTo(xPos(k), yPos(totalArr[k]));
+                ctx.strokeStyle = '#6366f1';
+                ctx.lineWidth = 4;
+                ctx.lineJoin = 'round';
+                ctx.stroke();
+
+                /* Dot markers on total line */
+                var dotStep = Math.max(1, Math.floor(labels.length / 7));
+                for (var d = 0; d < totalArr.length; d += dotStep) {
+                    ctx.beginPath(); ctx.arc(xPos(d), yPos(totalArr[d]), 5, 0, Math.PI * 2);
+                    ctx.fillStyle = '#6366f1'; ctx.fill();
+                    ctx.beginPath(); ctx.arc(xPos(d), yPos(totalArr[d]), 3, 0, Math.PI * 2);
+                    ctx.fillStyle = bgColor; ctx.fill();
+                }
+
+                /* Final value callout bubble */
+                var lastX = xPos(totalArr.length - 1);
+                var lastY = yPos(totalArr[totalArr.length - 1]);
+                var finalLabel = formatKShort(totalArr[totalArr.length - 1]);
+                /* Big dot on final point */
+                ctx.beginPath(); ctx.arc(lastX, lastY, 7, 0, Math.PI * 2);
+                ctx.fillStyle = '#6366f1'; ctx.fill();
+                ctx.beginPath(); ctx.arc(lastX, lastY, 4, 0, Math.PI * 2);
+                ctx.fillStyle = bgColor; ctx.fill();
+                /* Pill bubble */
+                ctx.font = 'bold 14px Plus Jakarta Sans, sans-serif';
+                var tw = ctx.measureText(finalLabel).width;
+                var bw = tw + 24, bh = 30, br = 8;
+                var bx = Math.min(lastX - bw / 2, W - bw - 6);
+                var by = lastY - bh - 14;
+                if (by < 4) by = lastY + 16;
+                ctx.fillStyle = '#6366f1';
+                ctx.beginPath();
+                ctx.moveTo(bx + br, by);
+                ctx.lineTo(bx + bw - br, by);
+                ctx.quadraticCurveTo(bx + bw, by, bx + bw, by + br);
+                ctx.lineTo(bx + bw, by + bh - br);
+                ctx.quadraticCurveTo(bx + bw, by + bh, bx + bw - br, by + bh);
+                ctx.lineTo(bx + br, by + bh);
+                ctx.quadraticCurveTo(bx, by + bh, bx, by + bh - br);
+                ctx.lineTo(bx, by + br);
+                ctx.quadraticCurveTo(bx, by, bx + br, by);
+                ctx.closePath();
+                ctx.fill();
+                ctx.fillStyle = '#ffffff';
+                ctx.textAlign = 'center';
+                ctx.fillText(finalLabel, bx + bw / 2, by + 20);
+
+                /* X-axis year labels — collision-safe */
+                ctx.fillStyle = labelColor;
+                ctx.font = 'bold 12px Plus Jakarta Sans, sans-serif';
+                ctx.textAlign = 'center';
+                var labelW = ctx.measureText('Año 20').width + 10; /* min gap between labels */
+                var minStep = Math.ceil(labelW / (cw / (labels.length - 1)));
+                var xStep = Math.max(minStep, Math.floor(labels.length / 6));
+                var drawnX = {};
+                for (var n = 0; n < labels.length; n += xStep) {
+                    ctx.fillText('Año ' + labels[n], xPos(n), H - 32);
+                    drawnX[n] = true;
+                }
+                var lastIdx = labels.length - 1;
+                /* Only draw last label if it won't overlap the previous one */
+                if (!drawnX[lastIdx]) {
+                    var prevDrawn = lastIdx - (lastIdx % xStep);
+                    var gap = xPos(lastIdx) - xPos(prevDrawn);
+                    if (gap >= labelW) {
+                        ctx.fillText('Año ' + labels[lastIdx], xPos(lastIdx), H - 32);
+                    }
+                }
+
+                /* Legend row */
+                var ly = H - 16;
+                var lx = pad.left;
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = '#6366f1';
+                ctx.beginPath(); ctx.moveTo(lx, ly); ctx.lineTo(lx + 24, ly); ctx.stroke();
+                ctx.beginPath(); ctx.arc(lx + 12, ly, 4, 0, Math.PI * 2);
+                ctx.fillStyle = '#6366f1'; ctx.fill();
+                ctx.fillStyle = labelColor;
+                ctx.font = '13px Plus Jakarta Sans, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText('Capital total', lx + 32, ly + 4);
+
+                var lx2 = lx + 150;
+                ctx.lineWidth = 2.5;
+                ctx.strokeStyle = isDark ? '#a78bfa' : '#7c3aed';
+                ctx.setLineDash([7, 5]);
+                ctx.beginPath(); ctx.moveTo(lx2, ly); ctx.lineTo(lx2 + 24, ly); ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.fillStyle = labelColor;
+                ctx.fillText('Lo que aportaste', lx2 + 32, ly + 4);
+            }
+
+            /* ── Number helpers ──────────────────────────────────────── */
+            function fmt(n) {
+                return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+            function formatKShort(n) {
+                if (n >= 1e9) return '$' + (n / 1e9).toFixed(1) + 'B';
+                if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+                if (n >= 1e3) return '$' + (n / 1e3).toFixed(0) + 'K';
+                return '$' + n.toFixed(0);
+            }
+            function fmtShort(n) {
+                if (n >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
+                if (n >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
+                if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+                return '$' + n.toFixed(2);
+            }
+
+            /* ── Main calculation ────────────────────────────────────── */
+            function calcular() {
+                var P = parseFloat(document.getElementById('principal').value) || 0;
+                var C = parseFloat(document.getElementById('contribution').value) || 0;
+                var cf = parseInt(document.getElementById('contribFreq').value) || 12;
+                var r = parseFloat(document.getElementById('rate').value) / 100;
+                var n = parseInt(document.getElementById('compFreq').value);        // 0 = continua
+                var t = parseInt(document.getElementById('years').value) || 1;
+                var inf = parseFloat(document.getElementById('inflation').value) / 100;
+
+                if (isNaN(P) || isNaN(r) || isNaN(t) || t < 1) {
+                    alert('Por favor, introduce valores válidos.');
+                    return;
+                }
+
+                var rows = [];
+                var labels = [];
+                var totalArr = [];
+                var investArr = [];
+                var cumInterest = 0;
+                var capital = P;
+
+                for (var y = 1; y <= t; y++) {
+                    var capitalStart = capital;
+                    var annualContrib = C * cf;
+
+                    /* Apply contributions mid-year (simplification: monthly throughout) */
+                    /* We simulate monthly for accuracy */
+                    var capitalSim = capital;
+                    var periodsPerYear = (n === 0) ? 12 : n;
+                    var ratePerPeriod = (n === 0) ? 0 : r / n;
+                    var contribPerPeriod = (cf >= periodsPerYear) ? (C * cf / periodsPerYear) : (C * cf / periodsPerYear);
+
+                    /* For continuous: use exact formula per year */
+                    if (n === 0) {
+                        capitalSim = capitalSim * Math.exp(r) + C * cf * (Math.exp(r) - 1) / r;
+                    } else {
+                        /* Simulate period by period */
+                        var subPeriods = periodsPerYear;
+                        var rpp = r / subPeriods;
+                        var contribsPerSub = C * cf / subPeriods;
+                        for (var p = 0; p < subPeriods; p++) {
+                            capitalSim = capitalSim * (1 + rpp) + contribsPerSub;
+                        }
+                    }
+
+                    var interestThisYear = capitalSim - capitalStart - annualContrib;
+                    cumInterest += interestThisYear;
+                    capital = capitalSim;
+
+                    var totalInvested = P + C * cf * y;
+                    var realValue = capital / Math.pow(1 + inf, y);
+
+                    rows.push({
+                        year: y,
+                        start: capitalStart,
+                        contrib: annualContrib,
+                        interest: interestThisYear,
+                        cumInterest: cumInterest,
+                        end: capital,
+                        real: realValue,
+                        invested: totalInvested
+                    });
+
+                    labels.push(y);
+                    totalArr.push(capital);
+                    investArr.push(totalInvested);
+                }
+
+                chartData = { rows: rows, labels: labels, totalArr: totalArr, investArr: investArr };
+
+                /* ── KPIs ── */
+                var last = rows[rows.length - 1];
+                document.getElementById('kpiTotal').textContent = fmtShort(last.end);
+                document.getElementById('kpiInterest').textContent = fmtShort(last.cumInterest);
+                document.getElementById('kpiInvested').textContent = fmtShort(last.invested);
+                document.getElementById('kpiReal').textContent = fmtShort(last.real);
+
+                /* ── Progress bar ── */
+                var total = last.end;
+                var pCapital = (P / total) * 100;
+                var pContrib = ((last.invested - P) / total) * 100;
+                var pInterest = (last.cumInterest / total) * 100;
+                document.getElementById('barCapital').style.width = pCapital + '%';
+                document.getElementById('barContrib').style.width = pContrib + '%';
+                document.getElementById('barInterest').style.width = pInterest + '%';
+
+                /* ── Table ── */
+                var tbody = document.getElementById('tableBody');
+                tbody.innerHTML = '';
+                rows.forEach(function (row) {
+                    var tr = document.createElement('tr');
+                    tr.innerHTML =
+                        '<td>Año ' + row.year + '</td>' +
+                        '<td>' + fmt(row.start) + '</td>' +
+                        '<td class="td-accent">' + fmt(row.contrib) + '</td>' +
+                        '<td class="td-positive">' + fmt(row.interest) + '</td>' +
+                        '<td class="td-positive">' + fmt(row.cumInterest) + '</td>' +
+                        '<td style="color:var(--text);font-weight:700">' + fmt(row.end) + '</td>' +
+                        '<td style="color:var(--amber)">' + fmt(row.real) + '</td>';
+                    tbody.appendChild(tr);
+                });
+
+                /* ── Show results ── */
+                document.getElementById('resultsSection').classList.remove('results-hidden');
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                /* ── Draw chart ── */
+                setTimeout(function () { drawChart(labels, totalArr, investArr); }, 50);
+            }
+
+            function resetForm() {
+                document.getElementById('principal').value = '10000';
+                document.getElementById('contribution').value = '200';
+                document.getElementById('contribFreq').value = '12';
+                document.getElementById('rate').value = '7';
+                document.getElementById('rateSlider').value = '7';
+                document.getElementById('compFreq').value = '12';
+                document.getElementById('years').value = '20';
+                document.getElementById('yearsSlider').value = '20';
+                document.getElementById('inflation').value = '3';
+                document.getElementById('resultsSection').classList.add('results-hidden');
+                chartData = null;
+                var canvas = document.getElementById('growthChart');
+                var ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+
+            /* ── Export CSV ─────────────────────────────────────────── */
+            function exportCSV() {
+                if (!chartData) return;
+                var rows = chartData.rows;
+                var header = 'Año,Capital Inicial,Aportado,Intereses Año,Intereses Acumulados,Capital Final,Valor Real\n';
+                var csv = header + rows.map(function (r) {
+                    return [r.year, r.start.toFixed(2), r.contrib.toFixed(2),
+                    r.interest.toFixed(2), r.cumInterest.toFixed(2),
+                    r.end.toFixed(2), r.real.toFixed(2)].join(',');
+                }).join('\n');
+                var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = 'interes-compuesto-ourtoolkit.csv';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+
+            /* ── FAQ toggle ─────────────────────────────────────────── */
+            function toggleFaq(id) {
+                var item = document.getElementById(id);
+                var isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item.open').forEach(function (el) {
+                    el.classList.remove('open');
+                    el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+                });
+                if (!isOpen) {
+                    item.classList.add('open');
+                    item.querySelector('.faq-q').setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            /* ── Settings panel ─────────────────────────────────────── */
+            function initPanel() {
+                var root = document.documentElement;
+                var cfgBtn = document.getElementById('cfgBtn');
+                var panel = document.getElementById('cfgPanel');
+                var overlay = document.getElementById('cfgOverlay');
+
+                /* Apply theme preference */
+                function applyTheme(pref) {
+                    var actual = pref === 'system'
+                        ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+                        : pref;
+                    root.setAttribute('data-theme', actual);
+                    localStorage.setItem('hkTheme', pref);
+                    var sel = document.getElementById('cfgThemeSelect');
+                    if (sel) sel.value = pref;
+                    if (chartData) {
+                        setTimeout(function () { drawChart(chartData.labels, chartData.totalArr, chartData.investArr); }, 50);
+                    }
+                }
+
+                /* Load saved preference (default: system) */
+                applyTheme(localStorage.getItem('hkTheme') || 'system');
+
+                /* Listen for OS theme changes */
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+                    if (localStorage.getItem('hkTheme') === 'system') applyTheme('system');
+                });
+
+                /* Theme select */
+                var themeSelect = document.getElementById('cfgThemeSelect');
+                if (themeSelect) {
+                    themeSelect.addEventListener('change', function () { applyTheme(this.value); });
+                }
+
+                /* Language select */
+                var currentLang = 'es';
+                var langSelect = document.getElementById('cfgLangSelect');
+                if (langSelect) {
+                    langSelect.value = currentLang;
+                    langSelect.addEventListener('change', function () {
+                        var target = this.value;
+                        if (target !== currentLang) {
+                            location.href = 'https://ourtoolkit.github.io/calculadora-interes/' + target + '/';
+                        }
+                    });
+                }
+
+                /* Open / close panel */
+                cfgBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    var open = panel.classList.toggle('open');
+                    overlay.classList.toggle('open', open);
+                });
+                overlay.addEventListener('click', function () {
+                    panel.classList.remove('open');
+                    overlay.classList.remove('open');
+                });
+            }
+
+            /* ── Ad zones: hide when empty ──────────────────────────── */
+            function watchAd(id) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                var obs = new MutationObserver(function (mutations) {
+                    mutations.forEach(function (m) {
+                        if (m.addedNodes.length > 0) {
+                            el.classList.add('loaded');
+                            obs.disconnect();
+                        }
+                    });
+                });
+                obs.observe(el, { childList: true, subtree: true });
+                setTimeout(function () { obs.disconnect(); }, 4000);
+            }
+
+            /* ── Slider sync ────────────────────────────────────────── */
+            function syncSliders() {
+                var rateSlider = document.getElementById('rateSlider');
+                var rateInput = document.getElementById('rate');
+                var yearsSlider = document.getElementById('yearsSlider');
+                var yearsInput = document.getElementById('years');
+
+                rateSlider.addEventListener('input', function () {
+                    rateInput.value = this.value;
+                });
+                rateInput.addEventListener('input', function () {
+                    var v = Math.min(Math.max(parseFloat(this.value) || 0, 0.1), 30);
+                    rateSlider.value = v;
+                });
+                yearsSlider.addEventListener('input', function () {
+                    yearsInput.value = this.value;
+                });
+                yearsInput.addEventListener('input', function () {
+                    var v = Math.min(Math.max(parseInt(this.value) || 1, 1), 50);
+                    yearsSlider.value = v;
+                });
+            }
+
+            /* ── Keyboard enter → calculate ────────────────────────── */
+            function bindEnter() {
+                document.querySelectorAll('input').forEach(function (inp) {
+                    inp.addEventListener('keydown', function (e) {
+                        if (e.key === 'Enter') calcular();
+                    });
+                });
+            }
+
+            /* ── Redraw on resize ───────────────────────────────────── */
+            function bindResize() {
+                var to;
+                window.addEventListener('resize', function () {
+                    clearTimeout(to);
+                    to = setTimeout(function () {
+                        if (chartData) drawChart(chartData.labels, chartData.totalArr, chartData.investArr);
+                    }, 200);
+                });
+            }
+
+            /* ── Expose globals for inline onclick ─────────────────── */
+            window.calcular = calcular;
+            window.resetForm = resetForm;
+            window.exportCSV = exportCSV;
+            window.toggleFaq = toggleFaq;
+
+            /* ── Init ───────────────────────────────────────────────── */
+            document.addEventListener('DOMContentLoaded', function () {
+                initPanel();
+                syncSliders();
+                bindEnter();
+                bindResize();
+                watchAd('adTop');
+                watchAd('adMid');
+                watchAd('adFooter');
+                calcular();
+            });
+
+        }());
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/calculadora-interes/sw.js');
+        }
+    </script>
+
+    <!-- ── SETTINGS PANEL ─────────────────────────────────── -->
+    <div id="cfgPanel" class="cfg-panel">
+        <div class="cfg-row">
+            <span class="cfg-row-label">Tema</span>
+            <select id="cfgThemeSelect" class="cfg-select">
+                <option value="system">💻 Sistema</option>
+                <option value="dark">🌑 Oscuro</option>
+                <option value="light">☀️ Claro</option>
+            </select>
+        </div>
+        <div class="cfg-divider"></div>
+        <div class="cfg-row">
+            <span class="cfg-row-label">Idioma</span>
+            <select id="cfgLangSelect" class="cfg-select">
+                <option value="es">🇪🇸 Español</option>
+                <option value="en">🇺🇸 English</option>
+            </select>
+        </div>
+        <div class="cfg-divider"></div>
+        <a class="cfg-tools-link" href="https://ourtoolkit.blogspot.com"><svg width="13" height="13" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+            </svg> Más herramientas</a>
+    </div>
+    <div id="cfgOverlay" class="cfg-overlay"></div>
+
+</body>
+
+</html>
