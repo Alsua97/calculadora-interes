@@ -19,18 +19,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Calculadora de Interés Compuesto gratuita y profesional. Calcula el crecimiento de tus inversiones con aportaciones periódicas, visualiza gráficos y descarga tu tabla de amortización.">
+        content="Calculadora de interés compuesto gratis y sin registro. Calcula el crecimiento de tus ahorros e inversiones, con gráfica y exportación a CSV. Resultados al instante.">
     <meta name="keywords"
-        content="calculadora interés compuesto, inversión, ahorro, interés compuesto, rendimiento financiero, cálculo inversión">
+        content="calculadora interés compuesto gratis, calcular interés compuesto, calculadora ahorro, calcular inversión, interés compuesto sin registro, calculadora financiera online">
     <meta name="author" content="OurToolkit">
-    <meta property="og:title" content="Calculadora de Interés Compuesto | OurToolkit">
+    <meta property="og:title" content="Calculadora de Interés Compuesto Gratis | OurToolkit">
     <meta property="og:description"
-        content="Calcula el crecimiento de tus inversiones con nuestra calculadora de interés compuesto profesional y gratuita.">
+        content="Calcula gratis el crecimiento de tus ahorros e inversiones con gráfica interactiva y exportación a CSV. Sin registro.">
     <meta property="og:type" content="website">
-    <title>Calculadora de Interés Compuesto | OurToolkit</title>
+    <meta property="og:url" content="https://Alsua97.github.io/calculadora-interes/es/">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="OurToolkit">
+    <title>Calculadora de Interés Compuesto Gratis — Sin Registro | OurToolkit</title>
     <!-- hreflang -->
-    <link rel="alternate" hreflang="es" href="https://ourtoolkit.github.io/calculadora-interes/es/" />
-    <link rel="alternate" hreflang="en" href="https://ourtoolkit.github.io/calculadora-interes/en/" />
+    <link rel="alternate" hreflang="es" href="https://Alsua97.github.io/calculadora-interes/es/" />
+    <link rel="alternate" hreflang="en" href="https://Alsua97.github.io/calculadora-interes/en/" />
+    <link rel="alternate" hreflang="pt" href="https://Alsua97.github.io/calculadora-interes/pt/" />
+    <link rel="alternate" hreflang="fr" href="https://Alsua97.github.io/calculadora-interes/fr/" />
+    <link rel="alternate" hreflang="x-default" href="https://Alsua97.github.io/calculadora-interes/en/" />
     <!-- PWA -->
     <link rel="manifest" href="/calculadora-interes/manifest.json" />
     <meta name="theme-color" content="#6366f1" />
@@ -40,7 +46,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
         rel="stylesheet">
     <style>
         /* ============================================================
@@ -67,7 +73,7 @@
             --shadow: 0 4px 24px rgba(0, 0, 0, .45);
             --shadow-h: 0 8px 40px rgba(99, 102, 241, .2);
             --ease: cubic-bezier(.22, 1, .36, 1);
-            --font-title: 'Syne', sans-serif;
+            --font-title: 'Outfit', sans-serif;
             --font-body: 'Plus Jakarta Sans', sans-serif;
             --header-h: 64px;
         }
@@ -93,8 +99,8 @@
         }
 
         /* ============================================================
-                  RESET & BASE
-           ============================================================ */
+   RESET & BASE
+   ============================================================ */
         *,
         *::before,
         *::after {
@@ -139,7 +145,7 @@
         }
 
         /* ============================================================
-              TYPOGRAPHY
+   TYPOGRAPHY
    ============================================================ */
         h1,
         h2,
@@ -170,22 +176,22 @@
         }
 
         /* ============================================================
-              LAYOUT
+   LAYOUT
    ============================================================ */
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 0 14px;
+            padding: 0 24px;
         }
 
         @media (max-width: 480px) {
             .container {
-                padding: 0 6px;
+                padding: 0 16px;
             }
         }
 
         /* ============================================================
-             HEADER
+   HEADER
    ============================================================ */
         .site-header {
             position: sticky;
@@ -275,7 +281,7 @@
         }
 
         /* ============================================================
-                 AD ZONES
+   AD ZONES
    ============================================================ */
         .ad-zone {
             width: 100%;
@@ -331,7 +337,7 @@
         }
 
         /* ============================================================
-               HERO / TOOL HEADER
+   HERO / TOOL HEADER
    ============================================================ */
         .tool-hero {
             padding: 48px 0 32px;
@@ -353,7 +359,7 @@
         }
 
         /* ============================================================
-                CARD
+   CARD
    ============================================================ */
         .card {
             background: var(--surface);
@@ -368,7 +374,7 @@
         }
 
         /* ============================================================
-                CALCULATOR GRID
+   CALCULATOR GRID
    ============================================================ */
         .calc-grid {
             display: grid;
@@ -384,7 +390,7 @@
         }
 
         /* ============================================================
-                FORM ELEMENTS
+   FORM ELEMENTS
    ============================================================ */
         .form-group {
             margin-bottom: 18px;
@@ -608,7 +614,7 @@
         }
 
         /* ============================================================
-                    RESULTS PANEL
+   RESULTS PANEL
    ============================================================ */
         .results-hidden {
             display: none;
@@ -686,7 +692,7 @@
         }
 
         /* ============================================================
-            PROGRESS BAR (capital vs interés)
+   PROGRESS BAR (capital vs interés)
    ============================================================ */
         .breakdown-bar {
             margin-bottom: 24px;
@@ -750,7 +756,7 @@
         }
 
         /* ============================================================
-                 CHART
+   CHART
    ============================================================ */
         .chart-wrap {
             position: relative;
@@ -764,7 +770,7 @@
         }
 
         /* ============================================================
-                    TABLE
+   TABLE
    ============================================================ */
         .table-section {
             margin-top: 24px;
@@ -843,7 +849,7 @@
         }
 
         /* ============================================================
-                SECTION — INFO & FAQ
+   SECTION — INFO & FAQ
    ============================================================ */
         .info-section {
             margin: 40px 0;
@@ -916,6 +922,18 @@
         }
 
         /* FAQ */
+
+        /* ── PWA STANDALONE: ocultar contenido SEO ────────── */
+        @media (display-mode: standalone) {
+
+            .faq-section,
+            .seo-info-section,
+            .hero-eyebrow,
+            .hero-description {
+                display: none !important;
+            }
+        }
+
         .faq-section {
             margin: 40px 0;
         }
@@ -997,7 +1015,7 @@
         }
 
         /* ============================================================
-                FOOTER
+   FOOTER
    ============================================================ */
         .site-footer {
             margin-top: 60px;
@@ -1020,7 +1038,7 @@
         }
 
         /* ============================================================
-                    UTILITY
+   UTILITY
    ============================================================ */
         .section-label {
             display: inline-flex;
@@ -1064,7 +1082,7 @@
         }
 
         /* ============================================================
-            LOADING SPINNER (optional polish)
+   LOADING SPINNER (optional polish)
    ============================================================ */
         @keyframes spin {
             to {
@@ -1083,7 +1101,7 @@
         }
 
         /* ============================================================
-                  PRINT
+   PRINT
    ============================================================ */
         @media print {
 
@@ -1105,19 +1123,19 @@
         }
 
         /* ============================================================
-                SETTINGS PANEL
+   SETTINGS PANEL
    ============================================================ */
         .cfg-panel {
             position: fixed;
             top: 72px;
             right: 16px;
-            width: 186px;
+            width: 224px;
             background: var(--surface);
             border: 1px solid var(--border-h);
             border-radius: var(--radius-card);
             box-shadow: var(--shadow-h);
             z-index: 500;
-            padding: 10px;
+            padding: 14px;
             display: none;
             animation: panelIn .18s cubic-bezier(.22, 1, .36, 1);
         }
@@ -1149,67 +1167,163 @@
             display: block;
         }
 
+        /* ── dropdown row ── */
         .cfg-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 8px;
-            padding: 3px 0;
+            padding: 4px 2px;
         }
 
         .cfg-row-label {
             font-size: .72rem;
-            font-weight: 700;
-            letter-spacing: .06em;
-            text-transform: uppercase;
+            font-weight: 600;
             color: var(--text-hint);
-            white-space: nowrap;
+            letter-spacing: .05em;
+            text-transform: uppercase;
             flex-shrink: 0;
         }
 
-        .cfg-select {
-            flex: 1;
-            height: 28px;
-            background: var(--bg);
+        .cfg-dropdown {
+            position: relative;
+        }
+
+        .cfg-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 8px;
+            border-radius: 7px;
             border: 1px solid var(--border-h);
-            border-radius: 6px;
+            background: transparent;
             color: var(--text-sec);
-            font-size: .75rem;
+            font-size: .78rem;
             font-weight: 500;
-            font-family: var(--font-body);
-            padding: 0 6px;
             cursor: pointer;
-            outline: none;
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238888a0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 7px center;
-            padding-right: 22px;
-            transition: border-color .15s;
+            transition: all .15s;
+            font-family: var(--font-body);
+            white-space: nowrap;
         }
 
-        .cfg-select:focus {
+        .cfg-trigger:hover {
             border-color: var(--accent);
+            color: var(--accent-h);
         }
 
-        [data-theme="light"] .cfg-select {
-            background-color: #f5f5fa;
-            color: #333355;
+        .cfg-trigger svg.chevron {
+            transition: transform .2s;
+            opacity: .5;
+        }
+
+        .cfg-dropdown.open .cfg-trigger {
+            border-color: var(--accent);
+            color: var(--accent-h);
+        }
+
+        .cfg-dropdown.open .cfg-trigger svg.chevron {
+            transform: rotate(180deg);
+            opacity: 1;
+        }
+
+        .cfg-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 0;
+            background: var(--surface);
+            border: 1px solid var(--border-h);
+            border-radius: 9px;
+            box-shadow: var(--shadow-h);
+            overflow: hidden;
+            min-width: 130px;
+            z-index: 10;
+            animation: panelIn .15s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .cfg-dropdown.open .cfg-menu {
+            display: block;
+        }
+
+        .cfg-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 12px;
+            font-size: .8rem;
+            font-weight: 500;
+            color: var(--text-sec);
+            cursor: pointer;
+            transition: background .12s, color .12s;
+            border: none;
+            background: none;
+            width: 100%;
+            font-family: var(--font-body);
+            white-space: nowrap;
+        }
+
+        .cfg-menu-item:hover {
+            background: var(--accent-bg);
+            color: var(--accent-h);
+        }
+
+        .cfg-menu-item.active {
+            color: var(--accent-h);
+            font-weight: 700;
+        }
+
+        .cfg-menu-item.active::after {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin-left: auto;
         }
 
         .cfg-divider {
             height: 1px;
             background: var(--border);
-            margin: 7px 0;
+            margin: 8px 0;
+        }
+
+        /* ── share + tools buttons ── */
+        .cfg-action-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 2px;
+        }
+
+        .cfg-action-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 7px 6px;
+            border-radius: 8px;
+            background: var(--accent-bg);
+            border: 1px solid rgba(99, 102, 241, .2);
+            color: var(--accent-h);
+            font-size: .76rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: var(--font-body);
+            transition: background .15s, border-color .15s;
+        }
+
+        .cfg-action-btn:hover {
+            background: rgba(99, 102, 241, .18);
+            border-color: var(--accent);
         }
 
         .cfg-tools-link {
             display: flex;
             align-items: center;
             gap: 7px;
-            padding: 7px 10px;
-            border-radius: 7px;
+            padding: 9px 12px;
+            border-radius: 8px;
             background: var(--accent-bg);
             border: 1px solid rgba(99, 102, 241, .2);
             color: var(--accent-h);
@@ -1226,7 +1340,7 @@
         }
 
         /* ============================================================
-            TABULAR NUMBERS — crisp financial data
+   TABULAR NUMBERS — crisp financial data
    ============================================================ */
         .kpi-value {
             font-variant-numeric: tabular-nums;
@@ -1240,7 +1354,7 @@
         }
 
         /* ============================================================
-              INPUT SUFFIX — wider variant for "años"
+   INPUT SUFFIX — wider variant for "años"
    ============================================================ */
         input[type="number"].has-suffix-wide {
             padding-right: 52px;
@@ -1305,7 +1419,7 @@
 <body>
 
     <!-- ============================================================
-                     HEADER
+     HEADER
      ============================================================ -->
     <header class="site-header">
         <div class="container header-inner">
@@ -1329,22 +1443,40 @@
     </header>
 
     <!-- ============================================================
-             AD TOP — Banner superior
+     AD TOP — Banner superior
      ============================================================ -->
     <div class="ad-top ad-zone" id="adTop">
         <span class="ad-label">Publicidad</span>
         <!-- AdsTerra banner 728×90 desktop -->
         <div class="ad-desktop">
-            <div class="ad-placeholder">[ AdsTerra Banner 728×90 ]</div>
+            <script>
+                atOptions = {
+                    'key' : '32aec08a08ffa4d25e58ce3accf85073',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
         </div>
         <!-- AdsTerra banner 320×50 móvil -->
         <div class="ad-mobile">
-            <div class="ad-placeholder">[ AdsTerra Banner 320×50 ]</div>
+            <script>
+                atOptions = {
+                    'key' : '8bdbee11f503acfed33a88b2d11c1b85',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
         </div>
     </div>
 
     <!-- ============================================================
-                 MAIN CONTENT
+     MAIN CONTENT
      ============================================================ -->
     <main>
         <div class="container">
@@ -1541,12 +1673,8 @@
                 <!-- ── AD MID — Después del resultado principal ── -->
                 <div class="ad-mid ad-zone" id="adMid">
                     <span class="ad-label">Publicidad</span>
-                    <div class="ad-desktop">
-                        <div class="ad-placeholder">[ AdsTerra Native Banner 728×90 ]</div>
-                    </div>
-                    <div class="ad-mobile">
-                        <div class="ad-placeholder">[ AdsTerra Native 320×50 ]</div>
-                    </div>
+                    <script async="async" data-cfasync="false" src="https://pl28881454.effectivegatecpm.com/85cb8dfd5653294d919ca5cddefedc89/invoke.js"></script>
+                    <div id="container-85cb8dfd5653294d919ca5cddefedc89"></div>
                 </div>
 
                 <!-- Tabla de amortización -->
@@ -1591,8 +1719,8 @@
             <div class="divider"></div>
 
             <!-- ============================================================
-                      INFO SEO SECTION (300+ words)
-    ============================================================== -->
+         INFO SEO SECTION (300+ words)
+         ============================================================ -->
             <section class="info-section" aria-labelledby="info-heading">
                 <div class="section-label">Aprende más</div>
                 <h2 id="info-heading">¿Qué es el Interés Compuesto y por qué es tan poderoso?</h2>
@@ -1681,7 +1809,7 @@
             <div class="divider"></div>
 
             <!-- ============================================================
-                      FAQ SECTION
+         FAQ SECTION
          ============================================================ -->
             <section class="faq-section" aria-labelledby="faq-heading">
                 <div class="section-label">Preguntas frecuentes</div>
@@ -1792,20 +1920,40 @@
     </main>
 
     <!-- ============================================================
-            AD FOOTER — Banner al final de página
+     AD FOOTER — Banner al final de página
      ============================================================ -->
     <div class="ad-footer ad-zone" id="adFooter">
         <span class="ad-label">Publicidad</span>
+        <!-- AdsTerra banner 728×90 desktop -->
         <div class="ad-desktop">
-            <div class="ad-placeholder">[ AdsTerra Footer Banner 728×90 ]</div>
+            <script>
+                atOptions = {
+                    'key' : '32aec08a08ffa4d25e58ce3accf85073',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
         </div>
+        <!-- AdsTerra banner 320×50 móvil -->
         <div class="ad-mobile">
-            <div class="ad-placeholder">[ AdsTerra Footer 320×50 ]</div>
+            <script>
+                atOptions = {
+                    'key' : '8bdbee11f503acfed33a88b2d11c1b85',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
         </div>
     </div>
 
     <!-- ============================================================
-                 FOOTER
+     FOOTER
      ============================================================ -->
     <footer class="site-footer" role="contentinfo">
         <div class="container">
@@ -1817,7 +1965,7 @@
     </footer>
 
     <!-- ============================================================
-                JAVASCRIPT
+     JAVASCRIPT
      ============================================================ -->
     <script>
         (function () {
@@ -2192,56 +2340,104 @@
                 var panel = document.getElementById('cfgPanel');
                 var overlay = document.getElementById('cfgOverlay');
 
-                /* Apply theme preference */
+                /* ── Theme ── */
+                var THEME_LABELS = { system: 'Sistema', dark: 'Oscuro', light: 'Claro' };
+                var THEME_SVGS = {
+                    system: '<rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
+                    dark: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
+                    light: '<circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>'
+                };
+
                 function applyTheme(pref) {
                     var actual = pref === 'system'
                         ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
                         : pref;
                     root.setAttribute('data-theme', actual);
                     localStorage.setItem('hkTheme', pref);
-                    var sel = document.getElementById('cfgThemeSelect');
-                    if (sel) sel.value = pref;
-                    if (chartData) {
-                        setTimeout(function () { drawChart(chartData.labels, chartData.totalArr, chartData.investArr); }, 50);
-                    }
+                    /* Update trigger label + icon */
+                    document.getElementById('themeLabel').textContent = THEME_LABELS[pref] || pref;
+                    document.getElementById('themeIcon').innerHTML = THEME_SVGS[pref] || THEME_SVGS.system;
+                    /* Mark active item */
+                    document.querySelectorAll('[data-theme-opt]').forEach(function (b) {
+                        b.classList.toggle('active', b.getAttribute('data-theme-opt') === pref);
+                    });
+                    if (chartData) setTimeout(function () { drawChart(chartData.labels, chartData.totalArr, chartData.investArr); }, 50);
                 }
-
-                /* Load saved preference (default: system) */
                 applyTheme(localStorage.getItem('hkTheme') || 'system');
-
-                /* Listen for OS theme changes */
                 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
                     if (localStorage.getItem('hkTheme') === 'system') applyTheme('system');
                 });
-
-                /* Theme select */
-                var themeSelect = document.getElementById('cfgThemeSelect');
-                if (themeSelect) {
-                    themeSelect.addEventListener('change', function () { applyTheme(this.value); });
-                }
-
-                /* Language select */
-                var currentLang = 'es';
-                var langSelect = document.getElementById('cfgLangSelect');
-                if (langSelect) {
-                    langSelect.value = currentLang;
-                    langSelect.addEventListener('change', function () {
-                        var target = this.value;
-                        if (target !== currentLang) {
-                            location.href = 'https://ourtoolkit.github.io/calculadora-interes/' + target + '/';
-                        }
+                document.querySelectorAll('[data-theme-opt]').forEach(function (b) {
+                    b.addEventListener('click', function () {
+                        applyTheme(b.getAttribute('data-theme-opt'));
+                        document.getElementById('themeDropdown').classList.remove('open');
                     });
-                }
+                });
 
-                /* Open / close panel */
+                /* ── Language ── */
+                var LANG_LABELS = { es: 'ES', en: 'EN', pt: 'PT', fr: 'FR' };
+                var currentLang = location.pathname.includes('/en/') ? 'en'
+                    : location.pathname.includes('/pt/') ? 'pt'
+                        : location.pathname.includes('/fr/') ? 'fr' : 'es';
+                document.getElementById('langLabel').textContent = LANG_LABELS[currentLang];
+                document.querySelectorAll('[data-lang]').forEach(function (b) {
+                    b.classList.toggle('active', b.getAttribute('data-lang') === currentLang);
+                    b.addEventListener('click', function () {
+                        var target = b.getAttribute('data-lang');
+                        if (target !== currentLang) {
+                            location.href = 'https://Alsua97.github.io/calculadora-interes/' + target + '/';
+                        }
+                        document.getElementById('langDropdown').classList.remove('open');
+                    });
+                });
+
+                /* ── Dropdown toggles ── */
+                document.getElementById('themeTrigger').addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    var dd = document.getElementById('themeDropdown');
+                    var langDd = document.getElementById('langDropdown');
+                    langDd.classList.remove('open');
+                    dd.classList.toggle('open');
+                });
+                document.getElementById('langTrigger').addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    var dd = document.getElementById('langDropdown');
+                    var themeDd = document.getElementById('themeDropdown');
+                    themeDd.classList.remove('open');
+                    dd.classList.toggle('open');
+                });
+
+                /* ── Botón compartir ── */
+                document.getElementById('shareBtn').addEventListener('click', function () {
+                    var url = location.href;
+                    var title = document.title;
+                    if (navigator.share) {
+                        navigator.share({ title: title, url: url }).catch(function () { });
+                    } else {
+                        navigator.clipboard.writeText(url).then(function () {
+                            var btn = document.getElementById('shareBtn');
+                            var orig = btn.innerHTML;
+                            btn.textContent = '¡Copiado!';
+                            setTimeout(function () { btn.innerHTML = orig; }, 2000);
+                        });
+                    }
+                });
+
+                /* ── Abrir / cerrar panel principal ── */
                 cfgBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     var open = panel.classList.toggle('open');
                     overlay.classList.toggle('open', open);
+                    if (!open) {
+                        document.getElementById('themeDropdown').classList.remove('open');
+                        document.getElementById('langDropdown').classList.remove('open');
+                    }
                 });
                 overlay.addEventListener('click', function () {
                     panel.classList.remove('open');
                     overlay.classList.remove('open');
+                    document.getElementById('themeDropdown').classList.remove('open');
+                    document.getElementById('langDropdown').classList.remove('open');
                 });
             }
 
@@ -2332,28 +2528,113 @@
 
     <!-- ── SETTINGS PANEL ─────────────────────────────────── -->
     <div id="cfgPanel" class="cfg-panel">
+
+        <!-- Tema dropdown -->
         <div class="cfg-row">
             <span class="cfg-row-label">Tema</span>
-            <select id="cfgThemeSelect" class="cfg-select">
-                <option value="system">💻 Sistema</option>
-                <option value="dark">🌑 Oscuro</option>
-                <option value="light">☀️ Claro</option>
-            </select>
+            <div class="cfg-dropdown" id="themeDropdown">
+                <button class="cfg-trigger" id="themeTrigger">
+                    <svg id="themeIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
+                    <span id="themeLabel">Sistema</span>
+                    <svg class="chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                </button>
+                <div class="cfg-menu">
+                    <button class="cfg-menu-item active" data-theme-opt="system">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                        Sistema
+                    </button>
+                    <button class="cfg-menu-item" data-theme-opt="dark">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                        Oscuro
+                    </button>
+                    <button class="cfg-menu-item" data-theme-opt="light">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="4" />
+                            <line x1="12" y1="2" x2="12" y2="4" />
+                            <line x1="12" y1="20" x2="12" y2="22" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="2" y1="12" x2="4" y2="12" />
+                            <line x1="20" y1="12" x2="22" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                        Claro
+                    </button>
+                </div>
+            </div>
         </div>
+
         <div class="cfg-divider"></div>
+
+        <!-- Idioma dropdown -->
         <div class="cfg-row">
             <span class="cfg-row-label">Idioma</span>
-            <select id="cfgLangSelect" class="cfg-select">
-                <option value="es">🇪🇸 Español</option>
-                <option value="en">🇺🇸 English</option>
-            </select>
+            <div class="cfg-dropdown" id="langDropdown">
+                <button class="cfg-trigger" id="langTrigger">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                    <span id="langLabel">ES</span>
+                    <svg class="chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                </button>
+                <div class="cfg-menu">
+                    <button class="cfg-menu-item active" data-lang="es">🇪🇸 ES Español</button>
+                    <button class="cfg-menu-item" data-lang="en">🇺🇸 EN English</button>
+                    <button class="cfg-menu-item" data-lang="pt">🇧🇷 PT Português</button>
+                    <button class="cfg-menu-item" data-lang="fr">🇫🇷 FR Français</button>
+                </div>
+            </div>
         </div>
+
         <div class="cfg-divider"></div>
-        <a class="cfg-tools-link" href="https://ourtoolkit.blogspot.com"><svg width="13" height="13" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path
-                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-            </svg> Más herramientas</a>
+
+        <!-- Compartir + Herramientas -->
+        <div class="cfg-action-row">
+            <button class="cfg-action-btn" id="shareBtn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="18" cy="5" r="3" />
+                    <circle cx="6" cy="12" r="3" />
+                    <circle cx="18" cy="19" r="3" />
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
+                Compartir
+            </button>
+            <a class="cfg-action-btn" href="https://ourtoolkit.blogspot.com" target="_blank">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                </svg>
+                Herramientas
+            </a>
+        </div>
     </div>
     <div id="cfgOverlay" class="cfg-overlay"></div>
 
