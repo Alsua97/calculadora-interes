@@ -761,7 +761,7 @@
         .chart-wrap {
             position: relative;
             width: 100%;
-            height: 310px;
+            height: 440px;
             margin-bottom: 0;
         }
 
@@ -1673,8 +1673,30 @@
                 <!-- ── AD MID — Después del resultado principal ── -->
                 <div class="ad-mid ad-zone" id="adMid">
                     <span class="ad-label">Publicidad</span>
-                    <script async="async" data-cfasync="false" src="https://pl28881454.effectivegatecpm.com/85cb8dfd5653294d919ca5cddefedc89/invoke.js"></script>
-                    <div id="container-85cb8dfd5653294d919ca5cddefedc89"></div>
+                    <div class="ad-desktop">
+                        <script>
+                            atOptions = {
+                                'key' : '32aec08a08ffa4d25e58ce3accf85073',
+                                'format' : 'iframe',
+                                'height' : 90,
+                                'width' : 728,
+                                'params' : {}
+                            };
+                        </script>
+                        <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
+                    </div>
+                    <div class="ad-mobile">
+                        <script>
+                            atOptions = {
+                                'key' : '8bdbee11f503acfed33a88b2d11c1b85',
+                                'format' : 'iframe',
+                                'height' : 50,
+                                'width' : 320,
+                                'params' : {}
+                            };
+                        </script>
+                        <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
+                    </div>
                 </div>
 
                 <!-- Tabla de amortización -->
@@ -1979,7 +2001,7 @@
                 var dpr = window.devicePixelRatio || 1;
                 var rect = canvas.parentElement.getBoundingClientRect();
                 var W = rect.width || 400;
-                var H = 290;
+                var H = 420;
                 canvas.width = W * dpr;
                 canvas.height = H * dpr;
                 canvas.style.width = W + 'px';
