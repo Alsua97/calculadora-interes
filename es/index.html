@@ -932,11 +932,41 @@
         /* ── PWA STANDALONE: ocultar contenido SEO ────────── */
         @media (display-mode: standalone) {
 
+            /* Ocultar todo excepto la calculadora */
             .faq-section,
             .seo-info-section,
-            .hero-eyebrow,
-            .hero-description {
+            .tool-hero,
+            .info-section,
+            .site-footer,
+            .ad-top,
+            .ad-mid,
+            .ad-footer {
                 display: none !important;
+            }
+
+            /* Header más compacto: ocultar logo OurToolkit, mostrar solo título */
+            .logo {
+                display: none !important;
+            }
+
+            .header-title {
+                font-size: .95rem;
+                color: var(--text);
+                padding-left: 4px;
+            }
+
+            .header-title::before {
+                content: none;
+            }
+
+            /* Quitar el separador "/" del header-title */
+            .header-title {
+                padding-left: 0;
+            }
+
+            /* Menos padding en el hero para app */
+            main {
+                padding-top: 8px;
             }
         }
 
@@ -2413,7 +2443,7 @@
                     b.addEventListener('click', function () {
                         var target = b.getAttribute('data-lang');
                         if (target !== currentLang) {
-                            location.href = 'https://Alsua97.github.io/calculadora-interes/' + target + '/';
+                            location.href = '/calculadora-interes/' + target + '/';
                         }
                         document.getElementById('langDropdown').classList.remove('open');
                     });
