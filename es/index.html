@@ -258,6 +258,25 @@
             color: var(--text);
         }
 
+        .header-calc-icon {
+            display: none; /* solo visible en standalone */
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent) 0%, #10b981 100%);
+            flex-shrink: 0;
+            margin-right: 9px;
+            color: #fff;
+        }
+
+        .header-calc-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
         .theme-btn {
             flex-shrink: 0;
             width: 40px;
@@ -932,39 +951,39 @@
         /* ── PWA STANDALONE: ocultar contenido SEO ────────── */
         @media (display-mode: standalone) {
 
-            /* Ocultar todo excepto la calculadora */
+            /* Ocultar contenido SEO — mantener calculadora y anuncios */
             .faq-section,
             .seo-info-section,
             .tool-hero,
             .info-section,
-            .site-footer,
-            .ad-top,
-            .ad-mid,
-            .ad-footer {
+            .site-footer {
                 display: none !important;
             }
 
-            /* Header más compacto: ocultar logo OurToolkit, mostrar solo título */
+            /* Ocultar logo OurToolkit */
             .logo {
                 display: none !important;
             }
 
-            .header-title {
-                font-size: .95rem;
-                color: var(--text);
-                padding-left: 4px;
+            /* Mostrar icono calculadora + título con gradiente */
+            .header-calc-icon {
+                display: flex !important;
             }
 
-            .header-title::before {
-                content: none;
-            }
-
-            /* Quitar el separador "/" del header-title */
             .header-title {
+                display: flex;
+                align-items: center;
+                font-size: 1rem;
+                font-weight: 700;
+                font-family: var(--font-title);
+                background: linear-gradient(90deg, var(--accent-h) 0%, #10b981 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
                 padding-left: 0;
             }
 
-            /* Menos padding en el hero para app */
+            /* Menos espacio superior en modo app */
             main {
                 padding-top: 8px;
             }
@@ -1467,7 +1486,16 @@
                     </svg></span>
                 Our<span class="logo-dot">Toolkit</span>
             </a>
-            <span class="header-title">/ <span>Calculadora de Interés Compuesto</span></span>
+            <span class="header-title">
+                <span class="header-calc-icon">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                        <polyline points="16 7 22 7 22 13"/>
+                    </svg>
+                </span>
+                <span class="header-calc-name">Calculadora de Interés Compuesto</span>
+            </span>
             <button class="theme-btn" id="cfgBtn" title="Configuración" aria-label="Configuración"><svg width="15"
                     height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -2695,6 +2723,125 @@
         </div>
     </div>
     <div id="cfgOverlay" class="cfg-overlay"></div>
+
+
+    <!-- ============================================================
+     PWA INSTALL PROMPT
+     ============================================================ -->
+    <div id="pwaInstallBanner" style="
+        display: none;
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        z-index: 9999;
+        padding: 0 16px 16px;
+        pointer-events: none;
+    ">
+        <div style="
+            background: linear-gradient(135deg, #1a1a3e 0%, #0f2027 100%);
+            border: 1px solid rgba(99,102,241,.35);
+            border-radius: 16px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 8px 40px rgba(0,0,0,.6), 0 0 0 1px rgba(99,102,241,.1);
+            pointer-events: all;
+            max-width: 520px;
+            margin: 0 auto;
+        ">
+            <!-- Icono -->
+            <div style="
+                width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
+                background: linear-gradient(135deg, #7c3aed 0%, #6366f1 50%, #0d9488 100%);
+                display: flex; align-items: center; justify-content: center;
+            ">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                     stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                    <polyline points="16 7 22 7 22 13"/>
+                </svg>
+            </div>
+            <!-- Texto -->
+            <div style="flex: 1; min-width: 0;">
+                <div style="font-size: .88rem; font-weight: 700; color: #ecedf8; margin-bottom: 2px;
+                            font-family: 'Outfit', sans-serif;">
+                    ¡Accede al instante, sin buscador!
+                </div>
+                <div style="font-size: .77rem; color: #8888a0; line-height: 1.4;">
+                    Instala la calculadora como app gratuita. Sin publicidad extra, sin cuenta.
+                </div>
+            </div>
+            <!-- Botones -->
+            <div style="display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;">
+                <button id="pwaInstallBtn" style="
+                    background: linear-gradient(90deg, #6366f1, #10b981);
+                    color: #fff; border: none; border-radius: 8px;
+                    padding: 8px 16px; font-size: .8rem; font-weight: 700;
+                    cursor: pointer; white-space: nowrap;
+                    font-family: 'Outfit', sans-serif;
+                ">Instalar gratis</button>
+                <button id="pwaInstallDismiss" style="
+                    background: transparent; color: #555570;
+                    border: 1px solid #2a2a4a; border-radius: 8px;
+                    padding: 5px 16px; font-size: .75rem;
+                    cursor: pointer; white-space: nowrap;
+                ">Ahora no</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var deferredPrompt = null;
+            var banner = document.getElementById('pwaInstallBanner');
+            var installBtn = document.getElementById('pwaInstallBtn');
+            var dismissBtn = document.getElementById('pwaInstallDismiss');
+
+            /* No mostrar si ya está instalada */
+            if (window.matchMedia('(display-mode: standalone)').matches) return;
+            if (localStorage.getItem('pwaInstallDismissed')) return;
+
+            /* Captura el evento beforeinstallprompt (Chrome/Android) */
+            window.addEventListener('beforeinstallprompt', function (e) {
+                e.preventDefault();
+                deferredPrompt = e;
+                /* Mostrar el banner tras 4 segundos */
+                setTimeout(function () { banner.style.display = 'block'; }, 4000);
+            });
+
+            /* Un clic — lanza el diálogo nativo de instalación */
+            installBtn.addEventListener('click', function () {
+                banner.style.display = 'none';
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(function (result) {
+                        deferredPrompt = null;
+                    });
+                }
+            });
+
+            dismissBtn.addEventListener('click', function () {
+                banner.style.display = 'none';
+                /* Recordar que lo rechazó para no molestar de nuevo */
+                localStorage.setItem('pwaInstallDismissed', '1');
+            });
+
+            /* En iOS (Safari) no hay beforeinstallprompt —
+               mostrar igual con instrucción de "Añadir a inicio" */
+            var isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+            var isInStandalone = window.navigator.standalone;
+            if (isIos && !isInStandalone && !localStorage.getItem('pwaInstallDismissed')) {
+                setTimeout(function () {
+                    installBtn.textContent = 'Cómo instalar';
+                    installBtn.addEventListener('click', function () {
+                        banner.style.display = 'none';
+                        alert('En Safari: toca el botón Compartir ↑ → "Añadir a pantalla de inicio"');
+                    }, { once: true });
+                    banner.style.display = 'block';
+                }, 4000);
+            }
+        })();
+    </script>
 
 </body>
 
