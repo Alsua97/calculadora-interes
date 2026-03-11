@@ -761,12 +761,18 @@
         .chart-wrap {
             position: relative;
             width: 100%;
-            height: 440px;
+            height: 310px;
             margin-bottom: 0;
         }
 
         canvas#growthChart {
             width: 100% !important;
+        }
+
+        /* Chart card — menos margen horizontal para gráfico más ancho */
+        #chartCard {
+            padding-left: 8px;
+            padding-right: 8px;
         }
 
         /* ============================================================
@@ -2001,7 +2007,7 @@
                 var dpr = window.devicePixelRatio || 1;
                 var rect = canvas.parentElement.getBoundingClientRect();
                 var W = rect.width || 400;
-                var H = 420;
+                var H = 290;
                 canvas.width = W * dpr;
                 canvas.height = H * dpr;
                 canvas.style.width = W + 'px';
