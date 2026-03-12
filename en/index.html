@@ -1,9 +1,9 @@
 <!--
   ════════════════════════════════════════════════════════
-  OurToolkit — Calculadora de Interés Compuesto
+  OurToolkit — Compound Interest Calculator
   https://ourtoolkit.blogspot.com
 
-  © 2025 OurToolkit Blog. Todos los derechos reservados.
+  © 2025 OurToolkit Blog. All rights reserved.
   All rights reserved.
 
   Código propietario. Prohibida su reproducción,
@@ -13,24 +13,24 @@
   ════════════════════════════════════════════════════════
 -->
 <!DOCTYPE html>
-<html lang="es" data-theme="system">
+<html lang="en" data-theme="system">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Calculadora de interés compuesto gratis y sin registro. Calcula el crecimiento de tus ahorros e inversiones, con gráfica y exportación a CSV. Resultados al instante.">
+        content="Free compound interest calculator, no sign-up needed. Calculate the growth of your savings and investments with interactive chart and CSV export. Instant results.">
     <meta name="keywords"
-        content="calculadora interés compuesto gratis, calcular interés compuesto, calculadora ahorro, calcular inversión, interés compuesto sin registro, calculadora financiera online">
+        content="compound interest calculator free, calculate compound interest, savings calculator, investment calculator, compound interest no sign up, online financial calculator">
     <meta name="author" content="OurToolkit">
-    <meta property="og:title" content="Calculadora de Interés Compuesto Gratis | OurToolkit">
+    <meta property="og:title" content="Free Compound Interest Calculator | OurToolkit">
     <meta property="og:description"
-        content="Calcula gratis el crecimiento de tus ahorros e inversiones con gráfica interactiva y exportación a CSV. Sin registro.">
+        content="Calculate for free the growth of your savings and investments with interactive chart and CSV export. No sign-up required.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://Alsua97.github.io/calculadora-interes/es/">
-    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="https://Alsua97.github.io/calculadora-interes/en/">
+    <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="OurToolkit">
-    <title>Calculadora de Interés Compuesto Gratis — Sin Registro | OurToolkit</title>
+    <title>Free Compound Interest Calculator — No Sign-Up Required | OurToolkit</title>
     <!-- hreflang -->
     <link rel="alternate" hreflang="es" href="https://Alsua97.github.io/calculadora-interes/es/" />
     <link rel="alternate" hreflang="en" href="https://Alsua97.github.io/calculadora-interes/en/" />
@@ -51,7 +51,7 @@
           href="https://alsua97.github.io/assets/icons/favicon-180.png">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Calculadora IC" />
+    <meta name="apple-mobile-web-app-title" content="Interest Calc" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -265,25 +265,6 @@
 
         .header-title span {
             color: var(--text);
-        }
-
-        .header-calc-icon {
-            display: none; /* solo visible en standalone */
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, var(--accent) 0%, #10b981 100%);
-            flex-shrink: 0;
-            margin-right: 9px;
-            color: #fff;
-        }
-
-        .header-calc-name {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
 
         .theme-btn {
@@ -797,10 +778,29 @@
             width: 100% !important;
         }
 
-        /* Chart card — menos margen horizontal para gráfico más ancho */
+        /* Chart card — reduced horizontal padding for wider chart */
         #chartCard {
             padding-left: 8px;
             padding-right: 8px;
+        }
+
+        .header-calc-icon {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent) 0%, #10b981 100%);
+            flex-shrink: 0;
+            margin-right: 9px;
+            color: #fff;
+        }
+
+        .header-calc-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         /* ============================================================
@@ -960,7 +960,7 @@
         /* ── PWA STANDALONE: ocultar contenido SEO ────────── */
         @media (display-mode: standalone) {
 
-            /* Ocultar contenido SEO — mantener calculadora y anuncios */
+            /* Hide SEO content — keep calculator and ads */
             .faq-section,
             .seo-info-section,
             .tool-hero,
@@ -969,12 +969,12 @@
                 display: none !important;
             }
 
-            /* Ocultar logo OurToolkit */
+            /* Hide OurToolkit logo */
             .logo {
                 display: none !important;
             }
 
-            /* Mostrar icono calculadora + título con gradiente */
+            /* Show calc icon + gradient title */
             .header-calc-icon {
                 display: flex !important;
             }
@@ -992,7 +992,6 @@
                 padding-left: 0;
             }
 
-            /* Menos espacio superior en modo app */
             main {
                 padding-top: 8px;
             }
@@ -1191,15 +1190,15 @@
    ============================================================ */
         .cfg-panel {
             position: fixed;
-            top: 72px;
-            right: 16px;
-            width: 224px;
+            top: 60px;
+            right: 12px;
+            width: 210px;
             background: var(--surface);
             border: 1px solid var(--border-h);
-            border-radius: var(--radius-card);
+            border-radius: 12px;
             box-shadow: var(--shadow-h);
             z-index: 500;
-            padding: 14px;
+            padding: 10px;
             display: none;
             animation: panelIn .18s cubic-bezier(.22, 1, .36, 1);
         }
@@ -1211,7 +1210,7 @@
         @keyframes panelIn {
             from {
                 opacity: 0;
-                transform: translateY(-8px) scale(.97);
+                transform: translateY(-6px) scale(.97);
             }
 
             to {
@@ -1479,8 +1478,7 @@
         }
     </style>
     <script>
-        // Forzar scroll al tope al cargar — evita que el navegador
-        // restaure la posición de la última visita
+        /* Evita que el navegador restaure la posición del último scroll */
         if (history.scrollRestoration) history.scrollRestoration = 'manual';
         window.addEventListener('load', function () { window.scrollTo(0, 0); });
     </script>
@@ -1496,8 +1494,7 @@
             <a href="https://ourtoolkit.blogspot.com" class="logo" title="OurToolkit — Herramientas gratuitas">
                 <span class="logo-icon">
                     <img src="https://alsua97.github.io/assets/icons/favicon-32.png"
-                         width="22" height="22"
-                         alt="OurToolkit"
+                         width="22" height="22" alt="OurToolkit"
                          style="border-radius:6px;display:block;">
                 </span>
                 Our<span class="logo-dot">Toolkit</span>
@@ -1510,11 +1507,11 @@
                         <polyline points="16 7 22 7 22 13"/>
                     </svg>
                 </span>
-                <span class="header-calc-name">Calculadora de Interés Compuesto</span>
+                <span class="header-calc-name">Compound Interest Calculator</span>
             </span>
-            <button class="theme-btn" id="cfgBtn" title="Configuración" aria-label="Configuración"><svg width="15"
-                    height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
+            <button class="theme-btn" id="cfgBtn" title="Settings" aria-label="Settings"><svg width="15" height="15"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <circle cx="12" cy="12" r="3" />
                     <path
                         d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
@@ -1526,7 +1523,7 @@
      AD TOP — Banner superior
      ============================================================ -->
     <div class="ad-top ad-zone" id="adTop">
-        <span class="ad-label">Publicidad</span>
+        <span class="ad-label">Advertisement</span>
         <!-- AdsTerra banner 728×90 desktop -->
         <div class="ad-desktop">
             <script>
@@ -1563,10 +1560,10 @@
 
             <!-- Hero -->
             <section class="tool-hero">
-                <div class="section-label">Finanzas personales</div>
-                <h1>Calculadora de Interés Compuesto</h1>
-                <p>Descubre el verdadero poder de tu dinero trabajando para ti. Calcula el crecimiento de tus
-                    inversiones con aportaciones periódicas y visualiza tu riqueza futura.</p>
+                <div class="section-label">Personal Finance</div>
+                <h1>Compound Interest Calculator</h1>
+                <p>Discover the true power of your money working for you. Calculate the growth of your
+                    investments with periodic contributions and visualize your future wealth.</p>
             </section>
 
             <!-- ── INPUTS ──────────────────────────────────────────── -->
@@ -1577,76 +1574,76 @@
                     <h2 class="mb-4" style="margin-bottom:22px;">Parámetros</h2>
 
                     <div class="form-group">
-                        <label>Capital inicial <span class="tip">(inversión de partida)</span></label>
+                        <label>Initial capital <span class="tip">(starting investment)</span></label>
                         <div class="input-wrap">
                             <span class="input-prefix">$</span>
                             <input type="number" id="principal" class="has-prefix" min="0" step="100" value="10000"
-                                aria-label="Capital inicial">
+                                aria-label="Initial capital">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Aportación periódica <span class="tip">(opcional)</span></label>
+                        <label>Periodic contribution <span class="tip">(optional)</span></label>
                         <div class="input-wrap">
                             <span class="input-prefix">$</span>
                             <input type="number" id="contribution" class="has-prefix" min="0" step="10" value="200"
-                                aria-label="Aportación periódica">
+                                aria-label="Periodic contribution">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Frecuencia de aportación</label>
-                        <select id="contribFreq" aria-label="Frecuencia de aportación">
-                            <option value="12">Mensual</option>
-                            <option value="4">Trimestral</option>
-                            <option value="2">Semestral</option>
-                            <option value="1">Anual</option>
+                        <label>Contribution frequency</label>
+                        <select id="contribFreq" aria-label="Contribution frequency">
+                            <option value="12">Monthly</option>
+                            <option value="4">Quarterly</option>
+                            <option value="2">Semi-annual</option>
+                            <option value="1">Annual</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label>Tasa de interés anual</label>
+                        <label>Annual interest rate</label>
                         <div class="slider-wrap">
                             <input type="range" id="rateSlider" min="0.1" max="30" step="0.1" value="7"
                                 aria-label="Deslizador tasa de interés">
                             <div class="input-wrap" style="width:90px;flex-shrink:0;">
                                 <input type="number" id="rate" class="has-suffix" min="0.01" max="100" step="0.1"
-                                    value="7" style="text-align:right;" aria-label="Tasa de interés anual">
+                                    value="7" style="text-align:right;" aria-label="Annual interest rate">
                                 <span class="input-suffix">%</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Capitalización</label>
-                        <select id="compFreq" aria-label="Frecuencia de capitalización">
-                            <option value="12">Mensual (12×/año)</option>
-                            <option value="4">Trimestral (4×/año)</option>
-                            <option value="2">Semestral (2×/año)</option>
-                            <option value="1">Anual (1×/año)</option>
-                            <option value="365">Diaria (365×/año)</option>
+                        <label>Compounding</label>
+                        <select id="compFreq" aria-label="Compounding frequency">
+                            <option value="12">Monthly (12×/year)</option>
+                            <option value="4">Quarterly (4×/year)</option>
+                            <option value="2">Semi-annual (2×/year)</option>
+                            <option value="1">Annual (1×/year)</option>
+                            <option value="365">Daily (365×/year)</option>
                             <option value="0">Continua (e^rt)</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label>Período de inversión</label>
+                        <label>Investment period</label>
                         <div class="slider-wrap">
                             <input type="range" id="yearsSlider" min="1" max="50" step="1" value="20"
                                 aria-label="Deslizador años">
                             <div class="input-wrap" style="width:90px;flex-shrink:0;">
                                 <input type="number" id="years" class="has-suffix has-suffix-wide" min="1" max="100"
-                                    step="1" value="20" style="text-align:right;" aria-label="Años de inversión">
-                                <span class="input-suffix">años</span>
+                                    step="1" value="20" style="text-align:right;" aria-label="Investment years">
+                                <span class="input-suffix">years</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Inflación anual estimada <span class="tip">(para valor real)</span></label>
+                        <label>Estimated annual inflation <span class="tip">(for real value)</span></label>
                         <div class="input-wrap">
                             <input type="number" id="inflation" class="has-suffix" min="0" max="30" step="0.1" value="3"
-                                style="text-align:right;" aria-label="Inflación anual">
+                                style="text-align:right;" aria-label="Annual inflation">
                             <span class="input-suffix">%</span>
                         </div>
                     </div>
@@ -1662,13 +1659,13 @@
                                 <line x1="11" y1="18" x2="8" y2="18" />
                                 <line x1="14" y1="14" x2="16" y2="18" />
                                 <line x1="16" y1="14" x2="14" y2="18" />
-                            </svg> Calcular</button>
+                            </svg> Calculate</button>
                         <button class="btn btn-outline" onclick="resetForm()"><svg width="15" height="15"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="1 4 1 10 7 10" />
                                 <path d="M3.51 15a9 9 0 1 0 .49-4.5" />
-                            </svg> Limpiar</button>
+                            </svg> Clear</button>
                     </div>
                 </div>
 
@@ -1679,12 +1676,12 @@
                             stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
                             <polyline points="16 7 22 7 22 13" />
-                        </svg> Crecimiento proyectado</h2>
+                        </svg> Projected growth</h2>
                     <div class="chart-wrap">
                         <canvas id="growthChart" aria-label="Gráfico de crecimiento de inversión"></canvas>
                     </div>
                     <div class="breakdown-bar" id="breakdownBar" style="margin-top:18px;">
-                        <h3>Composición del capital final</h3>
+                        <h3>Final capital breakdown</h3>
                         <div class="bar-track">
                             <div class="bar-seg bar-capital" id="barCapital"></div>
                             <div class="bar-seg bar-contrib" id="barContrib"></div>
@@ -1692,7 +1689,7 @@
                         </div>
                         <div class="bar-legend">
                             <div class="legend-item">
-                                <div class="legend-dot" style="background:var(--accent)"></div>Capital inicial
+                                <div class="legend-dot" style="background:var(--accent)"></div>Initial capital
                             </div>
                             <div class="legend-item">
                                 <div class="legend-dot" style="background:#a78bfa"></div>Aportaciones
@@ -1717,7 +1714,7 @@
                                 <line x1="1" y1="10" x2="23" y2="10" />
                             </svg></div>
                         <div class="kpi-value" id="kpiTotal">—</div>
-                        <div class="kpi-label">Capital Final</div>
+                        <div class="kpi-label">Final Capital</div>
                     </div>
                     <div class="kpi kpi-green">
                         <div class="kpi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -1727,7 +1724,7 @@
                                 <line x1="6" y1="20" x2="6" y2="16" />
                             </svg></div>
                         <div class="kpi-value" id="kpiInterest">—</div>
-                        <div class="kpi-label">Intereses Ganados</div>
+                        <div class="kpi-label">Interest Earned</div>
                     </div>
                     <div class="kpi">
                         <div class="kpi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -1746,13 +1743,13 @@
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                             </svg></div>
                         <div class="kpi-value" id="kpiReal">—</div>
-                        <div class="kpi-label">Valor Real (inflación)</div>
+                        <div class="kpi-label">Real Value (inflation)</div>
                     </div>
                 </div>
 
                 <!-- ── AD MID — Después del resultado principal ── -->
                 <div class="ad-mid ad-zone" id="adMid">
-                    <span class="ad-label">Publicidad</span>
+                    <span class="ad-label">Advertisement</span>
                     <div class="ad-desktop">
                         <script>
                             atOptions = {
@@ -1779,7 +1776,7 @@
                     </div>
                 </div>
 
-                <!-- Tabla de amortización -->
+                <!-- Amortization table -->
                 <div class="table-section card">
                     <div class="table-header">
                         <h3 style="display:flex;align-items:center;gap:7px;"><svg width="15" height="15"
@@ -1789,26 +1786,26 @@
                                 <line x1="3" y1="9" x2="21" y2="9" />
                                 <line x1="3" y1="15" x2="21" y2="15" />
                                 <line x1="9" y1="9" x2="9" y2="21" />
-                            </svg> Tabla de evolución anual</h3>
+                            </svg> Annual evolution table</h3>
                         <button class="btn btn-outline btn-sm" onclick="exportCSV()"><svg width="14" height="14"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                 <polyline points="7 10 12 15 17 10" />
                                 <line x1="12" y1="15" x2="12" y2="3" />
-                            </svg> Exportar CSV</button>
+                            </svg> Export CSV</button>
                     </div>
                     <div class="table-scroll">
-                        <table id="amortTable" aria-label="Tabla de evolución anual de la inversión">
+                        <table id="amortTable" aria-label="Annual investment evolution table">
                             <thead>
                                 <tr>
-                                    <th>Año</th>
-                                    <th>Capital inicial</th>
-                                    <th>Aportado</th>
-                                    <th>Intereses</th>
-                                    <th>Acum. intereses</th>
-                                    <th>Capital final</th>
-                                    <th>Valor real</th>
+                                    <th>Year</th>
+                                    <th>Initial capital</th>
+                                    <th>Contributed</th>
+                                    <th>Interest</th>
+                                    <th>Acum. interest</th>
+                                    <th>Final capital</th>
+                                    <th>Real value</th>
                                 </tr>
                             </thead>
                             <tbody id="tableBody"></tbody>
@@ -1824,23 +1821,23 @@
          INFO SEO SECTION (300+ words)
          ============================================================ -->
             <section class="info-section" aria-labelledby="info-heading">
-                <div class="section-label">Aprende más</div>
-                <h2 id="info-heading">¿Qué es el Interés Compuesto y por qué es tan poderoso?</h2>
+                <div class="section-label">Learn more</div>
+                <h2 id="info-heading">What is Compound Interest and Why is it so Powerful?</h2>
 
-                <p>El <strong style="color:var(--text)">interés compuesto</strong> es, sin duda, uno de los conceptos
-                    más transformadores de las finanzas personales. A diferencia del interés simple —donde los intereses
-                    se calculan siempre sobre el capital original—, el interés compuesto genera intereses sobre los
-                    intereses ya acumulados. Esta característica crea un efecto bola de nieve que, con el tiempo, puede
-                    multiplicar de forma espectacular cualquier inversión.</p>
+                <p>Compound <strong style="color:var(--text)">interest</strong> is, without doubt, one of the most
+                    transformative concepts in personal finance. Unlike simple interest—where interest is always
+                    calculated on the original principal—, compound interest generates interest on interest already
+                    accumulated. This creates a snowball effect that, over time, can spectacularly multiply any
+                    investment.</p>
 
-                <p>Albert Einstein —aunque la cita es probablemente apócrifa— supuestamente llamó al interés compuesto
-                    "la octava maravilla del mundo". Real o no, la frase captura perfectamente su efecto: quien lo
-                    entiende, lo cobra; quien no, lo paga.</p>
+                <p>Albert Einstein —although the quote is probably apocryphal— supposedly called compound interest
+                    "the eighth wonder of the world". Real or not, the phrase perfectly captures its effect: those who
+                    understand it, earn it; those who don't, pay it.</p>
 
                 <div class="formula-box">
                     A = P × (1 + r/n)^(n×t) + C × [((1 + r/n)^(n×t) − 1) / (r/n)]
-                    <span>A = capital final · P = capital inicial · r = tasa anual · n = períodos/año · t = años · C =
-                        aportación periódica</span>
+                    <span>A = final capital · P = initial capital · r = annual rate · n = periods/year · t = years · C =
+                        periodic contribution</span>
                 </div>
 
                 <div class="info-grid">
@@ -1850,9 +1847,9 @@
                                 <circle cx="12" cy="12" r="10" />
                                 <polyline points="12 6 12 12 16 14" />
                             </svg></div>
-                        <h3>El tiempo es tu mayor aliado</h3>
-                        <p>Invertir $10,000 durante 30 años al 7% anual produce más del doble que invertir la misma
-                            cantidad durante 20 años. Empezar pronto, aunque sea con poco, marca una diferencia enorme a
+                        <h3>Time is your greatest ally</h3>
+                        <p>Investing $10,000 for 30 years at 7% annual produces more than double investing the same
+                            amount for 20 years. Starting early, even with little, makes an enormous difference over
                             largo plazo.</p>
                     </div>
                     <div class="info-card">
@@ -1863,49 +1860,48 @@
                                 <polyline points="7 23 3 19 7 15" />
                                 <path d="M21 13v2a4 4 0 0 1-4 4H3" />
                             </svg></div>
-                        <h3>Frecuencia de capitalización</h3>
-                        <p>Cuanto más frecuente es la capitalización (diaria vs anual), mayor es el rendimiento
-                            efectivo. La capitalización mensual o diaria, habitual en fondos indexados y ETFs, maximiza
-                            el efecto compuesto.</p>
+                        <h3>Compounding frequency</h3>
+                        <p>The more frequent the compounding (daily vs annual), the higher the effective return. Monthly
+                            or daily compounding, common in index funds and ETFs, maximizes the compound effect.</p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                             </svg></div>
-                        <h3>Aportaciones periódicas</h3>
-                        <p>Añadir una cantidad mensual constante, por pequeña que sea, puede duplicar o triplicar el
-                            capital final. Este método se conoce como Dollar Cost Averaging (DCA) y reduce además el
-                            riesgo de comprar siempre en máximos.</p>
+                        <h3>Periodic contributions</h3>
+                        <p>Adding a constant monthly amount, however small, can double or triple the final capital. This
+                            method is known as Dollar Cost Averaging (DCA) and also reduces the risk of always buying at
+                            market highs.</p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                             </svg></div>
-                        <h3>Inflación y valor real</h3>
-                        <p>El valor nominal de tu inversión crecerá, pero la inflación erosiona el poder adquisitivo.
-                            Por eso nuestra calculadora muestra el <strong style="color:var(--text)">valor real</strong>
-                            ajustado por inflación: el dato que verdaderamente importa para planificar tu retiro.</p>
+                        <h3>Inflation and real value</h3>
+                        <p>The nominal value of your investment will grow, but inflation erodes purchasing power. That's
+                            why our calculator shows the <strong style="color:var(--text)">real value</strong> adjusted
+                            for inflation: the figure that truly matters for planning your retirement.</p>
                     </div>
                 </div>
 
-                <p>Cuando hablamos de vehículos reales de inversión, los fondos indexados (como los que replican el S&P
-                    500) han ofrecido históricamente retornos del <span class="text-green">7–10% anual</span> en
-                    términos nominales, aproximadamente un <span class="text-accent">4–7% real</span> después de
-                    inflación. Las cuentas de ahorro de alto rendimiento o los bonos del gobierno suelen ofrecer
-                    retornos menores, pero con menor riesgo.</p>
+                <p>When talking about real investment vehicles, index funds (such as those tracking the S&amp;P 500)
+                    have historically offered returns of <strong style="color:var(--text)">7–10% annually</strong> in
+                    nominal terms, approximately <strong style="color:var(--text)">4–7% real</strong> after inflation.
+                    High-yield savings accounts or government bonds typically offer lower returns, but with lower risk.
+                </p>
 
-                <p>La fórmula de capitalización continua —cuando <em>n</em> tiende a infinito— es A = P × e^(r×t), donde
-                    <em>e</em> es la constante de Euler (≈2.718). Aunque en la práctica ninguna institución capitaliza
-                    de forma verdaderamente continua, su comprensión es fundamental en matemáticas financieras
+                <p>The continuous compounding formula —when n tends to infinity— is A = P × e^(r×t), where e is Euler's
+                    constant (≈2.718). Although in practice no institution compounds truly continuously, understanding
+                    it is fundamental in financial mathematics
                     avanzadas.
                 </p>
 
-                <p>Recuerda siempre diversificar tus inversiones, considerar tu horizonte temporal y tolerancia al
-                    riesgo, y consultar a un asesor financiero certificado antes de tomar decisiones importantes. Esta
-                    calculadora es una herramienta educativa: los resultados reales dependen de muchos factores que
-                    ninguna simulación puede capturar al 100%.</p>
+                <p>Always remember to diversify your investments, consider your time horizon and risk
+                    tolerance, and consult a certified financial advisor before making important decisions. This
+                    calculator is an educational tool: real results depend on many factors that
+                    no simulation can fully capture.</p>
             </section>
 
             <div class="divider"></div>
@@ -1914,12 +1910,12 @@
          FAQ SECTION
          ============================================================ -->
             <section class="faq-section" aria-labelledby="faq-heading">
-                <div class="section-label">Preguntas frecuentes</div>
-                <h2 id="faq-heading">Preguntas Frecuentes</h2>
+                <div class="section-label">Frequently asked questions</div>
+                <h2 id="faq-heading">Frequently Asked Questions</h2>
 
                 <div class="faq-item" id="faq1">
                     <button class="faq-q" onclick="toggleFaq('faq1')" aria-expanded="false">
-                        ¿Cuál es la diferencia entre interés simple e interés compuesto?
+                        What is the difference between simple and compound interest?
                         <span class="faq-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9" />
@@ -1927,19 +1923,19 @@
                     </button>
                     <div class="faq-a" role="region">
                         <div class="faq-a-inner">
-                            El <strong>interés simple</strong> se calcula siempre sobre el capital original: si
-                            inviertes $1,000 al 10% anual, ganas $100 cada año sin excepción. El <strong>interés
-                                compuesto</strong>, en cambio, suma los intereses generados al capital, de modo que en
-                            el año 2 calculas el 10% sobre $1,100 (no sobre $1,000), en el año 3 sobre $1,210, y así
-                            sucesivamente. La diferencia parece pequeña al principio, pero a lo largo de décadas puede
-                            representar miles o millones de dólares adicionales.
+                            <strong style="color:var(--text)">Simple interest</strong> is always calculated on the
+                            original principal: if you invest $1,000 at 10% annual, you earn $100 every year. <strong
+                                style="color:var(--text)">Compound interest</strong>, on the other hand, adds generated
+                            interest to the principal, so in year 2 you calculate 10% on $1,100, in year 3 on $1,210,
+                            and so on. The difference seems small at first, but over decades it can represent thousands
+                            or millions of additional dollars.
                         </div>
                     </div>
                 </div>
 
                 <div class="faq-item" id="faq2">
                     <button class="faq-q" onclick="toggleFaq('faq2')" aria-expanded="false">
-                        ¿Qué tasa de interés es realista para mis inversiones?
+                        What interest rate is realistic for my investments?
                         <span class="faq-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9" />
@@ -1947,19 +1943,19 @@
                     </button>
                     <div class="faq-a" role="region">
                         <div class="faq-a-inner">
-                            Depende completamente del instrumento elegido. Las cuentas de ahorro tradicionales ofrecen
-                            0.5–3% anual. Los bonos del gobierno de EE.UU. ofrecen actualmente 4–5%. Los fondos
-                            indexados al S&P 500 han promediado un <strong>~10% nominal (7% real)</strong> en los
-                            últimos 100 años, aunque con alta volatilidad año a año. Las criptomonedas pueden ofrecer
-                            retornos mucho mayores, pero también pérdidas totales. Para planificación a largo plazo,
-                            usar entre 5% y 8% es un supuesto razonable y conservador.
+                            It depends entirely on the chosen instrument. Traditional savings accounts offer 0.5–3%
+                            annually. U.S. government bonds currently offer 4–5%. S&amp;P 500 index funds have averaged
+                            <strong style="color:var(--text)">~10% nominal (7% real)</strong> over the last 100 years,
+                            though with high year-to-year volatility. Cryptocurrencies can offer much higher returns,
+                            but also total losses. For long-term planning, using between 5% and 8% is a reasonable and
+                            conservative assumption.
                         </div>
                     </div>
                 </div>
 
                 <div class="faq-item" id="faq3">
                     <button class="faq-q" onclick="toggleFaq('faq3')" aria-expanded="false">
-                        ¿Con qué frecuencia debo capitalizar para maximizar mi rendimiento?
+                        How often should I compound to maximize my return?
                         <span class="faq-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9" />
@@ -1967,19 +1963,19 @@
                     </button>
                     <div class="faq-a" role="region">
                         <div class="faq-a-inner">
-                            Matemáticamente, cuanto más frecuente sea la capitalización, mayor el rendimiento: la
-                            capitalización diaria supera a la mensual, que supera a la anual. Sin embargo, la diferencia
-                            práctica entre capitalización mensual y diaria es mínima (apenas unas décimas de punto
-                            porcentual). La mayoría de los fondos de inversión y ETFs capitalizan diariamente de forma
-                            automática al reinvertir dividendos. Lo que <em>sí</em> importa más es la <strong>tasa de
-                                interés real</strong> y el <strong>tiempo de inversión</strong>.
+                            Mathematically, the more frequent the compounding, the higher the return: daily compounding
+                            beats monthly, which beats annual. However, the practical difference between monthly and
+                            daily compounding is minimal (just a few tenths of a percentage point). Most investment
+                            funds and ETFs compound daily automatically by reinvesting dividends. What <em>does</em>
+                            matter more is the <strong>real interest rate</strong> and the <strong>investment time
+                                horizon</strong>.
                         </div>
                     </div>
                 </div>
 
                 <div class="faq-item" id="faq4">
                     <button class="faq-q" onclick="toggleFaq('faq4')" aria-expanded="false">
-                        ¿Cómo afecta la inflación a mi inversión?
+                        How does inflation affect my investment?
                         <span class="faq-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9" />
@@ -1987,18 +1983,18 @@
                     </button>
                     <div class="faq-a" role="region">
                         <div class="faq-a-inner">
-                            La inflación reduce el poder adquisitivo de tu dinero con el tiempo. Si tienes $100,000
-                            nominales en 20 años pero la inflación fue del 3% anual, esos $100,000 equivalen en poder de
-                            compra a solo ~$55,368 de hoy. Por eso es crucial que tu tasa de retorno supere la
-                            inflación. La calculadora muestra el <strong>valor real</strong> de tu capital final: ese es
-                            el número que debes usar para planificar gastos futuros como la jubilación.
+                            Inflation reduces the purchasing power of your money over time. If you have $100,000 nominal
+                            in 20 years but inflation was 3% annually, those $100,000 are worth only ~$55,368 in today's
+                            purchasing power. That's why it's crucial that your return rate exceeds inflation. The
+                            calculator shows the <strong style="color:var(--text)">real value</strong> of your final
+                            capital: the number you should use to plan future expenses like retirement.
                         </div>
                     </div>
                 </div>
 
                 <div class="faq-item" id="faq5">
                     <button class="faq-q" onclick="toggleFaq('faq5')" aria-expanded="false">
-                        ¿Puedo usar esta calculadora para planificar mi jubilación?
+                        Can I use this calculator to plan my retirement?
                         <span class="faq-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="6 9 12 15 18 9" />
@@ -2006,12 +2002,13 @@
                     </button>
                     <div class="faq-a" role="region">
                         <div class="faq-a-inner">
-                            Sí, es una excelente herramienta de planificación inicial. Introduce tu capital actual como
-                            <em>inversión inicial</em>, tu ahorro mensual como <em>aportación periódica</em>, y el
-                            número de años hasta tu jubilación como <em>período</em>. Usa una tasa conservadora (5–7%) y
-                            activa el ajuste por inflación para ver el valor real. El resultado te dará una estimación
-                            del capital disponible. Ten en cuenta que los retornos reales varían año a año, y los
-                            impuestos reducirán las ganancias dependiendo de tu país y tipo de cuenta (IRA, 401k, etc.).
+                            Yes, it's an excellent initial planning tool. Enter your current capital as <strong
+                                style="color:var(--text)">initial investment</strong>, your monthly savings as <strong
+                                style="color:var(--text)">periodic contribution</strong>, and the number of years until
+                            retirement as <strong style="color:var(--text)">period</strong>. Use a conservative rate
+                            (5–7%) and enable the inflation adjustment to see the real value. Keep in mind that real
+                            returns vary year to year, and taxes will reduce gains depending on your country and account
+                            type (IRA, 401k, etc.).
                         </div>
                     </div>
                 </div>
@@ -2025,8 +2022,7 @@
      AD FOOTER — Banner al final de página
      ============================================================ -->
     <div class="ad-footer ad-zone" id="adFooter">
-        <span class="ad-label">Publicidad</span>
-        <!-- AdsTerra banner 728×90 desktop -->
+        <span class="ad-label">Advertisement</span>
         <div class="ad-desktop">
             <script>
                 atOptions = {
@@ -2039,7 +2035,6 @@
             </script>
             <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
         </div>
-        <!-- AdsTerra banner 320×50 móvil -->
         <div class="ad-mobile">
             <script>
                 atOptions = {
@@ -2060,9 +2055,9 @@
     <footer class="site-footer" role="contentinfo">
         <div class="container">
             <p>© 2025 <a href="https://ourtoolkit.blogspot.com" target="_blank" rel="noopener">OurToolkit Blog</a> —
-                Herramientas gratuitas para todos.</p>
-            <p style="margin-top:6px;font-size:.75rem;">Esta calculadora es solo para fines educativos. No constituye
-                asesoramiento financiero.</p>
+                Free tools for everyone.</p>
+            <p style="margin-top:6px;font-size:.75rem;">This calculator is for educational purposes only. It does not
+                constitute financial advice.</p>
         </div>
     </footer>
 
@@ -2214,12 +2209,12 @@
                 ctx.fillStyle = labelColor;
                 ctx.font = 'bold 12px Plus Jakarta Sans, sans-serif';
                 ctx.textAlign = 'center';
-                var labelW = ctx.measureText('Año 20').width + 10; /* min gap between labels */
+                var labelW = ctx.measureText('Year 20').width + 10; /* min gap between labels */
                 var minStep = Math.ceil(labelW / (cw / (labels.length - 1)));
                 var xStep = Math.max(minStep, Math.floor(labels.length / 6));
                 var drawnX = {};
                 for (var n = 0; n < labels.length; n += xStep) {
-                    ctx.fillText('Año ' + labels[n], xPos(n), H - 32);
+                    ctx.fillText('Year ' + labels[n], xPos(n), H - 32);
                     drawnX[n] = true;
                 }
                 var lastIdx = labels.length - 1;
@@ -2228,7 +2223,7 @@
                     var prevDrawn = lastIdx - (lastIdx % xStep);
                     var gap = xPos(lastIdx) - xPos(prevDrawn);
                     if (gap >= labelW) {
-                        ctx.fillText('Año ' + labels[lastIdx], xPos(lastIdx), H - 32);
+                        ctx.fillText('Year ' + labels[lastIdx], xPos(lastIdx), H - 32);
                     }
                 }
 
@@ -2243,7 +2238,7 @@
                 ctx.fillStyle = labelColor;
                 ctx.font = '13px Plus Jakarta Sans, sans-serif';
                 ctx.textAlign = 'left';
-                ctx.fillText('Capital total', lx + 32, ly + 4);
+                ctx.fillText('Total capital', lx + 32, ly + 4);
 
                 var lx2 = lx + 150;
                 ctx.lineWidth = 2.5;
@@ -2252,7 +2247,7 @@
                 ctx.beginPath(); ctx.moveTo(lx2, ly); ctx.lineTo(lx2 + 24, ly); ctx.stroke();
                 ctx.setLineDash([]);
                 ctx.fillStyle = labelColor;
-                ctx.fillText('Lo que aportaste', lx2 + 32, ly + 4);
+                ctx.fillText('Your contributions', lx2 + 32, ly + 4);
             }
 
             /* ── Number helpers ──────────────────────────────────────── */
@@ -2283,7 +2278,7 @@
                 var inf = parseFloat(document.getElementById('inflation').value) / 100;
 
                 if (isNaN(P) || isNaN(r) || isNaN(t) || t < 1) {
-                    alert('Por favor, introduce valores válidos.');
+                    alert('Please enter valid values.');
                     return;
                 }
 
@@ -2365,7 +2360,7 @@
                 rows.forEach(function (row) {
                     var tr = document.createElement('tr');
                     tr.innerHTML =
-                        '<td>Año ' + row.year + '</td>' +
+                        '<td>Year ' + row.year + '</td>' +
                         '<td>' + fmt(row.start) + '</td>' +
                         '<td class="td-accent">' + fmt(row.contrib) + '</td>' +
                         '<td class="td-positive">' + fmt(row.interest) + '</td>' +
@@ -2379,7 +2374,7 @@
                 document.getElementById('resultsSection').classList.remove('results-hidden');
                 document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-                /* Mostrar banner PWA solo después del primer cálculo exitoso */
+                /* Mostrar banner PWA tras el primer cálculo exitoso */
                 if (typeof window._showPwaAfterCalc === 'function') window._showPwaAfterCalc();
 
                 /* ── Draw chart ── */
@@ -2407,7 +2402,7 @@
             function exportCSV() {
                 if (!chartData) return;
                 var rows = chartData.rows;
-                var header = 'Año,Capital Inicial,Aportado,Intereses Año,Intereses Acumulados,Capital Final,Valor Real\n';
+                var header = 'Year,Initial Capital,Contributed,Annual Interest,Acum. Interest,Final Capital,Real Value\n';
                 var csv = header + rows.map(function (r) {
                     return [r.year, r.start.toFixed(2), r.contrib.toFixed(2),
                     r.interest.toFixed(2), r.cumInterest.toFixed(2),
@@ -2446,7 +2441,7 @@
                 var overlay = document.getElementById('cfgOverlay');
 
                 /* ── Theme ── */
-                var THEME_LABELS = { system: 'Sistema', dark: 'Oscuro', light: 'Claro' };
+                var THEME_LABELS = { system: 'System', dark: 'Dark', light: 'Light' };
                 var THEME_SVGS = {
                     system: '<rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
                     dark: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
@@ -2481,9 +2476,9 @@
 
                 /* ── Language ── */
                 var LANG_LABELS = { es: 'ES', en: 'EN', pt: 'PT', fr: 'FR' };
-                var currentLang = location.pathname.includes('/en/') ? 'en'
+                var currentLang = location.pathname.includes('/es/') ? 'es'
                     : location.pathname.includes('/pt/') ? 'pt'
-                        : location.pathname.includes('/fr/') ? 'fr' : 'es';
+                        : location.pathname.includes('/fr/') ? 'fr' : 'en';
                 document.getElementById('langLabel').textContent = LANG_LABELS[currentLang];
                 document.querySelectorAll('[data-lang]').forEach(function (b) {
                     b.classList.toggle('active', b.getAttribute('data-lang') === currentLang);
@@ -2512,7 +2507,7 @@
                     dd.classList.toggle('open');
                 });
 
-                /* ── Botón compartir ── */
+                /* ── Share button ── */
                 document.getElementById('shareBtn').addEventListener('click', function () {
                     var url = location.href;
                     var title = document.title;
@@ -2522,13 +2517,13 @@
                         navigator.clipboard.writeText(url).then(function () {
                             var btn = document.getElementById('shareBtn');
                             var orig = btn.innerHTML;
-                            btn.textContent = '¡Copiado!';
+                            btn.textContent = 'Copied!';
                             setTimeout(function () { btn.innerHTML = orig; }, 2000);
                         });
                     }
                 });
 
-                /* ── Abrir / cerrar panel principal ── */
+                /* ── Open / close main panel ── */
                 cfgBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     var open = panel.classList.toggle('open');
@@ -2634,9 +2629,9 @@
     <!-- ── SETTINGS PANEL ─────────────────────────────────── -->
     <div id="cfgPanel" class="cfg-panel">
 
-        <!-- Tema dropdown -->
+        <!-- Theme dropdown -->
         <div class="cfg-row">
-            <span class="cfg-row-label">Tema</span>
+            <span class="cfg-row-label">Theme</span>
             <div class="cfg-dropdown" id="themeDropdown">
                 <button class="cfg-trigger" id="themeTrigger">
                     <svg id="themeIcon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2645,7 +2640,7 @@
                         <line x1="8" y1="21" x2="16" y2="21" />
                         <line x1="12" y1="17" x2="12" y2="21" />
                     </svg>
-                    <span id="themeLabel">Sistema</span>
+                    <span id="themeLabel">System</span>
                     <svg class="chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9" />
@@ -2659,14 +2654,14 @@
                             <line x1="8" y1="21" x2="16" y2="21" />
                             <line x1="12" y1="17" x2="12" y2="21" />
                         </svg>
-                        Sistema
+                        System
                     </button>
                     <button class="cfg-menu-item" data-theme-opt="dark">
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                         </svg>
-                        Oscuro
+                        Dark
                     </button>
                     <button class="cfg-menu-item" data-theme-opt="light">
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2681,7 +2676,7 @@
                             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
                             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
                         </svg>
-                        Claro
+                        Light
                     </button>
                 </div>
             </div>
@@ -2689,9 +2684,9 @@
 
         <div class="cfg-divider"></div>
 
-        <!-- Idioma dropdown -->
+        <!-- Language dropdown -->
         <div class="cfg-row">
-            <span class="cfg-row-label">Idioma</span>
+            <span class="cfg-row-label">Language</span>
             <div class="cfg-dropdown" id="langDropdown">
                 <button class="cfg-trigger" id="langTrigger">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -2701,15 +2696,15 @@
                         <path
                             d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                     </svg>
-                    <span id="langLabel">ES</span>
+                    <span id="langLabel">EN</span>
                     <svg class="chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9" />
                     </svg>
                 </button>
                 <div class="cfg-menu">
-                    <button class="cfg-menu-item active" data-lang="es">🇪🇸 ES Español</button>
-                    <button class="cfg-menu-item" data-lang="en">🇺🇸 EN English</button>
+                    <button class="cfg-menu-item" data-lang="es">🇪🇸 ES Español</button>
+                    <button class="cfg-menu-item active" data-lang="en">🇺🇸 EN English</button>
                     <button class="cfg-menu-item" data-lang="pt">🇧🇷 PT Português</button>
                     <button class="cfg-menu-item" data-lang="fr">🇫🇷 FR Français</button>
                 </div>
@@ -2718,7 +2713,7 @@
 
         <div class="cfg-divider"></div>
 
-        <!-- Compartir + Herramientas -->
+        <!-- Share + More tools -->
         <div class="cfg-action-row">
             <button class="cfg-action-btn" id="shareBtn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -2729,7 +2724,7 @@
                     <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
                     <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
                 </svg>
-                Compartir
+                Share
             </button>
             <a class="cfg-action-btn" href="https://ourtoolkit.blogspot.com" target="_blank">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -2737,7 +2732,7 @@
                     <path
                         d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
                 </svg>
-                Herramientas
+                Tools
             </a>
         </div>
     </div>
@@ -2768,7 +2763,6 @@
             max-width: 520px;
             margin: 0 auto;
         ">
-            <!-- Icono -->
             <div style="
                 width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
                 background: linear-gradient(135deg, #7c3aed 0%, #6366f1 50%, #0d9488 100%);
@@ -2780,17 +2774,15 @@
                     <polyline points="16 7 22 7 22 13"/>
                 </svg>
             </div>
-            <!-- Texto -->
             <div style="flex: 1; min-width: 0;">
                 <div style="font-size: .88rem; font-weight: 700; color: #ecedf8; margin-bottom: 2px;
                             font-family: 'Outfit', sans-serif;">
-                    ¡Accede al instante, sin buscador!
+                    Instant access — no browser needed!
                 </div>
                 <div style="font-size: .77rem; color: #8888a0; line-height: 1.4;">
-                    Instala la calculadora como app gratuita. Sin publicidad extra, sin cuenta.
+                    Install the calculator as a free app. No extra ads, no account required.
                 </div>
             </div>
-            <!-- Botones -->
             <div style="display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;">
                 <button id="pwaInstallBtn" style="
                     background: linear-gradient(90deg, #6366f1, #10b981);
@@ -2798,13 +2790,13 @@
                     padding: 8px 16px; font-size: .8rem; font-weight: 700;
                     cursor: pointer; white-space: nowrap;
                     font-family: 'Outfit', sans-serif;
-                ">Instalar gratis</button>
+                ">Install free</button>
                 <button id="pwaInstallDismiss" style="
                     background: transparent; color: #555570;
                     border: 1px solid #2a2a4a; border-radius: 8px;
                     padding: 5px 16px; font-size: .75rem;
                     cursor: pointer; white-space: nowrap;
-                ">Ahora no</button>
+                ">Not now</button>
             </div>
         </div>
     </div>
@@ -2816,56 +2808,39 @@
             var installBtn = document.getElementById('pwaInstallBtn');
             var dismissBtn = document.getElementById('pwaInstallDismiss');
 
-            /* No mostrar si ya está instalada */
             if (window.matchMedia('(display-mode: standalone)').matches) return;
             if (localStorage.getItem('pwaInstallDismissed')) return;
 
-            /* Captura el evento beforeinstallprompt (Chrome/Android) */
             window.addEventListener('beforeinstallprompt', function (e) {
                 e.preventDefault();
                 deferredPrompt = e;
-                /* Guardar el evento — el banner se mostrará tras el primer cálculo */
-                window._pwaPromptReady = true;
+                setTimeout(function () { banner.style.display = 'block'; }, 4000);
             });
 
-            /* El banner aparece cuando el usuario ya hizo un cálculo y vio resultados */
-            window._showPwaAfterCalc = function () {
-                if (!banner || banner.style.display === 'block') return;
-                if (localStorage.getItem('pwaInstallDismissed')) return;
-                if (window.matchMedia('(display-mode: standalone)').matches) return;
-                if (window._pwaPromptReady || /iphone|ipad|ipod/i.test(navigator.userAgent)) {
-                    /* Pequeño delay para que el usuario vea los resultados primero */
-                    setTimeout(function () { banner.style.display = 'block'; }, 1200);
-                }
-            };
-
-            /* Un clic — lanza el diálogo nativo de instalación */
             installBtn.addEventListener('click', function () {
                 banner.style.display = 'none';
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(function (result) {
-                        deferredPrompt = null;
-                    });
+                    deferredPrompt.userChoice.then(function () { deferredPrompt = null; });
                 }
             });
 
             dismissBtn.addEventListener('click', function () {
                 banner.style.display = 'none';
-                /* Recordar que lo rechazó para no molestar de nuevo */
                 localStorage.setItem('pwaInstallDismissed', '1');
             });
 
-            /* En iOS (Safari) no hay beforeinstallprompt —
-               el banner se activa igualmente al calcular via _showPwaAfterCalc */
             var isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
             var isInStandalone = window.navigator.standalone;
             if (isIos && !isInStandalone) {
                 installBtn.textContent = 'How to install';
                 installBtn.addEventListener('click', function () {
                     banner.style.display = 'none';
-                    alert('In Safari: tap the Share button ↑ → "Add to Home Screen" → "Add"');
+                    alert('In Safari: tap the Share button ↑ → \"Add to Home Screen\" → \"Add\"');
                 }, { once: true });
+            }, { once: true });
+                    banner.style.display = 'block';
+                }, 4000);
             }
         })();
     </script>
