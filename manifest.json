@@ -9,66 +9,38 @@
   "background_color": "#08080f",
   "theme_color": "#6366f1",
   "lang": "es",
-  "categories": [
-    "finance",
-    "utilities",
-    "productivity"
-  ],
+  "categories": ["finance", "utilities", "productivity"],
   "icons": [
     {
       "src": "/calculadora-interes/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/calculadora-interes/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/calculadora-interes/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/calculadora-interes/screenshot-mobile.png",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Calculadora de Interés Compuesto en móvil"
+      "purpose": "any"
     },
     {
-      "src": "/calculadora-interes/screenshot-desktop.png",
-      "sizes": "1280x800",
+      "src": "/calculadora-interes/icon-512.png",
+      "sizes": "512x512",
       "type": "image/png",
-      "form_factor": "wide",
-      "label": "Calculadora de Interés Compuesto en desktop"
+      "purpose": "maskable"
     }
   ],
   "shortcuts": [
-    {
-      "name": "Español",
-      "short_name": "ES",
-      "url": "/calculadora-interes/es/",
-      "description": "Abrir en español"
-    },
-    {
-      "name": "English",
-      "short_name": "EN",
-      "url": "/calculadora-interes/en/",
-      "description": "Open in English"
-    },
-    {
-      "name": "Português",
-      "short_name": "PT",
-      "url": "/calculadora-interes/pt/",
-      "description": "Abrir em português"
-    },
-    {
-      "name": "Français",
-      "short_name": "FR",
-      "url": "/calculadora-interes/fr/",
-      "description": "Ouvrir en français"
-    }
+    { "name": "Español",   "short_name": "ES", "url": "/calculadora-interes/es/" },
+    { "name": "English",   "short_name": "EN", "url": "/calculadora-interes/en/" },
+    { "name": "Português", "short_name": "PT", "url": "/calculadora-interes/pt/" },
+    { "name": "Français",  "short_name": "FR", "url": "/calculadora-interes/fr/" }
   ],
   "prefer_related_applications": false
 }
