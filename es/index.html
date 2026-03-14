@@ -1451,64 +1451,78 @@
 
         /* ad-sticky only */
 
-        /* ── STICKY BOTTOM AD ────────────────────────────────────── */
+        /* ── ANUNCIOS: sticky móvil + sidebar desktop ─────────────── */
+
+        /* Móvil: sticky fijo abajo */
         .ad-sticky {
-            display: flex;
+            display: none;
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             z-index: 200;
-            width: 100%;
-            height: 90px;
+            height: 50px;
             background: var(--bg);
             border-top: 1px solid var(--border);
             align-items: center;
             justify-content: center;
             padding-bottom: env(safe-area-inset-bottom, 0px);
-            /* Forzar capa GPU — evita que iOS mueva el sticky al hacer scroll */
-            transform: translateZ(0);
             -webkit-transform: translateZ(0);
-            will-change: transform;
-            /* Oculto si no hay anuncio disponible */
-            transition: opacity .3s, height .3s;
+            transform: translateZ(0);
         }
-        .ad-sticky.no-ad {
-            opacity: 0;
-            height: 0 !important;
-            border-top: none;
-            pointer-events: none;
-        }
-        /* Oculto cuando el teclado virtual está activo en móvil */
-        .ad-sticky.keyboard-open {
-            display: none;
-        }
-        @media (display-mode: standalone) {
-            .ad-sticky { padding-bottom: 0; }
-        }
-        /* Desktop: 728×90 */
-        .ad-sticky .ad-desktop {
-            width: 728px;
-            height: 90px;
-            overflow: hidden;
-        }
-        /* Móvil: 320×50 */
         @media (max-width: 768px) {
-            .ad-sticky { height: 50px; }
-            .ad-sticky .ad-mobile {
-                width: 320px;
-                height: 50px;
-                overflow: hidden;
-            }
-        }
-        body { padding-bottom: 98px; }
-        @media (max-width: 768px) {
+            .ad-sticky { display: flex; }
             body { padding-bottom: 58px; }
         }
         @media (display-mode: standalone) {
+            .ad-sticky { padding-bottom: 0; }
             body { padding-bottom: 50px; }
         }
-    </style>
+        .ad-sticky.no-ad, .ad-sticky.keyboard-open {
+            display: none !important;
+        }
+
+        /* Desktop medio: sticky abajo 728×90 */
+        .ad-sticky-desktop {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 200;
+            height: 90px;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            align-items: center;
+            justify-content: center;
+        }
+        @media (min-width: 769px) and (max-width: 1459px) {
+            .ad-sticky-desktop { display: flex; }
+            body { padding-bottom: 98px; }
+        }
+        .ad-sticky-desktop.no-ad { display: none !important; }
+
+        /* Desktop ancho: sidebar flotante a la derecha del contenedor */
+        .ad-sidebar {
+            display: none;
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            /* Justo a la derecha del container de 1100px centrado */
+            left: calc(50% + 570px);
+            width: 90px;
+            z-index: 150;
+        }
+        /* Rotar el banner 728×90 → aparece como 90×728 vertical */
+        .ad-sidebar .ad-rotated {
+            transform-origin: top left;
+            transform: rotate(90deg) translateY(-90px);
+            width: 728px;
+            height: 90px;
+        }
+        @media (min-width: 1460px) {
+            .ad-sidebar { display: block; }
+            body { padding-bottom: 0; }
+        }
+        .ad-sidebar.no-ad { display: none !important; }
+
+            </style>
     <script>
         /* Evita que el navegador restaure la posición del último scroll */
         if (history.scrollRestoration) history.scrollRestoration = 'manual';
@@ -2569,27 +2583,32 @@
         }
     </script>
 
-        <!-- ── STICKY BOTTOM AD ──────────────────────────────────────── -->
+        <!-- ── ANUNCIO MÓVIL: sticky 320×50 ──────────────────────── -->
     <div class="ad-sticky" id="adSticky">
-        <!-- Desktop: 728×90 -->
-        <div class="ad-desktop">
+        <script>
+            atOptions = {'key':'8bdbee11f503acfed33a88b2d11c1b85',
+                'format':'iframe','height':50,'width':320,'params':{}};
+        </script>
+        <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
+    </div>
+
+    <!-- ── ANUNCIO DESKTOP MEDIO: sticky 728×90 ───────────────── -->
+    <div class="ad-sticky-desktop" id="adStickyDesktop">
+        <script>
+            atOptions = {'key':'32aec08a08ffa4d25e58ce3accf85073',
+                'format':'iframe','height':90,'width':728,'params':{}};
+        </script>
+        <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
+    </div>
+
+    <!-- ── ANUNCIO DESKTOP ANCHO: sidebar 728×90 rotado ──────── -->
+    <div class="ad-sidebar" id="adSidebar">
+        <div class="ad-rotated">
             <script>
-                atOptions = {
-                    'key'   : '32aec08a08ffa4d25e58ce3accf85073',
-                    'format': 'iframe', 'height': 90, 'width': 728, 'params': {}
-                };
+                atOptions = {'key':'32aec08a08ffa4d25e58ce3accf85073',
+                    'format':'iframe','height':90,'width':728,'params':{}};
             </script>
             <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
-        </div>
-        <!-- Móvil: 320×50 -->
-        <div class="ad-mobile">
-            <script>
-                atOptions = {
-                    'key'   : '8bdbee11f503acfed33a88b2d11c1b85',
-                    'format': 'iframe', 'height': 50, 'width': 320, 'params': {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
         </div>
     </div>
 
@@ -2866,75 +2885,68 @@
         })();
     </script>
     <script>
-        /* ── Sticky Ad: ocultar con teclado + refresh + fallback si no hay anuncio ── */
+        /* ── Ads manager ─────────────────────────────────────────── */
         (function () {
-            var sticky = document.getElementById('adSticky');
-            if (!sticky) return;
+            var sticky   = document.getElementById('adSticky');
+            var stickyD  = document.getElementById('adStickyDesktop');
+            var sidebar  = document.getElementById('adSidebar');
 
-            /* ── 1. Ocultar sticky cuando el teclado virtual abre ──────────
-               En móvil, al enfocar un input el viewport se reduce.
-               Detectamos eso comparando la altura del window. */
-            var initialHeight = window.innerHeight;
-            window.addEventListener('resize', function () {
-                if (!sticky) return;
-                var diff = initialHeight - window.innerHeight;
-                if (diff > 150) {
-                    sticky.classList.add('keyboard-open');    /* teclado abierto */
-                } else {
-                    sticky.classList.remove('keyboard-open'); /* teclado cerrado */
-                }
-            });
-
-            /* ── 2. Ocultar si no carga ningún anuncio en 5s ─────────────── */
-            function watchStickyAd() {
-                setTimeout(function () {
-                    var hasIframe = sticky.querySelector('iframe');
-                    if (!hasIframe) {
-                        sticky.classList.add('no-ad');
-                        document.body.style.paddingBottom = '0';
+            /* ── Ocultar si no carga en 5s ─────────────────────────── */
+            setTimeout(function () {
+                [sticky, stickyD, sidebar].forEach(function (el) {
+                    if (el && !el.querySelector('iframe')) {
+                        el.classList.add('no-ad');
+                        /* Si el sticky estaba dando espacio, quitarlo */
+                        if (el === sticky || el === stickyD) {
+                            document.body.style.paddingBottom = '0';
+                        }
                     }
-                }, 5000);
+                });
+            }, 5000);
+
+            /* ── Ocultar sticky móvil cuando teclado está abierto ───── */
+            if (sticky) {
+                document.querySelectorAll('input, select').forEach(function (el) {
+                    el.addEventListener('focus', function () {
+                        sticky.classList.add('keyboard-open');
+                    });
+                    el.addEventListener('blur', function () {
+                        setTimeout(function () {
+                            sticky.classList.remove('keyboard-open');
+                        }, 300);
+                    });
+                });
             }
-            watchStickyAd();
 
-            /* ── 3. Refresh de anuncio ────────────────────────────────────── */
+            /* ── Refresh del sticky móvil ───────────────────────────── */
             var lastInteraction = Date.now();
-            var MIN_INTERVAL    = 30000;
             var lastRefresh     = 0;
+            var MIN_INTERVAL    = 30000;
+            var AD_KEY_M = '8bdbee11f503acfed33a88b2d11c1b85';
+            var AD_SRC_M = 'https://www.highperformanceformat.com/' + AD_KEY_M + '/invoke.js';
 
-            var isMobile = window.innerWidth <= 768;
-            var AD_KEY   = isMobile ? '8bdbee11f503acfed33a88b2d11c1b85'
-                                    : '32aec08a08ffa4d25e58ce3accf85073';
-            var AD_H     = isMobile ? 50  : 90;
-            var AD_W     = isMobile ? 320 : 728;
-            var AD_SRC   = 'https://www.highperformanceformat.com/' + AD_KEY + '/invoke.js';
-
-            ['click', 'touchstart', 'keydown', 'scroll'].forEach(function (ev) {
+            ['click','touchstart','keydown','scroll'].forEach(function (ev) {
                 window.addEventListener(ev, function () {
                     lastInteraction = Date.now();
                 }, { passive: true });
             });
 
-            function refreshStickyAd() {
+            function refreshMobileAd() {
+                if (!sticky) return;
                 var now = Date.now();
                 if (now - lastRefresh < MIN_INTERVAL) return;
                 if (now - lastInteraction > 60000) return;
 
                 sticky.innerHTML = '';
-
-                var cfgScript = document.createElement('script');
-                cfgScript.text = "atOptions={key:'" + AD_KEY + "'," +
-                    "format:'iframe',height:" + AD_H + ",width:" + AD_W + ",params:{}};";
-                sticky.appendChild(cfgScript);
-
-                var adScript = document.createElement('script');
-                adScript.src = AD_SRC;
-                adScript.async = true;
-                sticky.appendChild(adScript);
-
+                var cfg = document.createElement('script');
+                cfg.text = "atOptions={'key':'" + AD_KEY_M +
+                    "','format':'iframe','height':50,'width':320,'params':{}};";
+                sticky.appendChild(cfg);
+                var s = document.createElement('script');
+                s.src = AD_SRC_M; s.async = true;
+                sticky.appendChild(s);
                 lastRefresh = Date.now();
 
-                /* Re-verificar si el anuncio cargó tras el refresh */
                 setTimeout(function () {
                     if (!sticky.querySelector('iframe')) {
                         sticky.classList.add('no-ad');
@@ -2945,8 +2957,8 @@
                 }, 4000);
             }
 
-            window._refreshAd = function () { refreshStickyAd(); };
-            setInterval(function () { refreshStickyAd(); }, 60000);
+            window._refreshAd = function () { refreshMobileAd(); };
+            setInterval(function () { refreshMobileAd(); }, 60000);
         })();
     </script>
 </body>
