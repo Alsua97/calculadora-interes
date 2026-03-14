@@ -211,7 +211,10 @@
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             border-bottom: 1px solid var(--border);
-            transition: background .3s;
+            transition: background .3s, transform .3s cubic-bezier(.22,1,.36,1);
+        }
+        .site-header.header-hidden {
+            transform: translateY(-100%);
         }
 
         [data-theme="light"] .site-header {
@@ -2810,66 +2813,87 @@
     <script>
         (function () {
             var deferredPrompt = null;
-            var banner = document.getElementById('pwaInstallBanner');
+                        var banner     = document.getElementById('pwaInstallBanner');
             var installBtn = document.getElementById('pwaInstallBtn');
             var dismissBtn = document.getElementById('pwaInstallDismiss');
 
-            /* No mostrar si ya está instalada */
+            /* No mostrar si ya está instalada como PWA */
             if (window.matchMedia('(display-mode: standalone)').matches) return;
             if (localStorage.getItem('pwaInstallDismissed')) return;
 
-            /* Captura el evento beforeinstallprompt (Chrome/Android) */
+            var deferredPrompt = null;
+
+            /* Chrome/Android: capturar evento de instalación */
             window.addEventListener('beforeinstallprompt', function (e) {
                 e.preventDefault();
                 deferredPrompt = e;
-                /* Guardar el evento — el banner aparece tras el primer cálculo */
                 window._pwaPromptReady = true;
             });
 
-            /* Se llama desde calculate() — muestra el banner en el momento justo */
+            /* Mostrar banner tras el primer cálculo exitoso */
             window._showPwaAfterCalc = function () {
                 if (!banner || banner.style.display === 'block') return;
                 if (localStorage.getItem('pwaInstallDismissed')) return;
                 if (window.matchMedia('(display-mode: standalone)').matches) return;
-                if (window._pwaPromptReady || /iphone|ipad|ipod/i.test(navigator.userAgent)) {
+                /* Mostrar si: prompt listo, iOS, o navegador con SW y HTTPS */
+                var canShow = window._pwaPromptReady
+                    || /iphone|ipad|ipod/i.test(navigator.userAgent)
+                    || ('serviceWorker' in navigator && location.protocol === 'https:');
+                if (canShow) {
                     setTimeout(function () { banner.style.display = 'block'; }, 1200);
                 }
             };
 
-            /* Un clic — lanza el diálogo nativo de instalación */
+            /* Botón instalar */
             installBtn.addEventListener('click', function () {
                 banner.style.display = 'none';
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(function (result) {
-                        deferredPrompt = null;
-                    });
+                    deferredPrompt.userChoice.then(function () { deferredPrompt = null; });
                 }
             });
 
+            /* Botón descartar */
             dismissBtn.addEventListener('click', function () {
                 banner.style.display = 'none';
-                /* Recordar que lo rechazó para no molestar de nuevo */
                 localStorage.setItem('pwaInstallDismissed', '1');
             });
 
-            /* En iOS (Safari) no hay beforeinstallprompt —
-               mostrar igual con instrucción de "Añadir a inicio" */
+            /* iOS Safari: no hay beforeinstallprompt */
             var isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
-            var isInStandalone = window.navigator.standalone;
-            if (isIos && !isInStandalone) {
+            if (isIos && !window.navigator.standalone) {
                 installBtn.textContent = 'Cómo instalar';
                 installBtn.addEventListener('click', function () {
                     banner.style.display = 'none';
                     alert("En Safari: toca el botón Compartir ↑ → 'Añadir a pantalla de inicio' → 'Añadir'");
                 }, { once: true });
-            }, { once: true });
-                    banner.style.display = 'block';
-                }, 4000);
             }
         })();
     </script>
 
+    <script>
+        /* ── Header hide-on-scroll / show-on-scroll-up ── */
+        (function () {
+            var header = document.querySelector('.site-header');
+            var lastY  = 0;
+            var ticking = false;
+            window.addEventListener('scroll', function () {
+                if (!ticking) {
+                    requestAnimationFrame(function () {
+                        var y = window.scrollY;
+                        if (y > lastY && y > 80) {
+                            header.classList.add('header-hidden');    // bajando
+                        } else {
+                            header.classList.remove('header-hidden'); // subiendo
+                        }
+                        lastY = y;
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+        })();
+    </script>
 </body>
 
 </html>
