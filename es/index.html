@@ -2825,17 +2825,20 @@
     </script>
     <script>
         /* ── Ad Refresh — sticky banner ───────────────────────────────
-           Refresca el anuncio cuando el usuario calcula (máxima atención)
-           y cada 60s si ha interactuado en los últimos 30s
+           Refresca creando los scripts dinámicamente (innerHTML no ejecuta JS)
+           - Al calcular: refresh inmediato (usuario con máxima atención)
+           - Cada 60s automático si el usuario ha interactuado recientemente
         ─────────────────────────────────────────────────────────────── */
         (function () {
             var lastInteraction = Date.now();
-            var refreshCount    = 0;
-            var MIN_INTERVAL    = 30000;   /* mínimo 30s entre refreshes */
+            var MIN_INTERVAL    = 30000;  /* mínimo 30s entre refreshes */
             var lastRefresh     = 0;
 
-            /* Registrar actividad del usuario */
-            ['click','touchstart','keydown','scroll'].forEach(function (ev) {
+            var AD_KEY    = '8bdbee11f503acfed33a88b2d11c1b85';
+            var AD_SRC    = 'https://www.highperformanceformat.com/' + AD_KEY + '/invoke.js';
+
+            /* Registrar actividad */
+            ['click', 'touchstart', 'keydown', 'scroll'].forEach(function (ev) {
                 window.addEventListener(ev, function () {
                     lastInteraction = Date.now();
                 }, { passive: true });
@@ -2843,28 +2846,36 @@
 
             function refreshStickyAd() {
                 var now = Date.now();
-                if (now - lastRefresh < MIN_INTERVAL) return;   /* demasiado pronto */
-                if (now - lastInteraction > 60000) return;      /* usuario inactivo */
+                if (now - lastRefresh < MIN_INTERVAL) return;  /* demasiado pronto */
+                if (now - lastInteraction > 60000) return;     /* usuario inactivo */
 
                 var container = document.getElementById('adSticky');
                 if (!container) return;
 
-                /* Recrear el contenedor para forzar nuevo anuncio */
-                var inner = container.innerHTML;
+                /* Vaciar el contenedor */
                 container.innerHTML = '';
-                setTimeout(function () {
-                    container.innerHTML = inner;
-                    refreshCount++;
-                    lastRefresh = Date.now();
-                }, 100);
+
+                /* Crear atOptions y script dinámicamente — única forma
+                   de que el navegador los ejecute al insertarlos */
+                var cfgScript = document.createElement('script');
+                cfgScript.text = "atOptions = { 'key': '" + AD_KEY + "', " +
+                    "'format': 'iframe', 'height': 50, 'width': 320, 'params': {} };";
+                container.appendChild(cfgScript);
+
+                var adScript = document.createElement('script');
+                adScript.src = AD_SRC;
+                adScript.async = true;
+                container.appendChild(adScript);
+
+                lastRefresh = Date.now();
             }
 
-            /* Refrescar al calcular — llamar desde calculate() */
+            /* Llamado desde calculate() */
             window._refreshAd = function () {
                 refreshStickyAd();
             };
 
-            /* Refrescar cada 60s automáticamente si hay actividad */
+            /* Refresh automático cada 60s */
             setInterval(function () {
                 refreshStickyAd();
             }, 60000);
