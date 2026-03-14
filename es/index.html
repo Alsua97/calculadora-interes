@@ -2414,6 +2414,7 @@
 
                 /* Mostrar banner PWA tras primer cálculo */
                 if (typeof window._showPwaAfterCalc === 'function') window._showPwaAfterCalc();
+                if (typeof window._refreshAd === 'function') window._refreshAd();
 
                 /* ── Draw chart ── */
                 setTimeout(function () { drawChart(labels, totalArr, investArr); }, 50);
@@ -2797,9 +2798,9 @@
     <div id="pwaInstallBanner" style="
         display: none;
         position: fixed;
-        bottom: 0; left: 0; right: 0;
+        bottom: 58px; left: 0; right: 0;
         z-index: 9999;
-        padding: 0 16px 16px;
+        padding: 0 16px 8px;
         pointer-events: none;
     ">
         <div style="
@@ -2886,14 +2887,25 @@
                 if (canShow) setTimeout(function () { banner.style.display = 'block'; }, 1200);
             };
 
-            /* Un clic — lanza el diálogo nativo de instalación */
+            /* Un clic — lanza el diálogo nativo o da instrucciones */
             installBtn.addEventListener('click', function () {
                 banner.style.display = 'none';
                 if (deferredPrompt) {
+                    /* Chrome/Android: lanzar diálogo nativo */
                     deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(function (result) {
+                    deferredPrompt.userChoice.then(function () {
                         deferredPrompt = null;
                     });
+                } else {
+                    /* Sin diálogo nativo: dar instrucciones según navegador */
+                    var ua = navigator.userAgent;
+                    if (/iphone|ipad|ipod/i.test(ua)) {
+                        alert("En Safari: toca el botón Compartir ↑ → 'Añadir a pantalla de inicio' → 'Añadir'");
+                    } else if (/android/i.test(ua)) {
+                        alert("En Chrome: toca el menú ⋮ → 'Añadir a pantalla de inicio' → 'Instalar'");
+                    } else {
+                        alert("En Chrome: busca el ícono ➕ en la barra de dirección, o ve al menú → 'Instalar aplicación'");
+                    }
                 }
             });
 
@@ -2937,6 +2949,53 @@
                     ticking = true;
                 }
             }, { passive: true });
+        })();
+    </script>
+    <script>
+        /* ── Ad Refresh — sticky banner ───────────────────────────────
+           Refresca el anuncio cuando el usuario calcula (máxima atención)
+           y cada 60s si ha interactuado en los últimos 30s
+        ─────────────────────────────────────────────────────────────── */
+        (function () {
+            var lastInteraction = Date.now();
+            var refreshCount    = 0;
+            var MIN_INTERVAL    = 30000;   /* mínimo 30s entre refreshes */
+            var lastRefresh     = 0;
+
+            /* Registrar actividad del usuario */
+            ['click','touchstart','keydown','scroll'].forEach(function (ev) {
+                window.addEventListener(ev, function () {
+                    lastInteraction = Date.now();
+                }, { passive: true });
+            });
+
+            function refreshStickyAd() {
+                var now = Date.now();
+                if (now - lastRefresh < MIN_INTERVAL) return;   /* demasiado pronto */
+                if (now - lastInteraction > 60000) return;      /* usuario inactivo */
+
+                var container = document.getElementById('adSticky');
+                if (!container) return;
+
+                /* Recrear el contenedor para forzar nuevo anuncio */
+                var inner = container.innerHTML;
+                container.innerHTML = '';
+                setTimeout(function () {
+                    container.innerHTML = inner;
+                    refreshCount++;
+                    lastRefresh = Date.now();
+                }, 100);
+            }
+
+            /* Refrescar al calcular — llamar desde calculate() */
+            window._refreshAd = function () {
+                refreshStickyAd();
+            };
+
+            /* Refrescar cada 60s automáticamente si hay actividad */
+            setInterval(function () {
+                refreshStickyAd();
+            }, 60000);
         })();
     </script>
 </body>
