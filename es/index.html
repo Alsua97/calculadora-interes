@@ -1451,9 +1451,9 @@
 
         /* ad-sticky only */
 
-        /* ── STICKY BOTTOM AD (móvil) ─────────────────────────────── */
+        /* ── STICKY BOTTOM AD ────────────────────────────────────── */
         .ad-sticky {
-            display: none;               /* solo móvil */
+            display: flex;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -1465,22 +1465,16 @@
             border-top: 1px solid var(--border);
             align-items: center;
             justify-content: center;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
-        /* En el navegador: padding para no tapar controles iOS/Android */
-        .ad-sticky { padding-bottom: env(safe-area-inset-bottom, 0px); }
-
-        /* En PWA standalone: sin padding, pegado al fondo */
+        /* PWA standalone: sin padding extra */
         @media (display-mode: standalone) {
             .ad-sticky { padding-bottom: 0; }
         }
-
-        @media (max-width: 768px) {
-            .ad-sticky { display: flex; }
-            /* Espacio para que el contenido no quede tapado */
-            body { padding-bottom: 60px; }
-            @media (display-mode: standalone) {
-                body { padding-bottom: 50px; }
-            }
+        /* Espacio para que el contenido no quede tapado en todos los dispositivos */
+        body { padding-bottom: 58px; }
+        @media (display-mode: standalone) {
+            body { padding-bottom: 50px; }
         }
     </style>
     <script>
@@ -2748,9 +2742,9 @@
 
             /* Captura el evento beforeinstallprompt (Chrome/Android) */
             window.addEventListener('beforeinstallprompt', function (e) {
-                e.preventDefault();
+                /* NO llamar e.preventDefault() — así Chrome mantiene el ícono + en
+                   la barra del navegador. Guardamos el prompt para nuestro banner. */
                 deferredPrompt = e;
-                /* Guardar el evento — el banner aparece tras el primer cálculo */
                 window._pwaPromptReady = true;
             });
 
