@@ -47,8 +47,8 @@
           href="https://alsua97.github.io/assets/icons/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16"
           href="https://alsua97.github.io/assets/icons/favicon-16.png">
-    <link rel="apple-touch-icon" sizes="180x180"
-          href="https://alsua97.github.io/assets/icons/favicon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192"
+          href="https://alsua97.github.io/calculadora-interes/icon-192.png">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Calculadora IC" />
@@ -1449,37 +1449,7 @@
             opacity: .8;
         }
 
-        /* AD zones: hidden until loaded */
-        .ad-top,
-        .ad-mid,
-        .ad-footer {
-            min-height: 0;
-            padding: 0;
-            transition: all .3s;
-        }
-
-        .ad-top.loaded,
-        .ad-footer.loaded {
-            min-height: 70px;
-            padding: 10px 0;
-        }
-
-        .ad-mid.loaded {
-            min-height: 90px;
-            padding: 12px 0;
-        }
-
-        .ad-top:not(.loaded) .ad-label,
-        .ad-mid:not(.loaded) .ad-label,
-        .ad-footer:not(.loaded) .ad-label {
-            display: none;
-        }
-
-        .ad-top:not(.loaded) .ad-placeholder,
-        .ad-mid:not(.loaded) .ad-placeholder,
-        .ad-footer:not(.loaded) .ad-placeholder {
-            display: none;
-        }
+        /* ad-sticky only */
 
         /* ── STICKY BOTTOM AD (móvil) ─────────────────────────────── */
         .ad-sticky {
@@ -1554,39 +1524,6 @@
                 </svg></button>
         </div>
     </header>
-
-    <!-- ============================================================
-     AD TOP — Banner superior
-     ============================================================ -->
-    <div class="ad-top ad-zone" id="adTop">
-        <span class="ad-label">Publicidad</span>
-        <!-- AdsTerra banner 728×90 desktop -->
-        <div class="ad-desktop">
-            <script>
-                atOptions = {
-                    'key' : '32aec08a08ffa4d25e58ce3accf85073',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
-        </div>
-        <!-- AdsTerra banner 320×50 móvil -->
-        <div class="ad-mobile">
-            <script>
-                atOptions = {
-                    'key' : '8bdbee11f503acfed33a88b2d11c1b85',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
-        </div>
-    </div>
 
     <!-- ============================================================
      MAIN CONTENT
@@ -1784,33 +1721,6 @@
                 </div>
 
                 <!-- ── AD MID — Después del resultado principal ── -->
-                <div class="ad-mid ad-zone" id="adMid">
-                    <span class="ad-label">Publicidad</span>
-                    <div class="ad-desktop">
-                        <script>
-                            atOptions = {
-                                'key' : '32aec08a08ffa4d25e58ce3accf85073',
-                                'format' : 'iframe',
-                                'height' : 90,
-                                'width' : 728,
-                                'params' : {}
-                            };
-                        </script>
-                        <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
-                    </div>
-                    <div class="ad-mobile">
-                        <script>
-                            atOptions = {
-                                'key' : '8bdbee11f503acfed33a88b2d11c1b85',
-                                'format' : 'iframe',
-                                'height' : 50,
-                                'width' : 320,
-                                'params' : {}
-                            };
-                        </script>
-                        <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
-                    </div>
-                </div>
 
                 <!-- Tabla de amortización -->
                 <div class="table-section card">
@@ -2057,35 +1967,6 @@
     <!-- ============================================================
      AD FOOTER — Banner al final de página
      ============================================================ -->
-    <div class="ad-footer ad-zone" id="adFooter">
-        <span class="ad-label">Publicidad</span>
-        <!-- AdsTerra banner 728×90 desktop -->
-        <div class="ad-desktop">
-            <script>
-                atOptions = {
-                    'key' : '32aec08a08ffa4d25e58ce3accf85073',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
-        </div>
-        <!-- AdsTerra banner 320×50 móvil -->
-        <div class="ad-mobile">
-            <script>
-                atOptions = {
-                    'key' : '8bdbee11f503acfed33a88b2d11c1b85',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
-        </div>
-    </div>
 
     <!-- ============================================================
      FOOTER
@@ -2651,9 +2532,6 @@
                 syncSliders();
                 bindEnter();
                 bindResize();
-                watchAd('adTop');
-                watchAd('adMid');
-                watchAd('adFooter');
                 calcular();
             });
 
