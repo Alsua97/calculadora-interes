@@ -6,8 +6,8 @@
   ════════════════════════════════════════════════════════
 */
 
-const CACHE_NAME = 'calculadora-interes-v1';
-const CACHE_STATIC = 'calculadora-static-v1';
+const CACHE_NAME = 'calculadora-interes-v2';
+const CACHE_STATIC = 'calculadora-static-v2';
 
 /* Archivos a cachear en la instalación */
 const PRECACHE_URLS = [
@@ -61,6 +61,12 @@ self.addEventListener('fetch', function (event) {
   var url = new URL(request.url);
 
   /* Solo manejar peticiones al mismo origen */
+  /* Dejar pasar siempre las redes de anuncios sin interferir */
+  var adDomains = ['highperformanceformat.com', 'effectivegatecpm.com',
+                   'adsterra.com', 'a-ads.com', 'googlesyndication.com'];
+  for (var i = 0; i < adDomains.length; i++) {
+    if (url.hostname.indexOf(adDomains[i]) !== -1) return;
+  }
   if (url.origin !== location.origin) return;
 
   /* Solo GET */
