@@ -9,16 +9,20 @@
   "background_color": "#08080f",
   "theme_color": "#6366f1",
   "lang": "es",
-  "categories": ["finance", "utilities", "productivity"],
+  "categories": [
+    "finance",
+    "utilities",
+    "productivity"
+  ],
   "icons": [
     {
-      "src": "/calculadora-interes/icons/icon-192.png",
+      "src": "/calculadora-interes/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/calculadora-interes/icons/icon-512.png",
+      "src": "/calculadora-interes/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -26,14 +30,14 @@
   ],
   "screenshots": [
     {
-      "src": "/calculadora-interes/icons/screenshot-mobile.png",
+      "src": "/calculadora-interes/screenshot-mobile.png",
       "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Calculadora de Interés Compuesto en móvil"
     },
     {
-      "src": "/calculadora-interes/icons/screenshot-desktop.png",
+      "src": "/calculadora-interes/screenshot-desktop.png",
       "sizes": "1280x800",
       "type": "image/png",
       "form_factor": "wide",
