@@ -1515,7 +1515,33 @@
         .ad-sticky.no-ad         { display: none !important; }
         .ad-sticky.keyboard-open { display: none !important; }
 
-            </style>
+        
+        /* ── Formulario 2 columnas compacto ────────────────────── */
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 0;
+        }
+        .form-row-2 .form-group {
+            margin-bottom: 12px;
+        }
+        .form-row-2 label {
+            font-size: .72rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .form-row-2 input[type="number"],
+        .form-row-2 select {
+            height: 40px;
+            font-size: .88rem;
+        }
+        /* En móvil vuelven a una columna */
+        @media (max-width: 480px) {
+            .form-row-2 { grid-template-columns: 1fr; }
+        }
+    </style>
     <script>
         /* Evita que el navegador restaure la posición del último scroll */
         if (history.scrollRestoration) history.scrollRestoration = 'manual';
@@ -1590,8 +1616,9 @@
 
                 <!-- Panel izquierdo: parámetros -->
                 <div class="card">
-                    <h2 class="mb-4" style="margin-bottom:22px;">Parámetros</h2>
+                    <h2 class="mb-4" style="margin-bottom:16px;">Parámetros</h2>
 
+                    <!-- Fila 1: Capital inicial (completo) -->
                     <div class="form-group">
                         <label>Capital inicial <span class="tip">(inversión de partida)</span></label>
                         <div class="input-wrap">
@@ -1601,74 +1628,72 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Aportación periódica <span class="tip">(opcional)</span></label>
-                        <div class="input-wrap">
-                            <span class="input-prefix">$</span>
-                            <input type="number" id="contribution" class="has-prefix" min="0" step="10" value="200"
-                                aria-label="Aportación periódica">
+                    <!-- Fila 2: Aportación + Frecuencia -->
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Aportación <span class="tip">(opcional)</span></label>
+                            <div class="input-wrap">
+                                <span class="input-prefix">$</span>
+                                <input type="number" id="contribution" class="has-prefix" min="0" step="10" value="200"
+                                    aria-label="Aportación periódica">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Frecuencia</label>
+                            <select id="contribFreq" aria-label="Frecuencia de aportación">
+                                <option value="12">Mensual</option>
+                                <option value="4">Trimestral</option>
+                                <option value="2">Semestral</option>
+                                <option value="1">Anual</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Frecuencia de aportación</label>
-                        <select id="contribFreq" aria-label="Frecuencia de aportación">
-                            <option value="12">Mensual</option>
-                            <option value="4">Trimestral</option>
-                            <option value="2">Semestral</option>
-                            <option value="1">Anual</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Tasa de interés anual</label>
-                        <div class="slider-wrap">
-                            <input type="range" id="rateSlider" min="0.1" max="30" step="0.1" value="7"
-                                aria-label="Deslizador tasa de interés">
-                            <div class="input-wrap" style="width:90px;flex-shrink:0;">
+                    <!-- Fila 3: Tasa de interés + Capitalización -->
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Tasa anual</label>
+                            <div class="input-wrap">
                                 <input type="number" id="rate" class="has-suffix" min="0.01" max="100" step="0.1"
                                     value="7" style="text-align:right;" aria-label="Tasa de interés anual">
                                 <span class="input-suffix">%</span>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>Capitalización</label>
+                            <select id="compFreq" aria-label="Frecuencia de capitalización">
+                                <option value="12">Mensual</option>
+                                <option value="4">Trimestral</option>
+                                <option value="2">Semestral</option>
+                                <option value="1">Anual</option>
+                                <option value="365">Diaria</option>
+                                <option value="0">Continua</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Capitalización</label>
-                        <select id="compFreq" aria-label="Frecuencia de capitalización">
-                            <option value="12">Mensual (12×/año)</option>
-                            <option value="4">Trimestral (4×/año)</option>
-                            <option value="2">Semestral (2×/año)</option>
-                            <option value="1">Anual (1×/año)</option>
-                            <option value="365">Diaria (365×/año)</option>
-                            <option value="0">Continua (e^rt)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Período de inversión</label>
-                        <div class="slider-wrap">
-                            <input type="range" id="yearsSlider" min="1" max="50" step="1" value="20"
-                                aria-label="Deslizador años">
-                            <div class="input-wrap" style="width:90px;flex-shrink:0;">
-                                <input type="number" id="years" class="has-suffix has-suffix-wide" min="1" max="100"
+                    <!-- Fila 4: Período + Inflación -->
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Período</label>
+                            <div class="input-wrap">
+                                <input type="number" id="years" class="has-suffix" min="1" max="100"
                                     step="1" value="20" style="text-align:right;" aria-label="Años de inversión">
                                 <span class="input-suffix">años</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Inflación anual estimada <span class="tip">(para valor real)</span></label>
-                        <div class="input-wrap">
-                            <input type="number" id="inflation" class="has-suffix" min="0" max="30" step="0.1" value="3"
-                                style="text-align:right;" aria-label="Inflación anual">
-                            <span class="input-suffix">%</span>
+                        <div class="form-group">
+                            <label>Inflación anual</label>
+                            <div class="input-wrap">
+                                <input type="number" id="inflation" class="has-suffix" min="0" max="30" step="0.1"
+                                    value="3" style="text-align:right;" aria-label="Inflación anual">
+                                <span class="input-suffix">%</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="btn-row" style="margin-top:20px;">
-                        <button class="btn btn-primary" id="calcBtn" onclick="calcular()"><svg width="15" height="15"
+                    <div class="btn-row" style="margin-top:16px;">
+                        <button class="btn btn-primary btn-block" id="calcBtn" onclick="calcular()"><svg width="15" height="15"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="4" y="2" width="16" height="20" rx="2" />
@@ -2547,28 +2572,8 @@
                 setTimeout(function () { obs.disconnect(); }, 4000);
             }
 
-            /* ── Slider sync ────────────────────────────────────────── */
-            function syncSliders() {
-                var rateSlider = document.getElementById('rateSlider');
-                var rateInput = document.getElementById('rate');
-                var yearsSlider = document.getElementById('yearsSlider');
-                var yearsInput = document.getElementById('years');
-
-                rateSlider.addEventListener('input', function () {
-                    rateInput.value = this.value;
-                });
-                rateInput.addEventListener('input', function () {
-                    var v = Math.min(Math.max(parseFloat(this.value) || 0, 0.1), 30);
-                    rateSlider.value = v;
-                });
-                yearsSlider.addEventListener('input', function () {
-                    yearsInput.value = this.value;
-                });
-                yearsInput.addEventListener('input', function () {
-                    var v = Math.min(Math.max(parseInt(this.value) || 1, 1), 50);
-                    yearsSlider.value = v;
-                });
-            }
+            /* Sliders eliminados — función vacía por compatibilidad */
+            function syncSliders() {}
 
             /* ── Keyboard enter → calculate ────────────────────────── */
             function bindEnter() {
