@@ -1451,9 +1451,29 @@
 
         /* ad-sticky only */
 
-        /* ── ANUNCIOS: sticky móvil + sidebar desktop ─────────────── */
+        /* ── ANUNCIOS ────────────────────────────────────────────── */
 
-        /* Móvil: sticky fijo abajo */
+        /* Zonas top/mid/footer: ocultas hasta que cargue el anuncio */
+        .ad-zone { width:100%; display:flex; flex-direction:column;
+                   align-items:center; min-height:0; padding:0; transition:all .3s; }
+        .ad-zone.loaded       { padding:10px 0; }
+        .ad-zone .ad-label    { font-size:.68rem; color:var(--text-hint);
+                                text-transform:uppercase; letter-spacing:.08em;
+                                margin-bottom:6px; display:none; }
+        .ad-zone.loaded .ad-label { display:block; }
+        .ad-desktop { display:flex; }
+        .ad-mobile  { display:none; }
+        @media (max-width:768px) {
+            .ad-desktop { display:none; }
+            .ad-mobile  { display:flex; }
+        }
+
+        /* En standalone: ocultar los 3 banners del navegador */
+        @media (display-mode: standalone) {
+            .ad-zone { display:none !important; }
+        }
+
+        /* Sticky: solo en PWA standalone móvil */
         .ad-sticky {
             display: none;
             position: fixed;
@@ -1468,59 +1488,17 @@
             -webkit-transform: translateZ(0);
             transform: translateZ(0);
         }
-        @media (max-width: 768px) {
+        /* Solo mostrar sticky en PWA standalone */
+        @media (display-mode: standalone) {
             .ad-sticky { display: flex; }
             body { padding-bottom: 58px; }
         }
-        @media (display-mode: standalone) {
-            .ad-sticky { padding-bottom: 0; }
-            body { padding-bottom: 50px; }
-        }
-        .ad-sticky.no-ad, .ad-sticky.keyboard-open {
-            display: none !important;
-        }
-
-        /* Desktop medio: sticky abajo 728×90 */
-        .ad-sticky-desktop {
-            display: none;
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            z-index: 200;
-            height: 90px;
-            background: var(--bg);
-            border-top: 1px solid var(--border);
-            align-items: center;
-            justify-content: center;
-        }
-        @media (min-width: 769px) and (max-width: 1459px) {
-            .ad-sticky-desktop { display: flex; }
-            body { padding-bottom: 98px; }
-        }
-        .ad-sticky-desktop.no-ad { display: none !important; }
-
-        /* Desktop ancho: sidebar flotante a la derecha del contenedor */
-        .ad-sidebar {
-            display: none;
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            /* Justo a la derecha del container de 1100px centrado */
-            left: calc(50% + 570px);
-            width: 90px;
-            z-index: 150;
-        }
-        /* Rotar el banner 728×90 → aparece como 90×728 vertical */
-        .ad-sidebar .ad-rotated {
-            transform-origin: top left;
-            transform: rotate(90deg) translateY(-90px);
-            width: 728px;
-            height: 90px;
-        }
-        @media (min-width: 1460px) {
-            .ad-sidebar { display: block; }
+        @media (display-mode: standalone) and (min-width: 769px) {
+            .ad-sticky { display: none; }
             body { padding-bottom: 0; }
         }
-        .ad-sidebar.no-ad { display: none !important; }
+        .ad-sticky.no-ad      { display: none !important; }
+        .ad-sticky.keyboard-open { display: none !important; }
 
             </style>
     <script>
@@ -1760,7 +1738,18 @@
                     </div>
                 </div>
 
-                <!-- ── AD MID — Después del resultado principal ── -->
+                <!-- ── AD MID ──────────────────────────────────────────────── -->
+                <div class="ad-zone" id="adMid">
+                    <span class="ad-label">Publicidad</span>
+                    <div class="ad-desktop">
+                        <script>atOptions={'key':'32aec08a08ffa4d25e58ce3accf85073','format':'iframe','height':90,'width':728,'params':{}};</script>
+                        <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
+                    </div>
+                    <div class="ad-mobile">
+                        <script>atOptions={'key':'8bdbee11f503acfed33a88b2d11c1b85','format':'iframe','height':50,'width':320,'params':{}};</script>
+                        <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
+                    </div>
+                </div>
 
                 <!-- Tabla de amortización -->
                 <div class="table-section card">
@@ -2007,6 +1996,19 @@
     <!-- ============================================================
      AD FOOTER — Banner al final de página
      ============================================================ -->
+
+    <!-- ── AD FOOTER ──────────────────────────────────────────── -->
+    <div class="ad-zone" id="adFooter">
+        <span class="ad-label">Publicidad</span>
+        <div class="ad-desktop">
+            <script>atOptions={'key':'32aec08a08ffa4d25e58ce3accf85073','format':'iframe','height':90,'width':728,'params':{}};</script>
+            <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
+        </div>
+        <div class="ad-mobile">
+            <script>atOptions={'key':'8bdbee11f503acfed33a88b2d11c1b85','format':'iframe','height':50,'width':320,'params':{}};</script>
+            <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
+        </div>
+    </div>
 
     <!-- ============================================================
      FOOTER
@@ -2583,33 +2585,23 @@
         }
     </script>
 
-        <!-- ── ANUNCIO MÓVIL: sticky 320×50 ──────────────────────── -->
-    <div class="ad-sticky" id="adSticky">
-        <script>
-            atOptions = {'key':'8bdbee11f503acfed33a88b2d11c1b85',
-                'format':'iframe','height':50,'width':320,'params':{}};
-        </script>
-        <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
-    </div>
-
-    <!-- ── ANUNCIO DESKTOP MEDIO: sticky 728×90 ───────────────── -->
-    <div class="ad-sticky-desktop" id="adStickyDesktop">
-        <script>
-            atOptions = {'key':'32aec08a08ffa4d25e58ce3accf85073',
-                'format':'iframe','height':90,'width':728,'params':{}};
-        </script>
-        <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
-    </div>
-
-    <!-- ── ANUNCIO DESKTOP ANCHO: sidebar 728×90 rotado ──────── -->
-    <div class="ad-sidebar" id="adSidebar">
-        <div class="ad-rotated">
-            <script>
-                atOptions = {'key':'32aec08a08ffa4d25e58ce3accf85073',
-                    'format':'iframe','height':90,'width':728,'params':{}};
-            </script>
+        <!-- ── ANUNCIO TOP ────────────────────────────────────────── -->
+    <div class="ad-zone" id="adTop">
+        <span class="ad-label">Publicidad</span>
+        <div class="ad-desktop">
+            <script>atOptions={'key':'32aec08a08ffa4d25e58ce3accf85073','format':'iframe','height':90,'width':728,'params':{}};</script>
             <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
         </div>
+        <div class="ad-mobile">
+            <script>atOptions={'key':'8bdbee11f503acfed33a88b2d11c1b85','format':'iframe','height':50,'width':320,'params':{}};</script>
+            <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
+        </div>
+    </div>
+
+    <!-- ── ANUNCIO STICKY (solo PWA móvil) ─────────────────────── -->
+    <div class="ad-sticky" id="adSticky">
+        <script>atOptions={'key':'8bdbee11f503acfed33a88b2d11c1b85','format':'iframe','height':50,'width':320,'params':{}};</script>
+        <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
     </div>
 
     <!-- ── SETTINGS PANEL ─────────────────────────────────── -->
@@ -2887,25 +2879,27 @@
     <script>
         /* ── Ads manager ─────────────────────────────────────────── */
         (function () {
-            var sticky   = document.getElementById('adSticky');
-            var stickyD  = document.getElementById('adStickyDesktop');
-            var sidebar  = document.getElementById('adSidebar');
-
-            /* ── Ocultar si no carga en 5s ─────────────────────────── */
-            setTimeout(function () {
-                [sticky, stickyD, sidebar].forEach(function (el) {
-                    if (el && !el.querySelector('iframe')) {
-                        el.classList.add('no-ad');
-                        /* Si el sticky estaba dando espacio, quitarlo */
-                        if (el === sticky || el === stickyD) {
-                            document.body.style.paddingBottom = '0';
-                        }
+            /* watchAd: añade clase .loaded cuando el iframe aparece */
+            function watchAd(id) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                var obs = new MutationObserver(function () {
+                    if (el.querySelector('iframe')) {
+                        el.classList.add('loaded');
+                        obs.disconnect();
                     }
                 });
-            }, 5000);
+                obs.observe(el, { childList: true, subtree: true });
+                setTimeout(function () { obs.disconnect(); }, 5000);
+            }
+            watchAd('adTop');
+            watchAd('adMid');
+            watchAd('adFooter');
 
-            /* ── Ocultar sticky móvil cuando teclado está abierto ───── */
+            /* Sticky: solo activo en PWA standalone móvil */
+            var sticky = document.getElementById('adSticky');
             if (sticky) {
+                /* Ocultar con teclado */
                 document.querySelectorAll('input, select').forEach(function (el) {
                     el.addEventListener('focus', function () {
                         sticky.classList.add('keyboard-open');
@@ -2916,49 +2910,46 @@
                         }, 300);
                     });
                 });
-            }
 
-            /* ── Refresh del sticky móvil ───────────────────────────── */
-            var lastInteraction = Date.now();
-            var lastRefresh     = 0;
-            var MIN_INTERVAL    = 30000;
-            var AD_KEY_M = '8bdbee11f503acfed33a88b2d11c1b85';
-            var AD_SRC_M = 'https://www.highperformanceformat.com/' + AD_KEY_M + '/invoke.js';
-
-            ['click','touchstart','keydown','scroll'].forEach(function (ev) {
-                window.addEventListener(ev, function () {
-                    lastInteraction = Date.now();
-                }, { passive: true });
-            });
-
-            function refreshMobileAd() {
-                if (!sticky) return;
-                var now = Date.now();
-                if (now - lastRefresh < MIN_INTERVAL) return;
-                if (now - lastInteraction > 60000) return;
-
-                sticky.innerHTML = '';
-                var cfg = document.createElement('script');
-                cfg.text = "atOptions={'key':'" + AD_KEY_M +
-                    "','format':'iframe','height':50,'width':320,'params':{}};";
-                sticky.appendChild(cfg);
-                var s = document.createElement('script');
-                s.src = AD_SRC_M; s.async = true;
-                sticky.appendChild(s);
-                lastRefresh = Date.now();
-
+                /* Ocultar si no carga en 5s */
                 setTimeout(function () {
                     if (!sticky.querySelector('iframe')) {
                         sticky.classList.add('no-ad');
                         document.body.style.paddingBottom = '0';
-                    } else {
-                        sticky.classList.remove('no-ad');
                     }
-                }, 4000);
-            }
+                }, 5000);
 
-            window._refreshAd = function () { refreshMobileAd(); };
-            setInterval(function () { refreshMobileAd(); }, 60000);
+                /* Refresh cada 60s o al calcular */
+                var lastInteraction = Date.now();
+                var lastRefresh = 0;
+                var MIN_INTERVAL = 30000;
+                var AD_KEY = '8bdbee11f503acfed33a88b2d11c1b85';
+                var AD_SRC = 'https://www.highperformanceformat.com/' + AD_KEY + '/invoke.js';
+
+                ['click','touchstart','keydown','scroll'].forEach(function (ev) {
+                    window.addEventListener(ev, function () {
+                        lastInteraction = Date.now();
+                    }, { passive: true });
+                });
+
+                function refreshSticky() {
+                    var now = Date.now();
+                    if (now - lastRefresh < MIN_INTERVAL) return;
+                    if (now - lastInteraction > 60000) return;
+                    sticky.innerHTML = '';
+                    var cfg = document.createElement('script');
+                    cfg.text = "atOptions={'key':'" + AD_KEY +
+                        "','format':'iframe','height':50,'width':320,'params':{}};";
+                    sticky.appendChild(cfg);
+                    var s = document.createElement('script');
+                    s.src = AD_SRC; s.async = true;
+                    sticky.appendChild(s);
+                    lastRefresh = Date.now();
+                }
+
+                window._refreshAd = function () { refreshSticky(); };
+                setInterval(function () { refreshSticky(); }, 60000);
+            }
         })();
     </script>
 </body>
