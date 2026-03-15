@@ -17,7 +17,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description"
         content="Calculadora de interés compuesto gratis y sin registro. Calcula el crecimiento de tus ahorros e inversiones, con gráfica y exportación a CSV. Resultados al instante.">
     <meta name="keywords"
@@ -1530,8 +1530,7 @@
         .form-row-2 label {
             font-size: .70rem;
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            overflow: visible;    /* no recortar el tooltip */
             display: flex;
             align-items: center;
             gap: 4px;
@@ -1539,8 +1538,15 @@
         .form-row-2 input[type="number"],
         .form-row-2 select {
             height: 38px;
-            font-size: .82rem;
+            font-size: 16px;   /* 16px mínimo para evitar zoom en iOS */
             min-width: 0;
+        }
+        /* En desktop podemos reducir un poco */
+        @media (min-width: 769px) {
+            .form-row-2 input[type="number"],
+            .form-row-2 select {
+                font-size: .84rem;
+            }
         }
         /* Siempre 2 columnas — incluso en móvil pequeño */
 
@@ -1549,54 +1555,45 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 15px;
-            height: 15px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            background: var(--border-h);
-            color: var(--text-hint);
-            font-size: .62rem;
-            font-weight: 700;
+            background: #9ca3af;
+            color: #ffffff;
+            font-size: .65rem;
+            font-weight: 800;
             cursor: pointer;
             border: none;
             flex-shrink: 0;
             position: relative;
             font-family: var(--font-body);
             line-height: 1;
-            transition: background .15s, color .15s;
+            transition: background .15s;
+            font-style: italic;
         }
-        .info-btn:hover { background: var(--accent); color: #fff; }
+        .info-btn:hover,
+        .info-btn.active { background: #6b7280; }
         .info-tooltip {
             display: none;
-            position: absolute;
-            bottom: calc(100% + 6px);
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--surface2);
-            border: 1px solid var(--border-h);
+            position: fixed;          /* escapa de cualquier overflow */
+            background: #1e1e2e;
+            border: 1px solid rgba(255,255,255,.18);
             border-radius: 8px;
             padding: 8px 10px;
-            font-size: .74rem;
+            font-size: .78rem;
             color: var(--ink);
             font-weight: 400;
             white-space: normal;
             width: 180px;
-            z-index: 300;
-            box-shadow: var(--shadow);
+            z-index: 9000;
+            box-shadow: 0 4px 20px rgba(0,0,0,.4);
             line-height: 1.5;
             text-transform: none;
             letter-spacing: 0;
             pointer-events: none;
         }
-        .info-btn:hover .info-tooltip,
-        .info-btn:focus .info-tooltip {
+        .info-tooltip.visible {
             display: block;
-        }
-        /* En móvil — tooltip a la derecha para no salirse */
-        @media (max-width: 500px) {
-            .info-tooltip {
-                left: 0;
-                transform: none;
-            }
         }
     </style>
     <script>
@@ -1709,10 +1706,10 @@
                     <!-- Fila 3: Tasa de interés + Capitalización -->
                     <div class="form-row-2">
                         <div class="form-group">
-                            <label>Tasa anual <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Rentabilidad anual esperada de tu inversión, en %.</span></button></label>
+                            <label>Interés anual <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Rentabilidad anual esperada de tu inversión, en %.</span></button></label>
                             <div class="input-wrap">
                                 <input type="number" id="rate" class="has-suffix" min="0.01" max="100" step="0.1"
-                                    value="7" style="text-align:right;" aria-label="Tasa de interés anual">
+                                    value="7" style="text-align:right;" aria-label="Interés anual">
                                 <span class="input-suffix">%</span>
                             </div>
                         </div>
@@ -3041,6 +3038,74 @@
                 setInterval(function () { refreshSticky(); }, 60000);
             }
         })();
+    </script>
+    <script>
+        /* ── Info tooltips: position:fixed calculado con JS ─────── */
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.info-btn').forEach(function (btn) {
+                var tooltip = btn.querySelector('.info-tooltip');
+                if (!tooltip) return;
+
+                function openTooltip() {
+                    /* Cerrar todos los demás primero */
+                    document.querySelectorAll('.info-tooltip.visible').forEach(function (t) {
+                        t.classList.remove('visible');
+                    });
+
+                    /* Calcular posición relativa a la ventana */
+                    var rect = btn.getBoundingClientRect();
+                    var tipW = 180;
+                    var left = rect.left + rect.width / 2 - tipW / 2;
+
+                    /* No salirse por la derecha ni por la izquierda */
+                    var margin = 8;
+                    if (left + tipW > window.innerWidth - margin) {
+                        left = window.innerWidth - tipW - margin;
+                    }
+                    if (left < margin) left = margin;
+
+                    /* Posicionar encima del botón */
+                    tooltip.style.left = left + 'px';
+                    tooltip.style.top  = (rect.top - tooltip.offsetHeight - 8) + 'px';
+                    tooltip.classList.add('visible');
+
+                    /* Recalcular top ahora que el tooltip tiene altura */
+                    requestAnimationFrame(function () {
+                        tooltip.style.top = (rect.top - tooltip.offsetHeight - 8) + 'px';
+                    });
+                }
+
+                /* Click/touch — toggle */
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    if (tooltip.classList.contains('visible')) {
+                        tooltip.classList.remove('visible');
+                    } else {
+                        openTooltip();
+                    }
+                });
+
+                /* Hover en desktop */
+                btn.addEventListener('mouseenter', openTooltip);
+                btn.addEventListener('mouseleave', function () {
+                    tooltip.classList.remove('visible');
+                });
+            });
+
+            /* Cerrar al tocar/clicar fuera */
+            document.addEventListener('click', function () {
+                document.querySelectorAll('.info-tooltip.visible').forEach(function (t) {
+                    t.classList.remove('visible');
+                });
+            });
+
+            /* Cerrar al hacer scroll */
+            window.addEventListener('scroll', function () {
+                document.querySelectorAll('.info-tooltip.visible').forEach(function (t) {
+                    t.classList.remove('visible');
+                });
+            }, { passive: true });
+        });
     </script>
 </body>
 
