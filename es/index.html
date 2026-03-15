@@ -1558,21 +1558,24 @@
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            background: #9ca3af;
-            color: #ffffff;
+            background: transparent;
+            color: var(--text-sec);          /* gris medio — visible claro y oscuro */
             font-size: .65rem;
             font-weight: 800;
             cursor: pointer;
-            border: none;
+            border: 1.5px solid var(--text-sec);  /* círculo outline */
             flex-shrink: 0;
             position: relative;
             font-family: var(--font-body);
             line-height: 1;
-            transition: background .15s;
+            transition: border-color .15s, color .15s;
             font-style: italic;
         }
         .info-btn:hover,
-        .info-btn.active { background: #6b7280; }
+        .info-btn.active {
+            color: var(--accent-h);
+            border-color: var(--accent-h);
+        }
         .info-tooltip {
             display: none;
             position: fixed;          /* escapa de cualquier overflow */
@@ -2273,27 +2276,39 @@
                 ctx.textAlign = 'center';
                 ctx.fillText(finalLabel, bx + bw / 2, by + 20);
 
-                /* X-axis year labels — collision-safe */
+                /* X-axis year labels — siempre mostrar el último año */
                 ctx.fillStyle = labelColor;
                 ctx.font = 'bold 12px Plus Jakarta Sans, sans-serif';
                 ctx.textAlign = 'center';
-                var labelW = ctx.measureText('Año 20').width + 10; /* min gap between labels */
-                var minStep = Math.ceil(labelW / (cw / (labels.length - 1)));
-                var xStep = Math.max(minStep, Math.floor(labels.length / 6));
-                var drawnX = {};
-                for (var n = 0; n < labels.length; n += xStep) {
-                    ctx.fillText('Año ' + labels[n], xPos(n), H - 32);
-                    drawnX[n] = true;
-                }
+
                 var lastIdx = labels.length - 1;
-                /* Only draw last label if it won't overlap the previous one */
-                if (!drawnX[lastIdx]) {
-                    var prevDrawn = lastIdx - (lastIdx % xStep);
-                    var gap = xPos(lastIdx) - xPos(prevDrawn);
-                    if (gap >= labelW) {
-                        ctx.fillText('Año ' + labels[lastIdx], xPos(lastIdx), H - 32);
+                var labelW  = ctx.measureText('Año ' + labels[lastIdx]).width + 14;
+                var maxLabels = Math.floor(cw / labelW);          /* cuántos caben */
+                if (maxLabels < 2) maxLabels = 2;
+
+                /* Calcular paso que distribuya uniformemente Y siempre incluya el último */
+                var xStep = Math.ceil(lastIdx / (maxLabels - 1));
+
+                /* Construir lista de índices a dibujar */
+                var toDrawX = {};
+                for (var n = 0; n <= lastIdx; n += xStep) {
+                    toDrawX[n] = true;
+                }
+                /* Siempre el último */
+                toDrawX[lastIdx] = true;
+
+                /* Si el penúltimo dibujado está demasiado cerca del último, quitarlo */
+                var keys = Object.keys(toDrawX).map(Number).sort(function(a,b){return a-b;});
+                if (keys.length >= 2) {
+                    var prev = keys[keys.length - 2];
+                    if (xPos(lastIdx) - xPos(prev) < labelW * 0.8) {
+                        delete toDrawX[prev];
                     }
                 }
+
+                Object.keys(toDrawX).map(Number).forEach(function (n) {
+                    ctx.fillText('Año ' + labels[n], xPos(n), H - 32);
+                });
 
                 /* Legend row */
                 var ly = H - 16;
