@@ -1,9 +1,9 @@
 <!--
   ════════════════════════════════════════════════════════
-  OurToolkit — Compound Interest Calculator
+  OurToolkit — Calculadora de Interés Compuesto
   https://ourtoolkit.blogspot.com
 
-  © 2025 OurToolkit Blog. All rights reserved.
+  © 2025 OurToolkit Blog. Todos los derechos reservados.
   All rights reserved.
 
   Código propietario. Prohibida su reproducción,
@@ -17,22 +17,22 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="description"
-        content="Free compound interest calculator, no sign-up needed. Calculate the growth of your savings and investments with interactive chart and CSV export. Instant results.">
+        content="Calculadora de interés compuesto gratis y sin registro. Calcula el crecimiento de tus ahorros e inversiones, con gráfica y exportación a CSV. Resultados al instante.">
     <meta name="keywords"
-        content="compound interest calculator free, calculate compound interest, savings calculator, investment calculator, compound interest no sign up, online financial calculator">
+        content="free compound interest calculator, calculate compound interest, savings calculator, investment calculator, compound interest no sign-up, online financial calculator">
     <meta name="author" content="OurToolkit">
     <meta property="og:title" content="Free Compound Interest Calculator | OurToolkit">
     <meta property="og:description"
-        content="Calculate for free the growth of your savings and investments with interactive chart and CSV export. No sign-up required.">
+        content="Calcula gratis el crecimiento de tus ahorros e inversiones con gráfica interactiva y exportación a CSV. Sin registro.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://Alsua97.github.io/calculadora-interes/en/">
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="OurToolkit">
-    <title>Free Compound Interest Calculator — No Sign-Up Required | OurToolkit</title>
+    <title>Free Compound Interest Calculator — No Sign-Up | OurToolkit</title>
     <!-- hreflang -->
-    <link rel="alternate" hreflang="es" href="https://Alsua97.github.io/calculadora-interes/es/" />
+    <link rel="alternate" hreflang="en" href="https://Alsua97.github.io/calculadora-interes/es/" />
     <link rel="alternate" hreflang="en" href="https://Alsua97.github.io/calculadora-interes/en/" />
     <link rel="alternate" hreflang="pt" href="https://Alsua97.github.io/calculadora-interes/pt/" />
     <link rel="alternate" hreflang="fr" href="https://Alsua97.github.io/calculadora-interes/fr/" />
@@ -47,11 +47,11 @@
           href="https://alsua97.github.io/assets/icons/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16"
           href="https://alsua97.github.io/assets/icons/favicon-16.png">
-    <link rel="apple-touch-icon" sizes="180x180"
-          href="https://alsua97.github.io/assets/icons/favicon-180.png">
+    <link rel="apple-touch-icon" sizes="192x192"
+          href="https://alsua97.github.io/calculadora-interes/icons/icon-192.png">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Interest Calc" />
+    <meta name="apple-mobile-web-app-title" content="Calculadora IC" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -268,6 +268,25 @@
 
         .header-title span {
             color: var(--text);
+        }
+
+        .header-calc-icon {
+            display: none; /* solo visible en standalone */
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent) 0%, #10b981 100%);
+            flex-shrink: 0;
+            margin-right: 9px;
+            color: #fff;
+        }
+
+        .header-calc-name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .theme-btn {
@@ -781,29 +800,10 @@
             width: 100% !important;
         }
 
-        /* Chart card — reduced horizontal padding for wider chart */
+        /* Chart card — menos margen horizontal para gráfico más ancho */
         #chartCard {
             padding-left: 8px;
             padding-right: 8px;
-        }
-
-        .header-calc-icon {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, var(--accent) 0%, #10b981 100%);
-            flex-shrink: 0;
-            margin-right: 9px;
-            color: #fff;
-        }
-
-        .header-calc-name {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
 
         /* ============================================================
@@ -963,7 +963,7 @@
         /* ── PWA STANDALONE: ocultar contenido SEO ────────── */
         @media (display-mode: standalone) {
 
-            /* Hide SEO content — keep calculator and ads */
+            /* Ocultar contenido SEO — mantener calculadora y anuncios */
             .faq-section,
             .seo-info-section,
             .tool-hero,
@@ -972,12 +972,12 @@
                 display: none !important;
             }
 
-            /* Hide OurToolkit logo */
+            /* Ocultar logo OurToolkit */
             .logo {
                 display: none !important;
             }
 
-            /* Show calc icon + gradient title */
+            /* Mostrar icono calculadora + título con gradiente */
             .header-calc-icon {
                 display: flex !important;
             }
@@ -995,6 +995,7 @@
                 padding-left: 0;
             }
 
+            /* Menos espacio superior en modo app */
             main {
                 padding-top: 8px;
             }
@@ -1193,15 +1194,15 @@
    ============================================================ */
         .cfg-panel {
             position: fixed;
-            top: 60px;
-            right: 12px;
-            width: 210px;
+            top: 72px;
+            right: 16px;
+            width: 224px;
             background: var(--surface);
             border: 1px solid var(--border-h);
-            border-radius: 12px;
+            border-radius: var(--radius-card);
             box-shadow: var(--shadow-h);
             z-index: 500;
-            padding: 10px;
+            padding: 14px;
             display: none;
             animation: panelIn .18s cubic-bezier(.22, 1, .36, 1);
         }
@@ -1213,7 +1214,7 @@
         @keyframes panelIn {
             from {
                 opacity: 0;
-                transform: translateY(-6px) scale(.97);
+                transform: translateY(-8px) scale(.97);
             }
 
             to {
@@ -1448,36 +1449,154 @@
             opacity: .8;
         }
 
-        /* AD zones: hidden until loaded */
-        .ad-top,
-        .ad-mid,
-        .ad-footer {
-            min-height: 0;
-            padding: 0;
-            transition: all .3s;
-        }
+        /* ad-sticky only */
 
-        .ad-top.loaded,
-        .ad-footer.loaded {
-            min-height: 70px;
+        /* ── ANUNCIOS ────────────────────────────────────────────── */
+
+        /* Zonas de anuncio: invisibles hasta que cargue un iframe */
+        .ad-zone {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Sin altura ni padding mientras no haya anuncio */
+            min-height: 0;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0;
+            transition: max-height .3s, padding .3s;
+        }
+        .ad-zone.loaded {
+            max-height: 120px;
             padding: 10px 0;
         }
-
-        .ad-mid.loaded {
-            min-height: 90px;
-            padding: 12px 0;
+        .ad-zone .ad-label {
+            font-size:.68rem; color:var(--text-hint);
+            text-transform:uppercase; letter-spacing:.08em;
+            margin-bottom:6px; display:none;
+        }
+        .ad-zone.loaded .ad-label { display:block; }
+        .ad-desktop { display:flex; }
+        .ad-mobile  { display:none; }
+        @media (max-width:768px) {
+            .ad-desktop { display:none; }
+            .ad-mobile  { display:flex; }
         }
 
-        .ad-top:not(.loaded) .ad-label,
-        .ad-mid:not(.loaded) .ad-label,
-        .ad-footer:not(.loaded) .ad-label {
-            display: none;
+        /* Standalone PWA móvil: ocultar ad-zone, mostrar solo sticky */
+        @media (display-mode: standalone) {
+            .ad-zone { display: none !important; }
+            body { padding-bottom: 0; }
+        }
+        /* Standalone PWA desktop: mostrar solo adMid (arriba de la tabla) */
+        @media (display-mode: standalone) and (min-width: 769px) {
+            #adMid { display: flex !important; }
         }
 
-        .ad-top:not(.loaded) .ad-placeholder,
-        .ad-mid:not(.loaded) .ad-placeholder,
-        .ad-footer:not(.loaded) .ad-placeholder {
+        /* Sticky: solo en PWA standalone móvil */
+        .ad-sticky {
             display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 200;
+            height: 50px;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            align-items: center;
+            justify-content: center;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        @media (display-mode: standalone) and (max-width: 768px) {
+            .ad-sticky { display: flex; }
+            body { padding-bottom: 58px; }
+        }
+        .ad-sticky.no-ad         { display: none !important; }
+        .ad-sticky.keyboard-open { display: none !important; }
+
+        
+        /* ── Formulario 2 columnas compacto ────────────────────── */
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 0;
+        }
+        .form-row-2 .form-group {
+            margin-bottom: 10px;
+            min-width: 0;          /* evita desbordamiento en flex/grid */
+        }
+        .form-row-2 label {
+            font-size: .70rem;
+            white-space: nowrap;
+            overflow: visible;    /* no recortar el tooltip */
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .form-row-2 input[type="number"],
+        .form-row-2 select {
+            height: 38px;
+            font-size: 16px;   /* 16px mínimo para evitar zoom en iOS */
+            min-width: 0;
+        }
+        /* En desktop podemos reducir un poco */
+        @media (min-width: 769px) {
+            .form-row-2 input[type="number"],
+            .form-row-2 select {
+                font-size: .84rem;
+            }
+        }
+        /* Siempre 2 columnas — incluso en móvil pequeño */
+
+        /* ── Tooltip de información ─────────────────────────────── */
+        .info-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: transparent;
+            color: var(--text-sec);          /* gris medio — visible claro y oscuro */
+            font-size: .65rem;
+            font-weight: 800;
+            cursor: pointer;
+            border: 1.5px solid var(--text-sec);  /* círculo outline */
+            flex-shrink: 0;
+            position: relative;
+            font-family: var(--font-body);
+            line-height: 1;
+            transition: border-color .15s, color .15s;
+            font-style: italic;
+        }
+        .info-btn:hover,
+        .info-btn.active {
+            color: var(--accent-h);
+            border-color: var(--accent-h);
+        }
+        .info-tooltip {
+            display: none;
+            position: fixed;          /* escapa de cualquier overflow */
+            background: #1e1e2e;
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: .78rem;
+            color: var(--ink);
+            font-weight: 400;
+            white-space: normal;
+            width: 180px;
+            z-index: 9000;
+            box-shadow: 0 4px 20px rgba(0,0,0,.4);
+            line-height: 1.5;
+            text-transform: none;
+            letter-spacing: 0;
+            pointer-events: none;
+        }
+        .info-tooltip.visible {
+            display: block;
         }
     </style>
     <script>
@@ -1512,48 +1631,15 @@
                 </span>
                 <span class="header-calc-name">Compound Interest Calculator</span>
             </span>
-            <button class="theme-btn" id="cfgBtn" title="Settings" aria-label="Settings"><svg width="15" height="15"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round">
+            <button class="theme-btn" id="cfgBtn" title="Settings" aria-label="Settings"><svg width="15"
+                    height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="3" />
                     <path
                         d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
                 </svg></button>
         </div>
     </header>
-
-    <!-- ============================================================
-     AD TOP — Banner superior
-     ============================================================ -->
-    <div class="ad-top ad-zone" id="adTop">
-        <span class="ad-label">Advertisement</span>
-        <!-- AdsTerra banner 728×90 desktop -->
-        <div class="ad-desktop">
-            <script>
-                atOptions = {
-                    'key' : '32aec08a08ffa4d25e58ce3accf85073',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
-        </div>
-        <!-- AdsTerra banner 320×50 móvil -->
-        <div class="ad-mobile">
-            <script>
-                atOptions = {
-                    'key' : '8bdbee11f503acfed33a88b2d11c1b85',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
-            <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
-        </div>
-    </div>
 
     <!-- ============================================================
      MAIN CONTENT
@@ -1563,21 +1649,35 @@
 
             <!-- Hero -->
             <section class="tool-hero">
-                <div class="section-label">Personal Finance</div>
+                <div class="section-label">Personal finance</div>
                 <h1>Compound Interest Calculator</h1>
                 <p>Discover the true power of your money working for you. Calculate the growth of your
                     investments with periodic contributions and visualize your future wealth.</p>
             </section>
+
+    <!-- ── ANUNCIO TOP ────────────────────────────────────────── -->
+    <div class="ad-zone" id="adTop">
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-desktop">
+            <script>atOptions={'key':'32aec08a08ffa4d25e58ce3accf85073','format':'iframe','height':90,'width':728,'params':{}};</script>
+            <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
+        </div>
+        <div class="ad-mobile">
+            <script>atOptions={'key':'8bdbee11f503acfed33a88b2d11c1b85','format':'iframe','height':50,'width':320,'params':{}};</script>
+            <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
+        </div>
+    </div>
 
             <!-- ── INPUTS ──────────────────────────────────────────── -->
             <div class="calc-grid">
 
                 <!-- Panel izquierdo: parámetros -->
                 <div class="card">
-                    <h2>Parameters</h2>
+                    <h2 class="mb-4" style="margin-bottom:16px;">Parameters</h2>
 
+                    <!-- Row 1: Initial capital (full width) -->
                     <div class="form-group">
-                        <label>Initial capital <span class="tip">(starting investment)</span></label>
+                        <label>Initial capital <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Amount you start investing with today.</span></button></label>
                         <div class="input-wrap">
                             <span class="input-prefix">$</span>
                             <input type="number" id="principal" class="has-prefix" min="0" step="100" value="10000"
@@ -1585,74 +1685,72 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Periodic contribution <span class="tip">(optional)</span></label>
-                        <div class="input-wrap">
-                            <span class="input-prefix">$</span>
-                            <input type="number" id="contribution" class="has-prefix" min="0" step="10" value="200"
-                                aria-label="Periodic contribution">
+                    <!-- Row 2: Contribution + Frequency -->
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Contribution <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Amount you add periodically. Leave 0 if you won't add more.</span></button></label>
+                            <div class="input-wrap">
+                                <span class="input-prefix">$</span>
+                                <input type="number" id="contribution" class="has-prefix" min="0" step="10" value="200"
+                                    aria-label="Periodic contribution">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Frequency <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">How often you make each contribution.</span></button></label>
+                            <select id="contribFreq" aria-label="Contribution frequency">
+                                <option value="12">Monthly</option>
+                                <option value="4">Quarterly</option>
+                                <option value="2">Semi-annual</option>
+                                <option value="1">Annual</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Contribution frequency</label>
-                        <select id="contribFreq" aria-label="Contribution frequency">
-                            <option value="12">Monthly</option>
-                            <option value="4">Quarterly</option>
-                            <option value="2">Semi-annual</option>
-                            <option value="1">Annual</option>
-                        </select>
+                    <!-- Row 3: Interest rate + Compounding -->
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Annual interest <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Expected annual return on your investment, in %.</span></button></label>
+                            <div class="input-wrap">
+                                <input type="number" id="rate" class="has-suffix" min="0.01" max="100" step="0.1"
+                                    value="7" style="text-align:right;" aria-label="Annual interest">
+                                <span class="input-suffix">%</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Compounding <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">How many times per year interest is added to the principal.</span></button></label>
+                            <select id="compFreq" aria-label="Compounding frequency">
+                                <option value="12">Monthly</option>
+                                <option value="4">Quarterly</option>
+                                <option value="2">Semi-annual</option>
+                                <option value="1">Annual</option>
+                                <option value="365">Diaria</option>
+                                <option value="0">Continua</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Annual interest rate</label>
-                        <div class="slider-wrap">
-                            <input type="range" id="rateSlider" min="0.1" max="30" step="0.1" value="7"
-                                aria-label="Interest rate slider">
-                            <div class="input-wrap" style="width:90px;flex-shrink:0;">
-                                <input type="number" id="rate" class="has-suffix" min="0.01" max="100" step="0.1"
-                                    value="7" style="text-align:right;" aria-label="Annual interest rate">
+                    <!-- Row 4: Period + Inflation -->
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Period <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">How many years you will hold the investment.</span></button></label>
+                            <div class="input-wrap">
+                                <input type="number" id="years" class="has-suffix" min="1" max="100"
+                                    step="1" value="20" style="text-align:right;" aria-label="Investment years">
+                                <span class="input-suffix">yrs</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Annual inflation <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Estimated inflation to calculate the real value of your future money.</span></button></label>
+                            <div class="input-wrap">
+                                <input type="number" id="inflation" class="has-suffix" min="0" max="30" step="0.1"
+                                    value="3" style="text-align:right;" aria-label="Annual inflation">
                                 <span class="input-suffix">%</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Compounding</label>
-                        <select id="compFreq" aria-label="Compounding frequency">
-                            <option value="12">Monthly (12×/year)</option>
-                            <option value="4">Quarterly (4×/year)</option>
-                            <option value="2">Semi-annual (2×/year)</option>
-                            <option value="1">Annual (1×/year)</option>
-                            <option value="365">Daily (365×/year)</option>
-                            <option value="0">Continuous (e^rt)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Investment period</label>
-                        <div class="slider-wrap">
-                            <input type="range" id="yearsSlider" min="1" max="50" step="1" value="20"
-                                aria-label="Years slider">
-                            <div class="input-wrap" style="width:90px;flex-shrink:0;">
-                                <input type="number" id="years" class="has-suffix has-suffix-wide" min="1" max="100"
-                                    step="1" value="20" style="text-align:right;" aria-label="Investment years">
-                                <span class="input-suffix">years</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Estimated annual inflation <span class="tip">(for real value)</span></label>
-                        <div class="input-wrap">
-                            <input type="number" id="inflation" class="has-suffix" min="0" max="30" step="0.1" value="3"
-                                style="text-align:right;" aria-label="Annual inflation">
-                            <span class="input-suffix">%</span>
-                        </div>
-                    </div>
-
-                    <div class="btn-row" style="margin-top:20px;">
-                        <button class="btn btn-primary" id="calcBtn" onclick="calcular()"><svg width="15" height="15"
+                    <div class="btn-row" style="margin-top:16px;">
+                        <button class="btn btn-primary btn-block" id="calcBtn" onclick="calcular()"><svg width="15" height="15"
                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="4" y="2" width="16" height="20" rx="2" />
@@ -1681,7 +1779,7 @@
                             <polyline points="16 7 22 7 22 13" />
                         </svg> Projected growth</h2>
                     <div class="chart-wrap">
-                        <canvas id="growthChart" aria-label="Gráfico de crecimiento de inversión"></canvas>
+                        <canvas id="growthChart" aria-label="Investment growth chart"></canvas>
                     </div>
                     <div class="breakdown-bar" id="breakdownBar" style="margin-top:18px;">
                         <h3>Final capital breakdown</h3>
@@ -1750,31 +1848,15 @@
                     </div>
                 </div>
 
-                <!-- ── AD MID — Después del resultado principal ── -->
-                <div class="ad-mid ad-zone" id="adMid">
+                <!-- ── AD MID ──────────────────────────────────────────────── -->
+                <div class="ad-zone" id="adMid">
                     <span class="ad-label">Advertisement</span>
                     <div class="ad-desktop">
-                        <script>
-                            atOptions = {
-                                'key' : '32aec08a08ffa4d25e58ce3accf85073',
-                                'format' : 'iframe',
-                                'height' : 90,
-                                'width' : 728,
-                                'params' : {}
-                            };
-                        </script>
+                        <script>atOptions={'key':'32aec08a08ffa4d25e58ce3accf85073','format':'iframe','height':90,'width':728,'params':{}};</script>
                         <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
                     </div>
                     <div class="ad-mobile">
-                        <script>
-                            atOptions = {
-                                'key' : '8bdbee11f503acfed33a88b2d11c1b85',
-                                'format' : 'iframe',
-                                'height' : 50,
-                                'width' : 320,
-                                'params' : {}
-                            };
-                        </script>
+                        <script>atOptions={'key':'8bdbee11f503acfed33a88b2d11c1b85','format':'iframe','height':50,'width':320,'params':{}};</script>
                         <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
                     </div>
                 </div>
@@ -1799,7 +1881,7 @@
                             </svg> Export CSV</button>
                     </div>
                     <div class="table-scroll">
-                        <table id="amortTable" aria-label="Annual investment evolution table">
+                        <table id="amortTable" aria-label="Annual evolution table de la inversión">
                             <thead>
                                 <tr>
                                     <th>Year</th>
@@ -1827,14 +1909,13 @@
                 <div class="section-label">Learn more</div>
                 <h2 id="info-heading">What is Compound Interest and Why is it so Powerful?</h2>
 
-                <p>Compound <strong style="color:var(--text)">interest</strong> is, without doubt, one of the most
-                    transformative concepts in personal finance. Unlike simple interest—where interest is always
-                    calculated on the original principal—, compound interest generates interest on interest already
-                    accumulated. This creates a snowball effect that, over time, can spectacularly multiply any
-                    investment.</p>
+                <p><strong style="color:var(--text)">Compound interest</strong> is, without doubt, one of the most
+                    transformative concepts in personal finance. Unlike simple interest — where interest is always
+                    calculated on the original principal — compound interest generates interest on already-accumulated
+                    interest. This creates a snowball effect that, over time, can spectacularly multiply any investment.</p>
 
-                <p>Albert Einstein —although the quote is probably apocryphal— supposedly called compound interest
-                    "the eighth wonder of the world". Real or not, the phrase perfectly captures its effect: those who
+                <p>Albert Einstein — though the quote is likely apocryphal — supposedly called compound interest
+                    "the eighth wonder of the world." Real or not, the phrase perfectly captures its effect: those who
                     understand it, earn it; those who don't, pay it.</p>
 
                 <div class="formula-box">
@@ -1851,9 +1932,9 @@
                                 <polyline points="12 6 12 12 16 14" />
                             </svg></div>
                         <h3>Time is your greatest ally</h3>
-                        <p>Investing $10,000 for 30 years at 7% annual produces more than double investing the same
-                            amount for 20 years. Starting early, even with little, makes an enormous difference over
-                            largo plazo.</p>
+                        <p>Investing $10,000 for 30 years at 7% annual return produces more than double what investing
+                            the same amount for 20 years does. Starting early, even with little, makes a huge difference
+                            in the long run.</p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
@@ -1864,8 +1945,8 @@
                                 <path d="M21 13v2a4 4 0 0 1-4 4H3" />
                             </svg></div>
                         <h3>Compounding frequency</h3>
-                        <p>The more frequent the compounding (daily vs annual), the higher the effective return. Monthly
-                            or daily compounding, common in index funds and ETFs, maximizes the compound effect.</p>
+                        <p>The more frequent the compounding (daily vs annual), the higher the effective return.
+                            Monthly or daily compounding, common in index funds and ETFs, maximizes the compound effect.</p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
@@ -1873,9 +1954,9 @@
                                 <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
                             </svg></div>
                         <h3>Periodic contributions</h3>
-                        <p>Adding a constant monthly amount, however small, can double or triple the final capital. This
-                            method is known as Dollar Cost Averaging (DCA) and also reduces the risk of always buying at
-                            market highs.</p>
+                        <p>Adding a constant monthly amount, however small, can double or triple the final capital.
+                            This method is known as Dollar Cost Averaging (DCA) and also reduces the risk of always
+                            buying at peaks.</p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"
@@ -1883,28 +1964,25 @@
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                             </svg></div>
                         <h3>Inflation and real value</h3>
-                        <p>The nominal value of your investment will grow, but inflation erodes purchasing power. That's
-                            why our calculator shows the <strong style="color:var(--text)">real value</strong> adjusted
-                            for inflation: the figure that truly matters for planning your retirement.</p>
+                        <p>The nominal value of your investment will grow, but inflation erodes purchasing power.
+                            That's why our calculator shows the <strong style="color:var(--text)">real value</strong>
+                            adjusted for inflation: the figure that truly matters for planning your retirement.</p>
                     </div>
                 </div>
 
-                <p>When talking about real investment vehicles, index funds (such as those tracking the S&amp;P 500)
-                    have historically offered returns of <strong style="color:var(--text)">7–10% annually</strong> in
-                    nominal terms, approximately <strong style="color:var(--text)">4–7% real</strong> after inflation.
-                    High-yield savings accounts or government bonds typically offer lower returns, but with lower risk.
+                <p>When talking about real investment vehicles, index funds (such as those tracking the S&P 500)
+                    have historically offered returns of <span class="text-green">7–10% per year</span> in nominal
+                    terms, approximately <span class="text-accent">4–7% real</span> after inflation. High-yield savings
+                    accounts or government bonds typically offer lower returns, but with lower risk.</p>
+
+                <p>The continuous compounding formula — when <em>n</em> tends to infinity — is A = P × e^(r×t), where
+                    <em>e</em> is Euler's number (≈2.718). Although in practice no institution truly compounds
+                    continuously, understanding it is fundamental in advanced financial mathematics.
                 </p>
 
-                <p>The continuous compounding formula —when n tends to infinity— is A = P × e^(r×t), where e is Euler's
-                    constant (≈2.718). Although in practice no institution compounds truly continuously, understanding
-                    it is fundamental in financial mathematics
-                    avanzadas.
-                </p>
-
-                <p>Always remember to diversify your investments, consider your time horizon and risk
-                    tolerance, and consult a certified financial advisor before making important decisions. This
-                    calculator is an educational tool: real results depend on many factors that
-                    no simulation can fully capture.</p>
+                <p>Always remember to diversify your investments, consider your time horizon and risk tolerance,
+                    and consult a certified financial advisor before making important decisions. This calculator is an
+                    educational tool: real results depend on many factors that no simulation can fully capture.</p>
             </section>
 
             <div class="divider"></div>
@@ -1926,12 +2004,12 @@
                     </button>
                     <div class="faq-a" role="region">
                         <div class="faq-a-inner">
-                            <strong style="color:var(--text)">Simple interest</strong> is always calculated on the
-                            original principal: if you invest $1,000 at 10% annual, you earn $100 every year. <strong
-                                style="color:var(--text)">Compound interest</strong>, on the other hand, adds generated
-                            interest to the principal, so in year 2 you calculate 10% on $1,100, in year 3 on $1,210,
-                            and so on. The difference seems small at first, but over decades it can represent thousands
-                            or millions of additional dollars.
+                            <strong>Simple interest</strong> is always calculated on the original principal: if you invest
+                            $1,000 at 10% annual, you earn $100 every year without exception. <strong>Compound
+                                interest</strong>, on the other hand, adds generated interest to the principal, so in
+                            year 2 you calculate 10% on $1,100 (not $1,000), in year 3 on $1,210, and so on. The
+                            difference seems small at first, but over decades it can represent thousands or millions of
+                            additional dollars.
                         </div>
                     </div>
                 </div>
@@ -1947,11 +2025,11 @@
                     <div class="faq-a" role="region">
                         <div class="faq-a-inner">
                             It depends entirely on the chosen instrument. Traditional savings accounts offer 0.5–3%
-                            annually. U.S. government bonds currently offer 4–5%. S&amp;P 500 index funds have averaged
-                            <strong style="color:var(--text)">~10% nominal (7% real)</strong> over the last 100 years,
-                            though with high year-to-year volatility. Cryptocurrencies can offer much higher returns,
-                            but also total losses. For long-term planning, using between 5% and 8% is a reasonable and
-                            conservative assumption.
+                            annually. US government bonds currently offer 4–5%. S&P 500 index funds have averaged
+                            <strong>~10% nominal (7% real)</strong> over the last 100 years, though with high
+                            year-to-year volatility. Cryptocurrencies can offer much higher returns, but also total
+                            losses. For long-term planning, using between 5% and 8% is a reasonable and conservative
+                            assumption.
                         </div>
                     </div>
                 </div>
@@ -1969,9 +2047,9 @@
                             Mathematically, the more frequent the compounding, the higher the return: daily compounding
                             beats monthly, which beats annual. However, the practical difference between monthly and
                             daily compounding is minimal (just a few tenths of a percentage point). Most investment
-                            funds and ETFs compound daily automatically by reinvesting dividends. What <em>does</em>
-                            matter more is the <strong>real interest rate</strong> and the <strong>investment time
-                                horizon</strong>.
+                            funds and ETFs compound daily automatically by reinvesting dividends. What <em>really</em>
+                            matters more is the <strong>real interest rate</strong> and the <strong>investment
+                                period</strong>.
                         </div>
                     </div>
                 </div>
@@ -1987,10 +2065,10 @@
                     <div class="faq-a" role="region">
                         <div class="faq-a-inner">
                             Inflation reduces the purchasing power of your money over time. If you have $100,000 nominal
-                            in 20 years but inflation was 3% annually, those $100,000 are worth only ~$55,368 in today's
-                            purchasing power. That's why it's crucial that your return rate exceeds inflation. The
-                            calculator shows the <strong style="color:var(--text)">real value</strong> of your final
-                            capital: the number you should use to plan future expenses like retirement.
+                            in 20 years but inflation was 3% annually, those $100,000 are worth only ~$55,368 in
+                            today's purchasing power. That's why it's crucial that your return rate exceeds inflation.
+                            The calculator shows the <strong>real value</strong> of your final capital: that's the
+                            number to use when planning future expenses like retirement.
                         </div>
                     </div>
                 </div>
@@ -2005,13 +2083,12 @@
                     </button>
                     <div class="faq-a" role="region">
                         <div class="faq-a-inner">
-                            Yes, it's an excellent initial planning tool. Enter your current capital as <strong
-                                style="color:var(--text)">initial investment</strong>, your monthly savings as <strong
-                                style="color:var(--text)">periodic contribution</strong>, and the number of years until
-                            retirement as <strong style="color:var(--text)">period</strong>. Use a conservative rate
-                            (5–7%) and enable the inflation adjustment to see the real value. Keep in mind that real
-                            returns vary year to year, and taxes will reduce gains depending on your country and account
-                            type (IRA, 401k, etc.).
+                            Yes, it's an excellent initial planning tool. Enter your current capital as <em>initial
+                            investment</em>, your monthly savings as <em>periodic contribution</em>, and the number of
+                            years until retirement as <em>period</em>. Use a conservative rate (5–7%) and enable
+                            inflation adjustment to see the real value. The result will give you an estimate of
+                            available capital. Keep in mind that real returns vary year to year, and taxes will reduce
+                            gains depending on your country and account type (IRA, 401k, etc.).
                         </div>
                     </div>
                 </div>
@@ -2024,30 +2101,16 @@
     <!-- ============================================================
      AD FOOTER — Banner al final de página
      ============================================================ -->
-    <div class="ad-footer ad-zone" id="adFooter">
+
+    <!-- ── AD FOOTER ──────────────────────────────────────────── -->
+    <div class="ad-zone" id="adFooter">
         <span class="ad-label">Advertisement</span>
         <div class="ad-desktop">
-            <script>
-                atOptions = {
-                    'key' : '32aec08a08ffa4d25e58ce3accf85073',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
-            </script>
+            <script>atOptions={'key':'32aec08a08ffa4d25e58ce3accf85073','format':'iframe','height':90,'width':728,'params':{}};</script>
             <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
         </div>
         <div class="ad-mobile">
-            <script>
-                atOptions = {
-                    'key' : '8bdbee11f503acfed33a88b2d11c1b85',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
-            </script>
+            <script>atOptions={'key':'8bdbee11f503acfed33a88b2d11c1b85','format':'iframe','height':50,'width':320,'params':{}};</script>
             <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
         </div>
     </div>
@@ -2059,8 +2122,8 @@
         <div class="container">
             <p>© 2025 <a href="https://ourtoolkit.blogspot.com" target="_blank" rel="noopener">OurToolkit Blog</a> —
                 Free tools for everyone.</p>
-            <p style="margin-top:6px;font-size:.75rem;">This calculator is for educational purposes only. It does not
-                constitute financial advice.</p>
+            <p style="margin-top:6px;font-size:.75rem;">This calculator is for educational purposes only. It does not constitute
+                financial advice.</p>
         </div>
     </footer>
 
@@ -2208,27 +2271,39 @@
                 ctx.textAlign = 'center';
                 ctx.fillText(finalLabel, bx + bw / 2, by + 20);
 
-                /* X-axis year labels — collision-safe */
+                /* X-axis year labels — siempre mostrar el último año */
                 ctx.fillStyle = labelColor;
                 ctx.font = 'bold 12px Plus Jakarta Sans, sans-serif';
                 ctx.textAlign = 'center';
-                var labelW = ctx.measureText('Year 20').width + 10; /* min gap between labels */
-                var minStep = Math.ceil(labelW / (cw / (labels.length - 1)));
-                var xStep = Math.max(minStep, Math.floor(labels.length / 6));
-                var drawnX = {};
-                for (var n = 0; n < labels.length; n += xStep) {
-                    ctx.fillText('Year ' + labels[n], xPos(n), H - 32);
-                    drawnX[n] = true;
-                }
+
                 var lastIdx = labels.length - 1;
-                /* Only draw last label if it won't overlap the previous one */
-                if (!drawnX[lastIdx]) {
-                    var prevDrawn = lastIdx - (lastIdx % xStep);
-                    var gap = xPos(lastIdx) - xPos(prevDrawn);
-                    if (gap >= labelW) {
-                        ctx.fillText('Year ' + labels[lastIdx], xPos(lastIdx), H - 32);
+                var labelW  = ctx.measureText('Año ' + labels[lastIdx]).width + 14;
+                var maxLabels = Math.floor(cw / labelW);          /* cuántos caben */
+                if (maxLabels < 2) maxLabels = 2;
+
+                /* Calcular paso que distribuya uniformemente Y siempre incluya el último */
+                var xStep = Math.ceil(lastIdx / (maxLabels - 1));
+
+                /* Construir lista de índices a dibujar */
+                var toDrawX = {};
+                for (var n = 0; n <= lastIdx; n += xStep) {
+                    toDrawX[n] = true;
+                }
+                /* Siempre el último */
+                toDrawX[lastIdx] = true;
+
+                /* Si el penúltimo dibujado está demasiado cerca del último, quitarlo */
+                var keys = Object.keys(toDrawX).map(Number).sort(function(a,b){return a-b;});
+                if (keys.length >= 2) {
+                    var prev = keys[keys.length - 2];
+                    if (xPos(lastIdx) - xPos(prev) < labelW * 0.8) {
+                        delete toDrawX[prev];
                     }
                 }
+
+                Object.keys(toDrawX).map(Number).forEach(function (n) {
+                    ctx.fillText('Yr ' + labels[n], xPos(n), H - 32);
+                });
 
                 /* Legend row */
                 var ly = H - 16;
@@ -2250,7 +2325,7 @@
                 ctx.beginPath(); ctx.moveTo(lx2, ly); ctx.lineTo(lx2 + 24, ly); ctx.stroke();
                 ctx.setLineDash([]);
                 ctx.fillStyle = labelColor;
-                ctx.fillText('Your contributions', lx2 + 32, ly + 4);
+                ctx.fillText('What you invested', lx2 + 32, ly + 4);
             }
 
             /* ── Number helpers ──────────────────────────────────────── */
@@ -2377,8 +2452,9 @@
                 document.getElementById('resultsSection').classList.remove('results-hidden');
                 document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-                /* Mostrar banner PWA tras el primer cálculo exitoso */
+                /* Mostrar banner PWA tras primer cálculo */
                 if (typeof window._showPwaAfterCalc === 'function') window._showPwaAfterCalc();
+                if (typeof window._refreshAd === 'function') window._refreshAd();
 
                 /* ── Draw chart ── */
                 setTimeout(function () { drawChart(labels, totalArr, investArr); }, 50);
@@ -2415,7 +2491,7 @@
                 var url = URL.createObjectURL(blob);
                 var a = document.createElement('a');
                 a.href = url;
-                a.download = 'interes-compuesto-ourtoolkit.csv';
+                a.download = 'compound-interest-ourtoolkit.csv';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -2479,9 +2555,9 @@
 
                 /* ── Language ── */
                 var LANG_LABELS = { es: 'ES', en: 'EN', pt: 'PT', fr: 'FR' };
-                var currentLang = location.pathname.includes('/es/') ? 'es'
+                var currentLang = location.pathname.includes('/en/') ? 'en'
                     : location.pathname.includes('/pt/') ? 'pt'
-                        : location.pathname.includes('/fr/') ? 'fr' : 'en';
+                        : location.pathname.includes('/fr/') ? 'fr' : 'es';
                 document.getElementById('langLabel').textContent = LANG_LABELS[currentLang];
                 document.querySelectorAll('[data-lang]').forEach(function (b) {
                     b.classList.toggle('active', b.getAttribute('data-lang') === currentLang);
@@ -2510,7 +2586,7 @@
                     dd.classList.toggle('open');
                 });
 
-                /* ── Share button ── */
+                /* ── Botón compartir ── */
                 document.getElementById('shareBtn').addEventListener('click', function () {
                     var url = location.href;
                     var title = document.title;
@@ -2526,7 +2602,7 @@
                     }
                 });
 
-                /* ── Open / close main panel ── */
+                /* ── Abrir / cerrar panel principal ── */
                 cfgBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     var open = panel.classList.toggle('open');
@@ -2560,28 +2636,8 @@
                 setTimeout(function () { obs.disconnect(); }, 4000);
             }
 
-            /* ── Slider sync ────────────────────────────────────────── */
-            function syncSliders() {
-                var rateSlider = document.getElementById('rateSlider');
-                var rateInput = document.getElementById('rate');
-                var yearsSlider = document.getElementById('yearsSlider');
-                var yearsInput = document.getElementById('years');
-
-                rateSlider.addEventListener('input', function () {
-                    rateInput.value = this.value;
-                });
-                rateInput.addEventListener('input', function () {
-                    var v = Math.min(Math.max(parseFloat(this.value) || 0, 0.1), 30);
-                    rateSlider.value = v;
-                });
-                yearsSlider.addEventListener('input', function () {
-                    yearsInput.value = this.value;
-                });
-                yearsInput.addEventListener('input', function () {
-                    var v = Math.min(Math.max(parseInt(this.value) || 1, 1), 50);
-                    yearsSlider.value = v;
-                });
-            }
+            /* Sliders eliminados — función vacía por compatibilidad */
+            function syncSliders() {}
 
             /* ── Keyboard enter → calculate ────────────────────────── */
             function bindEnter() {
@@ -2615,9 +2671,6 @@
                 syncSliders();
                 bindEnter();
                 bindResize();
-                watchAd('adTop');
-                watchAd('adMid');
-                watchAd('adFooter');
                 calcular();
             });
 
@@ -2629,10 +2682,29 @@
         }
     </script>
 
+        <!-- ── ANUNCIO TOP ────────────────────────────────────────── -->
+    <div class="ad-zone" id="adTop">
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-desktop">
+            <script>atOptions={'key':'32aec08a08ffa4d25e58ce3accf85073','format':'iframe','height':90,'width':728,'params':{}};</script>
+            <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
+        </div>
+        <div class="ad-mobile">
+            <script>atOptions={'key':'8bdbee11f503acfed33a88b2d11c1b85','format':'iframe','height':50,'width':320,'params':{}};</script>
+            <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
+        </div>
+    </div>
+
+    <!-- ── ANUNCIO STICKY (solo PWA móvil) ─────────────────────── -->
+    <div class="ad-sticky" id="adSticky">
+        <script>atOptions={'key':'8bdbee11f503acfed33a88b2d11c1b85','format':'iframe','height':50,'width':320,'params':{}};</script>
+        <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
+    </div>
+
     <!-- ── SETTINGS PANEL ─────────────────────────────────── -->
     <div id="cfgPanel" class="cfg-panel">
 
-        <!-- Theme dropdown -->
+        <!-- Tema dropdown -->
         <div class="cfg-row">
             <span class="cfg-row-label">Theme</span>
             <div class="cfg-dropdown" id="themeDropdown">
@@ -2687,7 +2759,7 @@
 
         <div class="cfg-divider"></div>
 
-        <!-- Language dropdown -->
+        <!-- Idioma dropdown -->
         <div class="cfg-row">
             <span class="cfg-row-label">Language</span>
             <div class="cfg-dropdown" id="langDropdown">
@@ -2706,8 +2778,8 @@
                     </svg>
                 </button>
                 <div class="cfg-menu">
-                    <button class="cfg-menu-item" data-lang="es">🇪🇸 ES Español</button>
-                    <button class="cfg-menu-item active" data-lang="en">🇺🇸 EN English</button>
+                    <button class="cfg-menu-item active" data-lang="en">🇪🇸 ES Español</button>
+                    <button class="cfg-menu-item" data-lang="en">🇺🇸 EN English</button>
                     <button class="cfg-menu-item" data-lang="pt">🇧🇷 PT Português</button>
                     <button class="cfg-menu-item" data-lang="fr">🇫🇷 FR Français</button>
                 </div>
@@ -2716,22 +2788,24 @@
 
         <div class="cfg-divider"></div>
 
-        <!-- Share + More tools -->
-                <div class="cfg-action-row">
+        <!-- Share + Tools -->
+        <div class="cfg-action-row">
             <button class="cfg-action-btn" id="shareBtn">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/>
-                    <circle cx="18" cy="19" r="3"/>
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="18" cy="5" r="3" />
+                    <circle cx="6" cy="12" r="3" />
+                    <circle cx="18" cy="19" r="3" />
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
                 </svg>
                 Share
             </button>
             <a class="cfg-action-btn" href="https://ourtoolkit.blogspot.com" target="_blank">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
                 </svg>
                 See more
             </a>
@@ -2746,9 +2820,9 @@
     <div id="pwaInstallBanner" style="
         display: none;
         position: fixed;
-        bottom: 0; left: 0; right: 0;
+        bottom: 58px; left: 0; right: 0;
         z-index: 9999;
-        padding: 0 16px 16px;
+        padding: 0 16px 8px;
         pointer-events: none;
     ">
         <div style="
@@ -2764,6 +2838,7 @@
             max-width: 520px;
             margin: 0 auto;
         ">
+            <!-- Icono -->
             <div style="
                 width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0;
                 background: linear-gradient(135deg, #7c3aed 0%, #6366f1 50%, #0d9488 100%);
@@ -2775,6 +2850,7 @@
                     <polyline points="16 7 22 7 22 13"/>
                 </svg>
             </div>
+            <!-- Texto -->
             <div style="flex: 1; min-width: 0;">
                 <div style="font-size: .88rem; font-weight: 700; color: #ecedf8; margin-bottom: 2px;
                             font-family: 'Outfit', sans-serif;">
@@ -2784,6 +2860,7 @@
                     Install the calculator as a free app. No extra ads, no account required.
                 </div>
             </div>
+            <!-- Botones -->
             <div style="display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;">
                 <button id="pwaInstallBtn" style="
                     background: linear-gradient(90deg, #6366f1, #10b981);
@@ -2805,59 +2882,70 @@
     <script>
         (function () {
             var deferredPrompt = null;
-                        var banner     = document.getElementById('pwaInstallBanner');
+            var banner = document.getElementById('pwaInstallBanner');
             var installBtn = document.getElementById('pwaInstallBtn');
             var dismissBtn = document.getElementById('pwaInstallDismiss');
 
-            /* No mostrar si ya está instalada como PWA */
+            /* No mostrar si ya está instalada */
             if (window.matchMedia('(display-mode: standalone)').matches) return;
             if (localStorage.getItem('pwaInstallDismissed')) return;
 
-            var deferredPrompt = null;
-
-            /* Chrome/Android: capturar evento de instalación */
+            /* Captura el evento beforeinstallprompt (Chrome/Android) */
             window.addEventListener('beforeinstallprompt', function (e) {
-                e.preventDefault();
+                /* NO llamar e.preventDefault() — así Chrome mantiene el ícono + en
+                   la barra del navegador. Guardamos el prompt para nuestro banner. */
                 deferredPrompt = e;
                 window._pwaPromptReady = true;
             });
 
-            /* Mostrar banner tras el primer cálculo exitoso */
+            /* Se llama desde calculate() — muestra el banner tras el primer resultado */
             window._showPwaAfterCalc = function () {
                 if (!banner || banner.style.display === 'block') return;
                 if (localStorage.getItem('pwaInstallDismissed')) return;
                 if (window.matchMedia('(display-mode: standalone)').matches) return;
-                /* Mostrar si: prompt listo, iOS, o navegador con SW y HTTPS */
                 var canShow = window._pwaPromptReady
                     || /iphone|ipad|ipod/i.test(navigator.userAgent)
                     || ('serviceWorker' in navigator && location.protocol === 'https:');
-                if (canShow) {
-                    setTimeout(function () { banner.style.display = 'block'; }, 1200);
-                }
+                if (canShow) setTimeout(function () { banner.style.display = 'block'; }, 1200);
             };
 
-            /* Botón instalar */
+            /* Un clic — lanza el diálogo nativo o da instrucciones */
             installBtn.addEventListener('click', function () {
                 banner.style.display = 'none';
                 if (deferredPrompt) {
+                    /* Chrome/Android: lanzar diálogo nativo */
                     deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(function () { deferredPrompt = null; });
+                    deferredPrompt.userChoice.then(function () {
+                        deferredPrompt = null;
+                    });
+                } else {
+                    /* Sin diálogo nativo: dar instrucciones según navegador */
+                    var ua = navigator.userAgent;
+                    if (/iphone|ipad|ipod/i.test(ua)) {
+                        alert("In Safari: tap Share ↑ → 'Add to Home Screen' → 'Add'");
+                    } else if (/android/i.test(ua)) {
+                        alert("In Chrome: tap menu ⋮ → 'Add to Home Screen' → 'Install'");
+                    } else {
+                        alert("In Chrome: look for the ➕ icon in the address bar, or go to menu → 'Install app'");
+                    }
                 }
             });
 
-            /* Botón descartar */
             dismissBtn.addEventListener('click', function () {
                 banner.style.display = 'none';
+                /* Recordar que lo rechazó para no molestar de nuevo */
                 localStorage.setItem('pwaInstallDismissed', '1');
             });
 
-            /* iOS Safari: no hay beforeinstallprompt */
+            /* En iOS (Safari) no hay beforeinstallprompt —
+               mostrar igual con instrucción de "Añadir a inicio" */
             var isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
-            if (isIos && !window.navigator.standalone) {
+            var isInStandalone = window.navigator.standalone;
+            if (isIos && !isInStandalone) {
                 installBtn.textContent = 'How to install';
                 installBtn.addEventListener('click', function () {
                     banner.style.display = 'none';
-                    alert("In Safari: tap the Share button ↑ → 'Add to Home Screen' → 'Add'");
+                    alert("In Safari: tap Share ↑ → 'Add to Home Screen' → 'Add'");
                 }, { once: true });
             }
         })();
@@ -2866,25 +2954,168 @@
     <script>
         /* ── Header hide-on-scroll / show-on-scroll-up ── */
         (function () {
-            var header = document.querySelector('.site-header');
-            var lastY  = 0;
+            var header  = document.querySelector('.site-header');
+            var lastY   = 0;
             var ticking = false;
             window.addEventListener('scroll', function () {
                 if (!ticking) {
                     requestAnimationFrame(function () {
                         var y = window.scrollY;
                         if (y > lastY && y > 80) {
-                            header.classList.add('header-hidden');    // bajando
+                            header.classList.add('header-hidden');
                         } else {
-                            header.classList.remove('header-hidden'); // subiendo
+                            header.classList.remove('header-hidden');
                         }
-                        lastY = y;
-                        ticking = false;
+                        lastY = y; ticking = false;
                     });
                     ticking = true;
                 }
             }, { passive: true });
         })();
+    </script>
+    <script>
+        /* ── Ads manager ─────────────────────────────────────────── */
+        (function () {
+            /* watchAd: añade clase .loaded cuando el iframe aparece */
+            function watchAd(id) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                var obs = new MutationObserver(function () {
+                    if (el.querySelector('iframe')) {
+                        el.classList.add('loaded');
+                        obs.disconnect();
+                    }
+                });
+                obs.observe(el, { childList: true, subtree: true });
+                setTimeout(function () { obs.disconnect(); }, 5000);
+            }
+            watchAd('adTop');
+            watchAd('adMid');
+            watchAd('adFooter');
+
+            /* Sticky: solo activo en PWA standalone móvil */
+            var sticky = document.getElementById('adSticky');
+            if (sticky) {
+                /* Ocultar con teclado */
+                document.querySelectorAll('input, select').forEach(function (el) {
+                    el.addEventListener('focus', function () {
+                        sticky.classList.add('keyboard-open');
+                    });
+                    el.addEventListener('blur', function () {
+                        setTimeout(function () {
+                            sticky.classList.remove('keyboard-open');
+                        }, 300);
+                    });
+                });
+
+                /* Ocultar si no carga en 5s */
+                setTimeout(function () {
+                    if (!sticky.querySelector('iframe')) {
+                        sticky.classList.add('no-ad');
+                        document.body.style.paddingBottom = '0';
+                    }
+                }, 5000);
+
+                /* Refresh cada 60s o al calcular */
+                var lastInteraction = Date.now();
+                var lastRefresh = 0;
+                var MIN_INTERVAL = 30000;
+                var AD_KEY = '8bdbee11f503acfed33a88b2d11c1b85';
+                var AD_SRC = 'https://www.highperformanceformat.com/' + AD_KEY + '/invoke.js';
+
+                ['click','touchstart','keydown','scroll'].forEach(function (ev) {
+                    window.addEventListener(ev, function () {
+                        lastInteraction = Date.now();
+                    }, { passive: true });
+                });
+
+                function refreshSticky() {
+                    var now = Date.now();
+                    if (now - lastRefresh < MIN_INTERVAL) return;
+                    if (now - lastInteraction > 60000) return;
+                    sticky.innerHTML = '';
+                    var cfg = document.createElement('script');
+                    cfg.text = "atOptions={'key':'" + AD_KEY +
+                        "','format':'iframe','height':50,'width':320,'params':{}};";
+                    sticky.appendChild(cfg);
+                    var s = document.createElement('script');
+                    s.src = AD_SRC; s.async = true;
+                    sticky.appendChild(s);
+                    lastRefresh = Date.now();
+                }
+
+                window._refreshAd = function () { refreshSticky(); };
+                setInterval(function () { refreshSticky(); }, 60000);
+            }
+        })();
+    </script>
+    <script>
+        /* ── Info tooltips: position:fixed calculado con JS ─────── */
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.info-btn').forEach(function (btn) {
+                var tooltip = btn.querySelector('.info-tooltip');
+                if (!tooltip) return;
+
+                function openTooltip() {
+                    /* Cerrar todos los demás primero */
+                    document.querySelectorAll('.info-tooltip.visible').forEach(function (t) {
+                        t.classList.remove('visible');
+                    });
+
+                    /* Calcular posición relativa a la ventana */
+                    var rect = btn.getBoundingClientRect();
+                    var tipW = 180;
+                    var left = rect.left + rect.width / 2 - tipW / 2;
+
+                    /* No salirse por la derecha ni por la izquierda */
+                    var margin = 8;
+                    if (left + tipW > window.innerWidth - margin) {
+                        left = window.innerWidth - tipW - margin;
+                    }
+                    if (left < margin) left = margin;
+
+                    /* Posicionar encima del botón */
+                    tooltip.style.left = left + 'px';
+                    tooltip.style.top  = (rect.top - tooltip.offsetHeight - 8) + 'px';
+                    tooltip.classList.add('visible');
+
+                    /* Recalcular top ahora que el tooltip tiene altura */
+                    requestAnimationFrame(function () {
+                        tooltip.style.top = (rect.top - tooltip.offsetHeight - 8) + 'px';
+                    });
+                }
+
+                /* Click/touch — toggle */
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    if (tooltip.classList.contains('visible')) {
+                        tooltip.classList.remove('visible');
+                    } else {
+                        openTooltip();
+                    }
+                });
+
+                /* Hover en desktop */
+                btn.addEventListener('mouseenter', openTooltip);
+                btn.addEventListener('mouseleave', function () {
+                    tooltip.classList.remove('visible');
+                });
+            });
+
+            /* Cerrar al tocar/clicar fuera */
+            document.addEventListener('click', function () {
+                document.querySelectorAll('.info-tooltip.visible').forEach(function (t) {
+                    t.classList.remove('visible');
+                });
+            });
+
+            /* Cerrar al hacer scroll */
+            window.addEventListener('scroll', function () {
+                document.querySelectorAll('.info-tooltip.visible').forEach(function (t) {
+                    t.classList.remove('visible');
+                });
+            }, { passive: true });
+        });
     </script>
 </body>
 
