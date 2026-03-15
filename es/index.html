@@ -1520,26 +1520,83 @@
         .form-row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 0;
         }
         .form-row-2 .form-group {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            min-width: 0;          /* evita desbordamiento en flex/grid */
         }
         .form-row-2 label {
-            font-size: .72rem;
+            font-size: .70rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
         .form-row-2 input[type="number"],
         .form-row-2 select {
-            height: 40px;
-            font-size: .88rem;
+            height: 38px;
+            font-size: .82rem;
+            min-width: 0;
         }
-        /* En móvil vuelven a una columna */
-        @media (max-width: 480px) {
-            .form-row-2 { grid-template-columns: 1fr; }
+        /* Siempre 2 columnas — incluso en móvil pequeño */
+
+        /* ── Tooltip de información ─────────────────────────────── */
+        .info-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--border-h);
+            color: var(--text-hint);
+            font-size: .62rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            flex-shrink: 0;
+            position: relative;
+            font-family: var(--font-body);
+            line-height: 1;
+            transition: background .15s, color .15s;
+        }
+        .info-btn:hover { background: var(--accent); color: #fff; }
+        .info-tooltip {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--surface2);
+            border: 1px solid var(--border-h);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: .74rem;
+            color: var(--ink);
+            font-weight: 400;
+            white-space: normal;
+            width: 180px;
+            z-index: 300;
+            box-shadow: var(--shadow);
+            line-height: 1.5;
+            text-transform: none;
+            letter-spacing: 0;
+            pointer-events: none;
+        }
+        .info-btn:hover .info-tooltip,
+        .info-btn:focus .info-tooltip {
+            display: block;
+        }
+        /* En móvil — tooltip a la derecha para no salirse */
+        @media (max-width: 500px) {
+            .info-tooltip {
+                left: 0;
+                transform: none;
+            }
         }
     </style>
     <script>
@@ -1620,7 +1677,7 @@
 
                     <!-- Fila 1: Capital inicial (completo) -->
                     <div class="form-group">
-                        <label>Capital inicial <span class="tip">(inversión de partida)</span></label>
+                        <label>Capital inicial <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Dinero con el que empiezas a invertir hoy.</span></button></label>
                         <div class="input-wrap">
                             <span class="input-prefix">$</span>
                             <input type="number" id="principal" class="has-prefix" min="0" step="100" value="10000"
@@ -1631,7 +1688,7 @@
                     <!-- Fila 2: Aportación + Frecuencia -->
                     <div class="form-row-2">
                         <div class="form-group">
-                            <label>Aportación <span class="tip">(opcional)</span></label>
+                            <label>Aportación <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Cantidad que añades periódicamente. Deja 0 si no aportarás más.</span></button></label>
                             <div class="input-wrap">
                                 <span class="input-prefix">$</span>
                                 <input type="number" id="contribution" class="has-prefix" min="0" step="10" value="200"
@@ -1639,7 +1696,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Frecuencia</label>
+                            <label>Frecuencia <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Con qué periodicidad haces cada aportación.</span></button></label>
                             <select id="contribFreq" aria-label="Frecuencia de aportación">
                                 <option value="12">Mensual</option>
                                 <option value="4">Trimestral</option>
@@ -1652,7 +1709,7 @@
                     <!-- Fila 3: Tasa de interés + Capitalización -->
                     <div class="form-row-2">
                         <div class="form-group">
-                            <label>Tasa anual</label>
+                            <label>Tasa anual <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Rentabilidad anual esperada de tu inversión, en %.</span></button></label>
                             <div class="input-wrap">
                                 <input type="number" id="rate" class="has-suffix" min="0.01" max="100" step="0.1"
                                     value="7" style="text-align:right;" aria-label="Tasa de interés anual">
@@ -1660,7 +1717,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Capitalización</label>
+                            <label>Capitalización <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Cuántas veces al año se suman los intereses al capital.</span></button></label>
                             <select id="compFreq" aria-label="Frecuencia de capitalización">
                                 <option value="12">Mensual</option>
                                 <option value="4">Trimestral</option>
@@ -1675,7 +1732,7 @@
                     <!-- Fila 4: Período + Inflación -->
                     <div class="form-row-2">
                         <div class="form-group">
-                            <label>Período</label>
+                            <label>Período <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Cuántos años mantendrás la inversión.</span></button></label>
                             <div class="input-wrap">
                                 <input type="number" id="years" class="has-suffix" min="1" max="100"
                                     step="1" value="20" style="text-align:right;" aria-label="Años de inversión">
@@ -1683,7 +1740,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Inflación anual</label>
+                            <label>Inflación anual <button class="info-btn" tabindex="-1" type="button">i<span class="info-tooltip">Inflación estimada para calcular el valor real de tu dinero futuro.</span></button></label>
                             <div class="input-wrap">
                                 <input type="number" id="inflation" class="has-suffix" min="0" max="30" step="0.1"
                                     value="3" style="text-align:right;" aria-label="Inflación anual">
