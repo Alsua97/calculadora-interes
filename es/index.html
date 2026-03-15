@@ -1453,13 +1453,28 @@
 
         /* ── ANUNCIOS ────────────────────────────────────────────── */
 
-        /* Zonas top/mid/footer: ocultas hasta que cargue el anuncio */
-        .ad-zone { width:100%; display:flex; flex-direction:column;
-                   align-items:center; min-height:0; padding:0; transition:all .3s; }
-        .ad-zone.loaded       { padding:10px 0; }
-        .ad-zone .ad-label    { font-size:.68rem; color:var(--text-hint);
-                                text-transform:uppercase; letter-spacing:.08em;
-                                margin-bottom:6px; display:none; }
+        /* Zonas de anuncio: invisibles hasta que cargue un iframe */
+        .ad-zone {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Sin altura ni padding mientras no haya anuncio */
+            min-height: 0;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0;
+            transition: max-height .3s, padding .3s;
+        }
+        .ad-zone.loaded {
+            max-height: 120px;
+            padding: 10px 0;
+        }
+        .ad-zone .ad-label {
+            font-size:.68rem; color:var(--text-hint);
+            text-transform:uppercase; letter-spacing:.08em;
+            margin-bottom:6px; display:none;
+        }
         .ad-zone.loaded .ad-label { display:block; }
         .ad-desktop { display:flex; }
         .ad-mobile  { display:none; }
@@ -1468,9 +1483,14 @@
             .ad-mobile  { display:flex; }
         }
 
-        /* En standalone: ocultar los 3 banners del navegador */
+        /* Standalone PWA móvil: ocultar ad-zone, mostrar solo sticky */
         @media (display-mode: standalone) {
-            .ad-zone { display:none !important; }
+            .ad-zone { display: none !important; }
+            body { padding-bottom: 0; }
+        }
+        /* Standalone PWA desktop: mostrar solo adMid (arriba de la tabla) */
+        @media (display-mode: standalone) and (min-width: 769px) {
+            #adMid { display: flex !important; }
         }
 
         /* Sticky: solo en PWA standalone móvil */
@@ -1488,16 +1508,11 @@
             -webkit-transform: translateZ(0);
             transform: translateZ(0);
         }
-        /* Solo mostrar sticky en PWA standalone */
-        @media (display-mode: standalone) {
+        @media (display-mode: standalone) and (max-width: 768px) {
             .ad-sticky { display: flex; }
             body { padding-bottom: 58px; }
         }
-        @media (display-mode: standalone) and (min-width: 769px) {
-            .ad-sticky { display: none; }
-            body { padding-bottom: 0; }
-        }
-        .ad-sticky.no-ad      { display: none !important; }
+        .ad-sticky.no-ad         { display: none !important; }
         .ad-sticky.keyboard-open { display: none !important; }
 
             </style>
@@ -1556,6 +1571,19 @@
                 <p>Descubre el verdadero poder de tu dinero trabajando para ti. Calcula el crecimiento de tus
                     inversiones con aportaciones periódicas y visualiza tu riqueza futura.</p>
             </section>
+
+    <!-- ── ANUNCIO TOP ────────────────────────────────────────── -->
+    <div class="ad-zone" id="adTop">
+        <span class="ad-label">Publicidad</span>
+        <div class="ad-desktop">
+            <script>atOptions={'key':'32aec08a08ffa4d25e58ce3accf85073','format':'iframe','height':90,'width':728,'params':{}};</script>
+            <script src="https://www.highperformanceformat.com/32aec08a08ffa4d25e58ce3accf85073/invoke.js"></script>
+        </div>
+        <div class="ad-mobile">
+            <script>atOptions={'key':'8bdbee11f503acfed33a88b2d11c1b85','format':'iframe','height':50,'width':320,'params':{}};</script>
+            <script src="https://www.highperformanceformat.com/8bdbee11f503acfed33a88b2d11c1b85/invoke.js"></script>
+        </div>
+    </div>
 
             <!-- ── INPUTS ──────────────────────────────────────────── -->
             <div class="calc-grid">
